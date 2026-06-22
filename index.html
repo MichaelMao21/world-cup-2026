@@ -139,6 +139,34 @@
     .tag { padding: 4px 8px; background: var(--soft); color: var(--brand); border-radius: 999px; font-size: 11px; font-weight: 700; }
     .tag.hot { background: #fff2d9; color: #9a5f00; }
 
+    /* ── Live match indicator ── */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 54px;
+      color: var(--brand-2);
+      font-weight: 900;
+      font-size: 14px;
+      justify-content: center;
+    }
+    .live-pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--brand-2);
+      flex-shrink: 0;
+      animation: livePulse 1.4s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.7); }
+    }
+    .card.live-card {
+      border-color: rgba(214, 47, 69, 0.3);
+      background: #fef8f8;
+    }
+
     /* ── Hero ── */
     .hero {
       margin-top: 10px;
@@ -912,6 +940,32 @@
       return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
     }
 
+    function beijingNow() {
+      return new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+    }
+
+    function beijingTodayKey() {
+      const d = beijingNow();
+      return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    }
+
+    /* Returns "live" | "scheduled" | "completed" based on Beijing time and match schedule */
+    function matchLiveStatus(match) {
+      if (match.status === "completed") return "completed";
+      if (!match.time || match.status !== "scheduled") return match.status || "scheduled";
+
+      const parts = match.dateText.split(" ");
+      if (parts.length < 4) return "scheduled";
+      const dateStr = parts[3] + "-" + (monthNames[parts[2]] || "00") + "-" + parts[1].padStart(2, "0");
+      const [hh, mm] = match.time.split(":").map(Number);
+      const kickoff = new Date(dateStr + "T" + String(hh).padStart(2, "0") + ":" + String(mm).padStart(2, "0") + ":00+08:00");
+      const matchEnd = new Date(kickoff.getTime() + 2.5 * 60 * 60 * 1000); // 90min + injury + halftime
+      const now = beijingNow();
+
+      if (now >= kickoff && now <= matchEnd) return "live";
+      return "scheduled";
+    }
+
     function updateStatusTime() {
       const el = document.getElementById("status-time");
       if (el) el.textContent = new Date().toLocaleTimeString("zh-CN", { hour12: false, hour: "2-digit", minute: "2-digit" });
@@ -937,72 +991,134 @@
 
     function renderHome() {
       const data = window.PROTOTYPE_DATA || { matches: [] };
-      const today = todayKey();
+      const todayBeijing = beijingTodayKey();
       const allMatches = data.matches || [];
 
-      const todayMatches = allMatches.filter((m) => dateKey(m.dateText) === today);
+      const todayMatches = allMatches.filter((m) => dateKey(m.dateText) === todayBeijing);
       const todayCompleted = todayMatches.filter((m) => m.status === "completed");
       const todayScheduled = todayMatches.filter((m) => m.status === "scheduled");
+      const todayLive = todayScheduled.filter((m) => matchLiveStatus(m) === "live");
+      const todayUpcoming = todayScheduled.filter((m) => matchLiveStatus(m) !== "live");
       const upcomingAll = allMatches.filter((m) => m.status === "scheduled").sort((a, b) => dateKey(a.dateText).localeCompare(dateKey(b.dateText)));
-      const nextMatchDay = upcomingAll.length ? dateKey(upcomingAll[0].dateText) : "";
+      const liveCount = todayLive.length;
 
       const homeDateSummary = document.getElementById("home-date-summary");
+      const homeTitle = document.getElementById("home-title");
       if (homeDateSummary && todayMatches.length) {
-        homeDateSummary.textContent = displayDate(todayMatches[0].dateText) + " · " + todayMatches.length + " 场比赛";
+        const summary = displayDate(todayMatches[0].dateText) + " · " + todayMatches.length + " 场比赛";
+        homeDateSummary.textContent = liveCount ? summary + " · 🔴 " + liveCount + " 场进行中" : summary;
+      }
+      if (homeTitle && liveCount) {
+        homeTitle.textContent = "🔥 比赛进行中";
+      } else if (homeTitle) {
+        homeTitle.textContent = "今日观赛";
       }
 
-      // Featured hero
+      // Featured hero — pick the first live match, or first scheduled, or first upcoming
       const heroContainer = document.getElementById("home-featured");
       if (heroContainer) {
-        const heroMatch = todayScheduled.length ? todayScheduled[0] : (upcomingAll.length ? upcomingAll[0] : null);
+        const heroMatch = todayLive.length ? todayLive[0] : (todayUpcoming.length ? todayUpcoming[0] : (upcomingAll.length ? upcomingAll[0] : null));
+        const heroLive = heroMatch ? (matchLiveStatus(heroMatch) === "live") : false;
         if (heroMatch) {
-          heroContainer.innerHTML = `<div class="hero">
-            <p class="eyebrow">今晚推荐</p>
+          const middleHtml = heroLive
+            ? `<span class="live-badge">🔴 进行中<span class="live-pulse"></span></span>`
+            : `<span class="vs">VS</span>`;
+          const tagsHtml = heroLive
+            ? `<div class="tags"><span class="tag hot">🔥 正在直播</span><span class="tag">${escapeHtml(displayStage(heroMatch))}</span></div>`
+            : `<div class="tags"><span class="tag hot">必看</span><span class="tag">焦点战</span></div>`;
+          heroContainer.innerHTML = `<div class="hero${heroLive ? "" : ""}">
+            <p class="eyebrow">${heroLive ? "正在直播" : "今晚推荐"}</p>
             <div class="match-head">
               <span class="team">${escapeHtml(displayTeamName(heroMatch.homeTeam))}</span>
-              <span class="vs">VS</span>
+              ${middleHtml}
               <span class="team">${escapeHtml(displayTeamName(heroMatch.awayTeam))}</span>
             </div>
             <p class="meta">${escapeHtml(displayStage(heroMatch))} · ${escapeHtml(heroMatch.venue || "")} · ${escapeHtml(heroMatch.time || "")}</p>
-            <div class="tags"><span class="tag hot">必看</span><span class="tag">焦点战</span></div>
+            ${tagsHtml}
           </div>`;
         } else {
           heroContainer.innerHTML = `<div class="hero"><p class="eyebrow">赛程告一段落</p><p class="sub">下一轮比赛即将到来，敬请期待。</p></div>`;
         }
       }
 
-      // Upcoming today
-      const upcomingDiv = document.getElementById("home-upcoming");
-      if (upcomingDiv) {
-        const matches = todayScheduled.length ? todayScheduled : upcomingAll.slice(0, 4);
-        upcomingDiv.innerHTML = `<div class="section-title"><h2>${todayScheduled.length ? "今日比赛" : "即将到来"}</h2><small>${matches.length} 场</small></div>` +
-          matches.map((m) => `<article class="card">
-            <div class="match-head">
-              <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
-              <span class="vs">VS</span>
-              <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
-            </div>
-            <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")}</p>
-            <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
-          </article>`).join("");
-      }
-
-      // Today's results
-      const resultsDiv = document.getElementById("home-today-results");
-      if (resultsDiv) {
-        if (todayCompleted.length) {
-          resultsDiv.innerHTML = `<div class="section-title"><h2>今日赛果</h2><small>${todayCompleted.length} 场</small></div>` +
-            todayCompleted.map((m) => `<article class="card">
+      // Today's live matches (if any)
+      if (todayLive.length) {
+        const liveDiv = document.getElementById("home-upcoming");
+        if (liveDiv) {
+          liveDiv.innerHTML = `<div class="section-title"><h2>🔴 进行中</h2><small>${todayLive.length} 场</small></div>` +
+            todayLive.map((m) => `<article class="card live-card">
               <div class="match-head">
                 <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
-                <span class="score">${m.homeScore} - ${m.awayScore}</span>
+                <span class="live-badge">进行中<span class="live-pulse"></span></span>
                 <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
               </div>
-              <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
+              <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "")} 开球</p>
               <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
             </article>`).join("");
-        } else {
-          resultsDiv.innerHTML = "";
+        }
+
+        // Upcoming later today (after live matches)
+        const upcomingDiv = document.getElementById("home-today-results");
+        if (upcomingDiv) {
+          if (todayUpcoming.length) {
+            upcomingDiv.innerHTML = `<div class="section-title" style="margin-top:18px"><h2>稍后开赛</h2><small>${todayUpcoming.length} 场</small></div>` +
+              todayUpcoming.map((m) => `<article class="card">
+                <div class="match-head">
+                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="vs">VS</span>
+                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                </div>
+                <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")} 开球</p>
+                <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
+              </article>`).join("");
+          }
+          // Today's completed results
+          if (todayCompleted.length) {
+            upcomingDiv.innerHTML += `<div class="section-title" style="margin-top:18px"><h2>今日赛果</h2><small>${todayCompleted.length} 场</small></div>` +
+              todayCompleted.map((m) => `<article class="card">
+                <div class="match-head">
+                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="score">${m.homeScore} - ${m.awayScore}</span>
+                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                </div>
+                <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
+                <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
+              </article>`).join("");
+          }
+        }
+      } else {
+        // No live matches — original layout
+        const upcomingDiv = document.getElementById("home-upcoming");
+        if (upcomingDiv) {
+          const matches = todayScheduled.length ? todayScheduled : upcomingAll.slice(0, 4);
+          upcomingDiv.innerHTML = `<div class="section-title"><h2>${todayScheduled.length ? "今日比赛" : "即将到来"}</h2><small>${matches.length} 场</small></div>` +
+            matches.map((m) => `<article class="card">
+              <div class="match-head">
+                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                <span class="vs">VS</span>
+                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+              </div>
+              <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")} 开球</p>
+              <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
+            </article>`).join("");
+        }
+
+        const resultsDiv = document.getElementById("home-today-results");
+        if (resultsDiv) {
+          if (todayCompleted.length) {
+            resultsDiv.innerHTML = `<div class="section-title"><h2>今日赛果</h2><small>${todayCompleted.length} 场</small></div>` +
+              todayCompleted.map((m) => `<article class="card">
+                <div class="match-head">
+                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="score">${m.homeScore} - ${m.awayScore}</span>
+                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                </div>
+                <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
+                <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
+              </article>`).join("");
+          } else {
+            resultsDiv.innerHTML = "";
+          }
         }
       }
 
@@ -1081,16 +1197,24 @@
       const groups = groupByDate(scheduled);
       list.innerHTML = Object.keys(groups).sort().map((d) => {
         const matches = groups[d];
-        return `<div class="section-title"><h2>${displayDate(matches[0].dateText)}</h2><small>${matches.length} 场</small></div>` +
-          matches.map((m) => `<article class="card">
-            <div class="match-head">
-              <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
-              <span class="vs">VS</span>
-              <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
-            </div>
-            <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")}</p>
-            <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
-          </article>`).join("");
+        const liveCount = matches.filter((m) => matchLiveStatus(m) === "live").length;
+        return `<div class="section-title"><h2>${displayDate(matches[0].dateText)}</h2><small>${matches.length} 场${liveCount ? " · 🔴 " + liveCount + " 场进行中" : ""}</small></div>` +
+          matches.map((m) => {
+            const isLive = matchLiveStatus(m) === "live";
+            const middle = isLive
+              ? `<span class="live-badge">进行中<span class="live-pulse"></span></span>`
+              : `<span class="vs">VS</span>`;
+            const cardClass = isLive ? "card live-card" : "card";
+            return `<article class="${cardClass}">
+              <div class="match-head">
+                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                ${middle}
+                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+              </div>
+              <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")}${isLive ? " · 🔴 正在直播" : ""}</p>
+              <button class="ghost" onclick="openMatch('${m.id}')">查看详情 →</button>
+            </article>`;
+          }).join("");
       }).join("");
     }
 
@@ -1202,9 +1326,13 @@
 
       const statusEl = document.getElementById("match-detail-status");
       const summaryEl = document.getElementById("match-detail-summary");
+      const isLive = matchLiveStatus(match) === "live";
       if (match.status === "completed") {
-        statusEl.textContent = match.homeScore + " - " + match.awayScore;
+        statusEl.innerHTML = `<span style="font-size:28px;font-weight:900">${match.homeScore} - ${match.awayScore}</span>`;
         summaryEl.textContent = match.homeTeam + " " + match.homeScore + " - " + match.awayScore + " " + match.awayTeam + " · " + displayStage(match);
+      } else if (isLive) {
+        statusEl.innerHTML = `<span class="live-badge" style="font-size:18px">🔴 比赛中<span class="live-pulse"></span></span>`;
+        summaryEl.textContent = displayTeamName(match.homeTeam) + " vs " + displayTeamName(match.awayTeam) + " · " + (match.time || "") + " 开球 · 比赛正在进行";
       } else {
         statusEl.textContent = "即将开赛";
         summaryEl.textContent = displayTeamName(match.homeTeam) + " vs " + displayTeamName(match.awayTeam) + " · " + (match.time || "待定");
@@ -1220,6 +1348,11 @@
       if (match.status === "completed") {
         highlightLink.hidden = false;
         highlightLink.href = "https://search.cctv.com/search.php?q=" + encodeURIComponent(match.homeTeam + " " + match.awayTeam + " 集锦");
+        highlightLink.textContent = "搜索央视集锦";
+      } else if (isLive) {
+        highlightLink.hidden = false;
+        highlightLink.textContent = "⚡ 查看文字直播";
+        highlightLink.href = "https://www.zhibo8.cc/";
       } else {
         highlightLink.hidden = true;
       }
@@ -1629,6 +1762,8 @@
     renderHome();
     updateStatusTime();
     setInterval(updateStatusTime, 60000);
+    setInterval(renderHome, 60000);
+    setInterval(renderMatchData, 60000);
     void initPredictionApp();
   </script>
 </body>
