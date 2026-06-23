@@ -134,7 +134,10 @@
       align-items: center;
       text-align: center;
     }
-    .team { font-weight: 800; font-size: 15px; }
+    .team { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-weight: 800; font-size: 15px; }
+    .team-flag-emoji { flex: 0 0 auto; font-size: 18px; line-height: 1; }
+    .team-flag { width: 22px; height: 16px; flex: 0 0 auto; border-radius: 2px; object-fit: cover; box-shadow: 0 0 0 1px rgba(17, 24, 39, .08); }
+    .team-flag-fallback { width: 22px; height: 16px; flex: 0 0 auto; display: inline-grid; place-items: center; border-radius: 2px; background: #eef2f4; color: var(--brand); font-size: 10px; font-weight: 900; }
     .vs, .score { min-width: 54px; color: var(--brand-2); font-weight: 900; font-size: 18px; }
     .meta { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
@@ -462,6 +465,13 @@
     .prediction-poster { margin: 12px 0; padding: 18px; border-radius: 8px; color: #fff; background: #143d32; text-align: center; }
     .prediction-poster .eyebrow, .prediction-poster .sub { color: rgba(255,255,255,0.8); }
     .prediction-poster strong { display: block; margin: 10px 0 4px; color: var(--accent); font-size: 30px; }
+    .prophecy-poster { text-align: left; background: radial-gradient(circle at 20% 12%, rgba(255,197,73,.34), transparent 28%), linear-gradient(160deg, #102b25 0%, #0b5d49 56%, #111827 100%); }
+    .prophecy-title { margin: 16px 0 10px; color: #fff; font-size: 28px; line-height: 1.08; }
+    .prophecy-match { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: 14px 0; padding: 12px; border: 1px solid rgba(255,255,255,.18); border-radius: 8px; background: rgba(255,255,255,.08); }
+    .prophecy-hits { display: grid; gap: 8px; margin-top: 12px; }
+    .prophecy-hit { padding: 9px 10px; border-radius: 8px; background: rgba(255,255,255,.12); font-size: 13px; }
+    .prophecy-footer { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 18px; }
+    .poster-qr { width: 72px; height: 72px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 8px; background: #fff; color: #0b5d49; font-size: 11px; font-weight: 900; text-align: center; }
 
     .champion-poster { min-height: 470px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; border: 2px solid var(--accent); text-align: left; }
     .poster-brand { display: flex; justify-content: space-between; gap: 10px; color: rgba(255,255,255,0.78); font-size: 11px; font-weight: 800; }
@@ -713,64 +723,51 @@
 
     <section class="view" id="halftimeReport">
       <button class="back" onclick="showView('pkRoom')">返回PK房</button>
-      <header class="topbar"><p class="eyebrow">半场结算</p><h1>美国 1-0 澳大利亚</h1><p class="sub">上半场预测已结算，全场预测继续保密。</p></header>
+      <header class="topbar"><p class="eyebrow">半场结算</p><h1>等待官方半场比分</h1><p class="sub">系统将在官方开球 50 分钟后开始刷新 FIFA 赛程页；若半场未结束，每 2 分钟继续刷新一次。</p></header>
+      <article class="card"><h3>自动刷新规则</h3><p class="sub">比赛开始 +50 分钟首次抓取；未显示 HT/半场比分时，每 2 分钟重试；识别到半场比分后立即结算上半场预测。</p><span class="tag" id="halftime-sync-status">等待官方半场信号</span></article>
       <article class="card"><div class="section-title"><h3>我的半场战绩</h3><span class="tag hot">暂列第2</span></div><div class="points-rule"><div><strong>3/4</strong>命中</div><div><strong>40</strong>半场分</div><div><strong>10</strong>距榜首</div></div></article>
       <div class="section-title"><h2>半场临时排名</h2><small>6人参与</small></div>
       <div class="rank-table"><div class="rank-line"><strong>1</strong><span>小王·半场预言家</span><strong>50分</strong></div><div class="rank-line me"><strong>2</strong><span>我·命中3项</span><strong>40分</strong></div><div class="rank-line"><strong>3</strong><span>Leo</span><strong>35分</strong></div><div class="rank-line"><strong>4</strong><span>小鹿</span><strong>30分</strong></div><div class="rank-line"><strong>5</strong><span>阿峰</span><strong>20分</strong></div></div>
-      <article class="card"><h3>朋友间快捷互动</h3><div class="quick-replies"><button onclick="sendPkReply(this)">领先只是暂时的</button><button onclick="sendPkReply(this)">下半场我要反超</button><button onclick="sendPkReply(this)">你这比分真敢预测</button></div><p class="sub" id="pk-last-message">小王：全场结束再说。</p></article>
-      <div id="second-half-status"></div>
-      <button style="width:100%" onclick="showView('secondHalfPrediction')">参加下半场闪电预测·剩4:38</button>
-    </section>
-
-    <section class="view" id="secondHalfPrediction">
-      <button class="back" onclick="showView('halftimeReport')">返回半场战报</button>
-      <header class="topbar"><p class="eyebrow">5分钟加赛</p><h1>下半场闪电预测</h1><p class="sub">新加入的好友可参与下半场榜，但不进入原PK房冠军争夺。</p></header>
-      <div class="form-group"><label for="second-half-result">下半场胜平负·+10</label><select class="form-control" id="second-half-result"><option>美国胜</option><option>平局</option><option>澳大利亚胜</option></select></div>
-      <div class="form-group"><label for="second-half-next-goal">下一个进球队·+10</label><select class="form-control" id="second-half-next-goal"><option>美国</option><option>澳大利亚</option><option>无进球</option></select></div>
-      <div class="form-group"><label for="second-half-goals">下半场总进球·+10</label><select class="form-control" id="second-half-goals"><option>0-1球</option><option>2-3球</option><option>4球及以上</option></select></div>
-      <div class="form-group"><label for="second-half-red">下半场是否有红牌·+10</label><select class="form-control" id="second-half-red"><option>没有</option><option>有</option></select></div>
-      <button style="width:100%" onclick="submitSecondHalf()">提交闪电预测</button>
+      <article class="card"><h3>朋友间快捷互动</h3><div class="quick-replies"><button onclick="sendPkReply(this)">领先只是暂时的</button><button onclick="sendPkReply(this)">全场我要反超</button><button onclick="sendPkReply(this)">你这预测真敢选</button></div><p class="sub" id="pk-last-message">小王：全场结束再说。</p></article>
     </section>
 
     <section class="view" id="pkResult">
       <button class="back" onclick="showView('pkRoom')">返回PK房</button>
       <header class="topbar"><p class="eyebrow">终场结算</p><h1>预测PK战报</h1><p class="sub">美国 2-1 澳大利亚｜6人完成预测</p></header>
-      <div class="prediction-poster champion-poster">
+      <div class="prediction-poster champion-poster prophecy-poster">
         <div>
           <div class="poster-brand"><span>世界杯观赛指南</span><span>2026·预测PK</span></div>
           <div class="poster-avatar">峰</div>
-          <h2 class="poster-title">太厉害了，阿峰又预测对了4项</h2>
-          <p class="poster-match">美国 2-1 澳大利亚｜6人PK房</p>
-          <div class="poster-hits">
-            <div class="poster-hit"><b>预测命中 A</b>上半场美国领先</div>
-            <div class="poster-hit"><b>预测命中 B</b>上半场比分 1-0</div>
-            <div class="poster-hit"><b>预测命中 C</b>全场美国获胜</div>
-            <div class="poster-hit"><b>预测命中 D</b>全场比分 2-1</div>
+          <h2 class="prophecy-title">太厉害了，阿峰又神预言了 4 项</h2>
+          <div class="prophecy-match"><span>🇵🇹 葡萄牙</span><strong>VS</strong><span>🇺🇿 乌兹别克斯坦</span></div>
+          <div class="prophecy-hits">
+            <div class="prophecy-hit"><b>命中 A</b> 上半场葡萄牙领先</div>
+            <div class="prophecy-hit"><b>命中 B</b> 上半场 0-1 球</div>
+            <div class="prophecy-hit"><b>命中 C</b> 全场葡萄牙获胜</div>
+            <div class="prophecy-hit"><b>命中 D</b> 全场黄牌 3-5 张</div>
           </div>
         </div>
-        <div class="poster-bottom">
-          <div><span class="tag hot">PK房冠军</span><div class="poster-score">125 分</div><p class="sub">击败5位好友｜超越92%预测者</p><p class="sub">下一场，敢来和我预测PK吗？</p></div>
-          <div class="poster-code">小程序码<br>来PK</div>
+        <div class="prophecy-footer">
+          <div><span class="tag hot">神预言玩家</span><div class="poster-score">125 分</div><p class="sub">击败5位好友｜超越92%预测者</p><p class="sub">下一场，敢来和我预测PK吗？</p></div>
+          <div class="poster-qr">扫码<br>来PK</div>
         </div>
       </div>
       <article class="card"><h3>每个人都有可分享战报</h3><p class="sub">未夺冠的用户也会生成"预测对了几项"的个人海报，冠军版额外展示击败人数和PK荣誉分。</p></article>
       <div class="rank-table"><div class="rank-line me"><strong>1</strong><span>阿峰·我</span><strong>125</strong></div><div class="rank-line"><strong>2</strong><span>小王</span><strong>108</strong></div><div class="rank-line"><strong>3</strong><span>Leo</span><strong>95</strong></div><div class="rank-line"><strong>4</strong><span>小鹿</span><strong>80</strong></div></div>
-      <div class="actions"><button onclick="sharePrototype(this)">分享我的冠军海报</button><button class="secondary" onclick="showView('challengeCreate')">发起下一场PK</button></div>
+      <div class="actions"><button onclick="sharePrototype(this)">分享我的神预言</button><button class="secondary" onclick="showView('challengeCreate')">发起下一场PK</button></div>
     </section>
 
     <section class="view" id="challengeCreate">
       <button class="back" onclick="showView('home', true)">返回首页</button>
       <header class="topbar"><p class="eyebrow">赛前立预测，赛中看排名</p><h1>发起预测PK</h1><p class="sub">至少2人成局。上半场即时结算，终场决出PK冠军。</p></header>
       <div class="form-group"><label for="challenge-match">选择比赛</label><select class="form-control" id="challenge-match" onchange="syncPredictionMatch()"></select></div>
-      <div class="section-title"><h2>上半场预测</h2><small>最高50分</small></div>
-      <div class="form-group"><label for="half-result">上半场胜平负·+10</label><select class="form-control" id="half-result"><option>美国胜</option><option>平局</option><option>澳大利亚胜</option></select></div>
-      <div class="form-group"><label for="half-score">上半场精确比分·+20</label><select class="form-control" id="half-score"><option>1-0</option><option>0-0</option><option>2-0</option><option>1-1</option></select></div>
-      <div class="form-group"><label for="half-first-goal">上半场先进球队·+10</label><select class="form-control" id="half-first-goal"><option>美国</option><option>澳大利亚</option><option>无进球</option></select></div>
+      <div class="section-title"><h2>上半场预测</h2><small>最高30分</small></div>
+      <div class="form-group"><label for="half-result">上半场胜平负·+10</label><select class="form-control" id="half-result"><option>主队胜</option><option>平局</option><option>客队胜</option></select></div>
+      <div class="form-group"><label for="half-first-goal">上半场先进球队·+10</label><select class="form-control" id="half-first-goal"><option>主队</option><option>客队</option><option>无进球</option></select></div>
       <div class="form-group"><label for="half-goals">上半场总进球区间·+10</label><select class="form-control" id="half-goals"><option>0-1球</option><option>2-3球</option><option>4球及以上</option></select></div>
-      <div class="section-title"><h2>全场预测</h2><small>最高80分</small></div>
-      <div class="form-group"><label for="prediction-result">全场胜平负·+10</label><select class="form-control" id="prediction-result"><option>美国胜</option><option>平局</option><option>澳大利亚胜</option></select></div>
-      <div class="form-group"><label for="challenge-score">全场精确比分·+30</label><select class="form-control" id="challenge-score"><option>美国 2-1 澳大利亚</option><option>美国 1-0 澳大利亚</option><option>美国 1-1 澳大利亚</option></select></div>
-      <div class="form-group"><label for="prediction-first-goal">全场首个进球队·+10</label><select class="form-control" id="prediction-first-goal"><option>美国</option><option>澳大利亚</option><option>无进球</option></select></div>
+      <div class="section-title"><h2>全场预测</h2><small>最高40分</small></div>
+      <div class="form-group"><label for="prediction-result">全场胜平负·+10</label><select class="form-control" id="prediction-result"><option>主队胜</option><option>平局</option><option>客队胜</option></select></div>
+      <div class="form-group"><label for="full-goals">全场总进球区间·+10</label><select class="form-control" id="full-goals"><option>0-1球</option><option>2-3球</option><option>4球及以上</option></select></div>
       <div class="form-group"><label for="match-red-card">全场是否出现红牌·+15</label><select class="form-control" id="match-red-card"><option>没有</option><option>有</option></select></div>
       <div class="form-group"><label for="match-yellow-cards">全场黄牌数量·+15</label><select class="form-control" id="match-yellow-cards"><option>0-2张</option><option>3-5张</option><option>6张及以上</option></select><span class="form-hint">开赛前可修改，开赛后所有答案锁定。</span></div>
       <button id="create-prediction-button" style="width:100%" onclick="createPrediction(this)">保存预测并创建PK房</button>
@@ -780,10 +777,10 @@
       <button class="back" onclick="showView('home', true)">返回首页</button>
       <header class="topbar"><p class="eyebrow">预测得准，排名就要稳</p><h1>全民预测榜</h1><p class="sub">实力分看准确度，PK荣誉分看多人房间战绩。</p></header>
       <article class="card"><div class="section-title"><h3>我的排名</h3><strong class="social-count" id="leaderboard-my-rank">--</strong></div><p class="sub" id="leaderboard-my-summary">完成一次预测后生成排名</p></article>
-      <div class="points-rule"><div><strong>+10</strong>胜平负</div><div><strong>+30</strong>精确比分</div><div><strong>+15</strong>先进球</div></div>
+      <div class="points-rule"><div><strong>+10</strong>胜平负</div><div><strong>+10</strong>进球区间</div><div><strong>+15</strong>红黄牌</div></div>
       <div class="section-title"><h2>实时 TOP 20</h2><small id="leaderboard-updated">读取中</small></div>
       <article class="card" id="leaderboard-list"><p class="sub">正在读取排行榜。</p></article>
-      <div class="prediction-poster"><p class="eyebrow">我猜中了</p><h3>巴西 3-0 海地</h3><strong>+55 分</strong><p class="sub">胜负、比分、先进球全中｜超越 98% 球迷</p></div>
+      <div class="prediction-poster"><p class="eyebrow">我猜中了</p><h3>巴西击败海地</h3><strong>+55 分</strong><p class="sub">胜负、进球区间、红黄牌全中｜超越 98% 球迷</p></div>
       <button style="width:100%" onclick="sharePrototype(this)">分享成功海报</button>
     </section>
 
@@ -792,7 +789,7 @@
       <header class="topbar"><p class="eyebrow">我的PK记录</p><h1>我的预测</h1><p class="sub">实力分 86｜全国第128名｜PK冠军 2 次</p></header>
       <div id="social-created"></div>
       <div class="section-title"><h2>进行中</h2><small>2 项</small></div>
-      <article class="card"><span class="tag hot">等待开赛</span><h3 style="margin-top:10px">美国 vs 澳大利亚·猜美国胜·2-1</h3><p class="sub">已生成赛前预测卡｜开赛后自动锁定并结算积分</p></article>
+      <article class="card"><span class="tag hot">等待开赛</span><h3 style="margin-top:10px">美国 vs 澳大利亚·猜主队胜</h3><p class="sub">已生成赛前预测卡｜开赛后自动锁定并结算积分</p></article>
       <article class="card"><span class="tag">多人PK·已成局</span><h3 style="margin-top:10px">美国 vs 澳大利亚·6人房</h3><p class="sub">所有人答案已锁定｜半场即时结算</p></article>
     </section>
 
@@ -809,7 +806,8 @@
   <dialog class="profile-dialog" id="profile-dialog">
     <form method="dialog" id="profile-form">
       <p class="eyebrow">预测身份</p>
-      <h2>设置你的昵称</h2>
+      <h2>设置你的预测昵称</h2>
+      <p class="sub">首次参与时默认使用微信昵称；你也可以改成更轻松的预测昵称。设定后，下次登录无需重复设置。</p>
       <div class="form-group">
         <label for="profile-nickname">昵称</label>
         <input class="form-control" id="profile-nickname" name="nickname" maxlength="20" autocomplete="nickname" placeholder="例如：凌晨球迷" required>
@@ -831,6 +829,7 @@
     let lastTab = "home";
     let predictionService;
     let currentPredictionRoomId = "";
+    let currentPredictionMatchId = "";
     let submittingToExistingRoom = false;
     let pendingProfileResolver = null;
     let toastTimer = null;
@@ -885,6 +884,56 @@
       USA: "美国",
       Uzbekistan: "乌兹别克斯坦",
     };
+    const teamFlags = {
+      Algeria: "🇩🇿",
+      Argentina: "🇦🇷",
+      Australia: "🇦🇺",
+      Austria: "🇦🇹",
+      Belgium: "🇧🇪",
+      "Bosnia and Herzegovina": "🇧🇦",
+      Brazil: "🇧🇷",
+      "Cabo Verde": "🇨🇻",
+      Canada: "🇨🇦",
+      Colombia: "🇨🇴",
+      "Congo DR": "🇨🇩",
+      "Côte d'Ivoire": "🇨🇮",
+      Croatia: "🇭🇷",
+      Curaçao: "🇨🇼",
+      Czechia: "🇨🇿",
+      Ecuador: "🇪🇨",
+      Egypt: "🇪🇬",
+      England: "🏴",
+      France: "🇫🇷",
+      Germany: "🇩🇪",
+      Ghana: "🇬🇭",
+      Haiti: "🇭🇹",
+      "IR Iran": "🇮🇷",
+      Iraq: "🇮🇶",
+      Japan: "🇯🇵",
+      Jordan: "🇯🇴",
+      "Korea Republic": "🇰🇷",
+      Mexico: "🇲🇽",
+      Morocco: "🇲🇦",
+      Netherlands: "🇳🇱",
+      "New Zealand": "🇳🇿",
+      Norway: "🇳🇴",
+      Panama: "🇵🇦",
+      Paraguay: "🇵🇾",
+      Portugal: "🇵🇹",
+      Qatar: "🇶🇦",
+      "Saudi Arabia": "🇸🇦",
+      Scotland: "🏴",
+      Senegal: "🇸🇳",
+      "South Africa": "🇿🇦",
+      Spain: "🇪🇸",
+      Sweden: "🇸🇪",
+      Switzerland: "🇨🇭",
+      Tunisia: "🇹🇳",
+      Türkiye: "🇹🇷",
+      USA: "🇺🇸",
+      Uruguay: "🇺🇾",
+      Uzbekistan: "🇺🇿",
+    };
 
     const positionNames = { Goalkeeper: "门将", Defender: "后卫", Midfielder: "中场", Forward: "前锋" };
     const stageNames = {
@@ -922,6 +971,19 @@
     function escapeHtml(value) {
       if (!value) return "";
       return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function teamRecord(name) {
+      const data = window.PROTOTYPE_DATA || { teams: [] };
+      return (data.teams || []).find((t) => t.name === name);
+    }
+
+    function displayTeamWithFlag(name) {
+      const label = displayTeamName(name);
+      if (teamFlags[name]) return `<span class="team-flag-emoji" aria-hidden="true">${teamFlags[name]}</span><span>${escapeHtml(label)}</span>`;
+      const team = teamRecord(name);
+      if (!team?.flagUrl) return `<span class="team-flag-fallback">${escapeHtml(label.slice(0, 1))}</span><span>${escapeHtml(label)}</span>`;
+      return `<img class="team-flag" src="${escapeHtml(team.flagUrl)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'team-flag-fallback',textContent:'${escapeHtml(label.slice(0, 1))}'}))"><span>${escapeHtml(label)}</span>`;
     }
 
     function displayDate(dateText) {
@@ -1048,9 +1110,9 @@
           heroContainer.innerHTML = `<div class="hero${heroLive ? "" : ""}">
             <p class="eyebrow">${heroLive ? "正在直播" : "今晚推荐"}</p>
             <div class="match-head">
-              <span class="team">${escapeHtml(displayTeamName(heroMatch.homeTeam))}</span>
+              <span class="team">${displayTeamWithFlag(heroMatch.homeTeam)}</span>
               ${middleHtml}
-              <span class="team">${escapeHtml(displayTeamName(heroMatch.awayTeam))}</span>
+              <span class="team">${displayTeamWithFlag(heroMatch.awayTeam)}</span>
             </div>
             <p class="meta">${escapeHtml(displayStage(heroMatch))} · ${escapeHtml(heroMatch.venue || "")} · ${escapeHtml(heroMatch.time || "")}</p>
             ${tagsHtml}
@@ -1068,9 +1130,9 @@
           liveDiv.innerHTML = `<div class="section-title"><h2>🔴 进行中</h2><small>${todayLive.length} 场</small></div>` +
             todayLive.map((m) => `<article class="card live-card">
               <div class="match-head">
-                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                 <span class="live-badge">进行中<span class="live-pulse"></span></span>
-                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
               </div>
               <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "")} 开球</p>
               ${renderMatchActions(m)}
@@ -1084,9 +1146,9 @@
             upcomingDiv.innerHTML = `<div class="section-title" style="margin-top:18px"><h2>稍后开赛</h2><small>${todayUpcoming.length} 场</small></div>` +
               todayUpcoming.map((m) => `<article class="card">
                 <div class="match-head">
-                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                   <span class="vs">VS</span>
-                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
                 </div>
                 <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")} 开球</p>
                 ${renderMatchActions(m)}
@@ -1097,9 +1159,9 @@
             upcomingDiv.innerHTML += `<div class="section-title" style="margin-top:18px"><h2>今日赛果</h2><small>${todayCompleted.length} 场</small></div>` +
               todayCompleted.map((m) => `<article class="card">
                 <div class="match-head">
-                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                   <span class="score">${m.homeScore} - ${m.awayScore}</span>
-                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
                 </div>
                 <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
                 ${renderMatchActions(m)}
@@ -1114,9 +1176,9 @@
           upcomingDiv.innerHTML = `<div class="section-title"><h2>${todayScheduled.length ? "今日比赛" : "即将到来"}</h2><small>${matches.length} 场</small></div>` +
             matches.map((m) => `<article class="card">
               <div class="match-head">
-                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                 <span class="vs">VS</span>
-                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
               </div>
               <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")} 开球</p>
               ${renderMatchActions(m)}
@@ -1129,9 +1191,9 @@
             resultsDiv.innerHTML = `<div class="section-title"><h2>今日赛果</h2><small>${todayCompleted.length} 场</small></div>` +
               todayCompleted.map((m) => `<article class="card">
                 <div class="match-head">
-                  <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                   <span class="score">${m.homeScore} - ${m.awayScore}</span>
-                  <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                  <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
                 </div>
                 <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
                 ${renderMatchActions(m)}
@@ -1178,9 +1240,9 @@
           return `<div class="section-title"><h2>${displayDate(matches[0].dateText)}</h2><small>${matches.length} 场</small></div>` +
             matches.map((m) => `<article class="card">
               <div class="match-head">
-                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                 <span class="score">${m.homeScore} - ${m.awayScore}</span>
-                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
               </div>
               <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
               ${renderMatchActions(m, { detailLabel: "查看比赛详情 →" })}
@@ -1227,9 +1289,9 @@
             const cardClass = isLive ? "card live-card" : "card";
             return `<article class="${cardClass}">
               <div class="match-head">
-                <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
                 ${middle}
-                <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+                <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
               </div>
               <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")} · ${escapeHtml(m.time || "待定")}${isLive ? " · 🔴 正在直播" : ""}</p>
               ${renderMatchActions(m)}
@@ -1252,8 +1314,8 @@
           <h3>${escapeHtml(stageNames[s] || s)}</h3>
           <div class="bracket-matches">` +
           grouped[s].map((m) => `<article class="bracket-match" onclick="openMatch('${m.id}')">
-            <div class="bracket-team"><span>${escapeHtml(displayTeamName(m.homeTeam))}</span>${m.homeScore != null ? "<strong>" + m.homeScore + "</strong>" : ""}</div>
-            <div class="bracket-team"><span>${escapeHtml(displayTeamName(m.awayTeam))}</span>${m.awayScore != null ? "<strong>" + m.awayScore + "</strong>" : ""}</div>
+            <div class="bracket-team"><span class="team">${displayTeamWithFlag(m.homeTeam)}</span>${m.homeScore != null ? "<strong>" + m.homeScore + "</strong>" : ""}</div>
+            <div class="bracket-team"><span class="team">${displayTeamWithFlag(m.awayTeam)}</span>${m.awayScore != null ? "<strong>" + m.awayScore + "</strong>" : ""}</div>
           </article>`).join("") +
           `</div></div>`).join("") +
         `</div></div>`;
@@ -1270,7 +1332,7 @@
             <tbody>` +
         g.rows.map((r) => `<tr>
           <td><span class="standings-rank${r.rank <= 2 ? " qualifying" : ""}">${r.rank}</span></td>
-          <td>${escapeHtml(displayTeamName(r.team))}</td>
+          <td><span class="team">${displayTeamWithFlag(r.team)}</span></td>
           <td>${r.played}</td><td>${r.won}</td><td>${r.drawn}</td><td>${r.lost}</td>
           <td>${r.goalsFor}</td><td>${r.goalsAgainst}</td><td>${r.goalDifference}</td><td><strong>${r.points}</strong></td>
         </tr>`).join("") +
@@ -1286,9 +1348,9 @@
           <div class="section-title"><h2>${escapeHtml(v.name)}</h2><small>${escapeHtml(v.city)} · ${v.matchCount || 0} 场</small></div>` +
           (venueMatches.length ? venueMatches.map((m) => `<article class="card">
             <div class="match-head">
-              <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+              <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
               ${m.status === "completed" ? `<span class="score">${m.homeScore} - ${m.awayScore}</span>` : `<span class="vs">VS</span>`}
-              <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+              <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
             </div>
             <p class="meta">${escapeHtml(displayDate(m.dateText))} · ${escapeHtml(displayStage(m))} · ${escapeHtml(m.time || "待定")}</p>
             ${renderMatchActions(m)}
@@ -1316,7 +1378,7 @@
         const cats = { attacking: "进攻", creativity: "创造力", defending: "防守" };
         leaders.innerHTML = `<div class="section-title"><h2>Power Rankings 领跑者</h2></div><div class="leader-grid">` +
           power.leaders.map((l) => `<article class="card leader-card">
-            <div><strong>${escapeHtml(cats[l.category] || l.category)}</strong> · ${escapeHtml(displayTeamName(l.team))}</div>
+            <div><strong>${escapeHtml(cats[l.category] || l.category)}</strong> · <span class="team">${displayTeamWithFlag(l.team)}</span></div>
             <div class="leader-score">${l.score}</div>
           </article>`).join("") + `</div>`;
       }
@@ -1328,7 +1390,7 @@
             <div class="ranking-row ranking-head"><span>#</span><span class="ranking-player">球员</span><span>攻</span><span>创</span><span>防</span></div>` +
           power.topOutfield.map((p) => `<div class="ranking-row">
             <span>${p.rank}</span>
-            <span class="ranking-player"><strong>${escapeHtml(p.player)}</strong><span>${escapeHtml(displayTeamName(p.team))}</span></span>
+            <span class="ranking-player"><strong>${escapeHtml(p.player)}</strong><span class="team">${displayTeamWithFlag(p.team)}</span></span>
             <span>${p.attacking}</span><span>${p.creativity}</span><span>${p.defending}</span>
           </div>`).join("") + `</div>`;
       }
@@ -1341,7 +1403,7 @@
       const match = (data.matches || []).find((m) => m.id === matchId);
       if (!match) return;
 
-      document.getElementById("match-detail-title").textContent = displayTeamName(match.homeTeam) + " vs " + displayTeamName(match.awayTeam);
+      document.getElementById("match-detail-title").innerHTML = `<span class="team">${displayTeamWithFlag(match.homeTeam)}</span> vs <span class="team">${displayTeamWithFlag(match.awayTeam)}</span>`;
       document.getElementById("match-detail-meta").textContent = displayDate(match.dateText) + " · " + displayStage(match);
 
       const statusEl = document.getElementById("match-detail-status");
@@ -1411,9 +1473,9 @@
       matchList.innerHTML = venueMatches.length ?
         venueMatches.map((m) => `<article class="card">
           <div class="match-head">
-            <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+            <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
             ${m.status === "completed" ? `<span class="score">${m.homeScore} - ${m.awayScore}</span>` : `<span class="vs">VS</span>`}
-            <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+            <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
           </div>
           <p class="meta">${escapeHtml(displayDate(m.dateText))} · ${escapeHtml(displayStage(m))}</p>
           ${renderMatchActions(m)}
@@ -1436,9 +1498,9 @@
         const m = window.currentSocialMatch;
         ctx.innerHTML = `<article class="card">
           <div class="match-head">
-            <span class="team">${escapeHtml(displayTeamName(m.homeTeam))}</span>
+            <span class="team">${displayTeamWithFlag(m.homeTeam)}</span>
             <span class="vs">VS</span>
-            <span class="team">${escapeHtml(displayTeamName(m.awayTeam))}</span>
+            <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
           </div>
           <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
         </article>`;
@@ -1467,6 +1529,30 @@
       showToast("分享卡已生成（原型演示）");
     };
 
+    async function shareLink({ title, text, url }, btn) {
+      const shareUrl = url || window.location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, text, url: shareUrl });
+          showToast("已打开系统分享面板");
+          return;
+        } catch (e) {
+          if (e?.name === "AbortError") return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(`${title}\n${text}\n${shareUrl}`);
+        showToast("链接已复制，去微信粘贴给好友");
+      } catch (e) {
+        showToast("请复制浏览器地址栏链接发给好友");
+      }
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = "链接已复制";
+        setTimeout(() => { btn.textContent = orig; }, 1600);
+      }
+    }
+
     function showToast(msg) {
       const toast = document.getElementById("app-toast");
       if (!toast) return;
@@ -1484,9 +1570,16 @@
       if (profile) return profile;
       return new Promise((resolve) => {
         pendingProfileResolver = resolve;
+        const input = document.getElementById("profile-nickname");
+        if (input && !input.value) input.value = suggestedWechatNickname();
         document.getElementById("profile-dialog").showModal();
       });
     };
+
+    function suggestedWechatNickname() {
+      const config = window.APP_CONFIG || {};
+      return config.wechatNickname || window.localStorage.getItem("wechat_nickname") || "微信球迷";
+    }
 
     window.cancelProfile = function cancelProfile() {
       document.getElementById("profile-dialog").close();
@@ -1510,11 +1603,17 @@
       const data = window.PROTOTYPE_DATA || { matches: [] };
       const match = (data.matches || []).find((m) => m.id === matchId);
       if (!match) return;
-      // Update prediction form default values based on selected match
-      const resultSelect = document.getElementById("prediction-result");
-      if (resultSelect && resultSelect.options.length === 0) {
-        resultSelect.innerHTML = `<option>${displayTeamName(match.homeTeam)}胜</option><option>平局</option><option>${displayTeamName(match.awayTeam)}胜</option>`;
-      }
+      currentPredictionMatchId = match.id;
+      const home = escapeHtml(displayTeamName(match.homeTeam));
+      const away = escapeHtml(displayTeamName(match.awayTeam));
+      const resultOptions = `<option>${home}胜</option><option>平局</option><option>${away}胜</option>`;
+      const firstGoalOptions = `<option>${home}</option><option>${away}</option><option>无进球</option>`;
+      const halfResult = document.getElementById("half-result");
+      const fullResult = document.getElementById("prediction-result");
+      const halfFirstGoal = document.getElementById("half-first-goal");
+      if (halfResult) halfResult.innerHTML = resultOptions;
+      if (fullResult) fullResult.innerHTML = resultOptions;
+      if (halfFirstGoal) halfFirstGoal.innerHTML = firstGoalOptions;
     };
 
     function getPredictionMatch(matchId) {
@@ -1527,54 +1626,44 @@
       return (data.matches || []).find((m) => m.status === "scheduled") || (data.matches || [])[0] || null;
     }
 
-    function getPredictionFormUrl(match) {
-      const config = window.APP_CONFIG || {};
-      const mapped = match && config.predictionFormUrls && config.predictionFormUrls[match.id];
-      return ((mapped || config.predictionFormUrl || "") + "").trim();
-    }
-
-    function buildExternalPredictionUrl(match) {
-      const baseUrl = getPredictionFormUrl(match);
-      if (!baseUrl) return "";
-      const url = new URL(baseUrl);
-      const inviteCode = new URLSearchParams(window.location.search).get("room") || "";
-      const returnUrl = new URL(window.location.href);
-      returnUrl.searchParams.delete("room");
-      url.searchParams.set("source", "world-cup-h5");
-      url.searchParams.set("return_url", returnUrl.toString());
-      if (inviteCode) url.searchParams.set("invite_code", inviteCode);
-      if (match) {
-        url.searchParams.set("match_id", match.id || "");
-        url.searchParams.set("match", `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}`);
-        url.searchParams.set("match_time", displayDate(match.dateText));
-      }
-      return url.toString();
-    }
-
     window.startPredictionPk = function startPredictionPk(matchId) {
       const match = getPredictionMatch(matchId);
-      const externalUrl = buildExternalPredictionUrl(match);
-      if (!externalUrl) {
-        showView("challengeCreate");
-        showToast("该场预测链接待配置，先进入原型预测页");
-        return;
+      showView("challengeCreate");
+      const select = document.getElementById("challenge-match");
+      if (match && select) {
+        select.value = match.id;
+        syncPredictionMatch();
       }
-      window.location.href = externalUrl;
+      showToast(match ? "已选择这场比赛，填写预测即可创建PK房" : "请选择比赛并填写预测");
     };
 
     window.collectPredictionAnswers = function collectPredictionAnswers() {
       return {
         halfResult: document.getElementById("half-result")?.value || "",
-        halfScore: document.getElementById("half-score")?.value || "",
         halfFirstGoal: document.getElementById("half-first-goal")?.value || "",
         halfGoals: document.getElementById("half-goals")?.value || "",
         result: document.getElementById("prediction-result")?.value || "",
-        score: document.getElementById("challenge-score")?.value || "",
-        firstGoal: document.getElementById("prediction-first-goal")?.value || "",
+        fullGoals: document.getElementById("full-goals")?.value || "",
         redCard: document.getElementById("match-red-card")?.value || "",
         yellowCards: document.getElementById("match-yellow-cards")?.value || "",
       };
     };
+
+    function normalizePredictionRoom(data) {
+      if (!data) return null;
+      const room = data.room ? { ...data.room } : { ...data };
+      const matchId = room.matchId || room.match_id || data.matchId || data.match_id || "";
+      return {
+        ...room,
+        id: room.id || room._id || data.id || data._id || "",
+        joinCode: room.joinCode || room.id || room._id || data.joinCode || data.id || data._id || "",
+        matchId,
+        name: room.name || room.match_label || room.matchLabel || "预测PK房",
+        members: data.members || room.members || [],
+        memberCount: data.memberCount || room.memberCount || (data.members || room.members || []).length || 1,
+        myPrediction: data.prediction || room.myPrediction || null,
+      };
+    }
 
     window.createPrediction = async function createPrediction(btn) {
       const profile = await ensurePredictionProfile();
@@ -1586,7 +1675,9 @@
       btn.disabled = true;
       btn.textContent = "创建中...";
       try {
-        const room = await predictionService.createRoom({ matchId, answers });
+        const match = getPredictionMatch(matchId);
+        const matchLabel = match ? `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}` : "预测PK";
+        const room = normalizePredictionRoom(await predictionService.createRoom({ matchId, matchLabel, answers }));
         currentPredictionRoomId = room.id;
         updateRoomUrl(room);
         renderPredictionRoom(room);
@@ -1608,13 +1699,15 @@
     }
 
     window.renderPredictionRoom = function renderPredictionRoom(room) {
+      room = normalizePredictionRoom(room);
       if (!room) return;
       const data = window.PROTOTYPE_DATA || { matches: [] };
       const match = (data.matches || []).find((m) => m.id === room.matchId);
+      currentPredictionMatchId = room.matchId || currentPredictionMatchId;
 
       document.getElementById("pk-room-title").textContent = room.name || "预测PK房";
-      document.getElementById("pk-room-match").textContent = match ?
-        displayTeamName(match.homeTeam) + " vs " + displayTeamName(match.awayTeam) + " · " + displayDate(match.dateText) : "正在读取比赛";
+      document.getElementById("pk-room-match").innerHTML = match ?
+        `<span class="team">${displayTeamWithFlag(match.homeTeam)}</span> vs <span class="team">${displayTeamWithFlag(match.awayTeam)}</span> · ${escapeHtml(displayDate(match.dateText))}` : "正在读取比赛";
 
       document.getElementById("pk-room-count").textContent = (room.memberCount || 1) + "/20人";
       document.getElementById("pk-room-state").textContent = (room.memberCount || 1) >= 2 ? "已成局" : "等待好友加入";
@@ -1632,8 +1725,14 @@
       if (submitBtn) submitBtn.hidden = !!room.myPrediction;
     };
 
-    window.sharePkRoom = function sharePkRoom(btn) {
-      sharePrototype(btn);
+    window.sharePkRoom = async function sharePkRoom(btn) {
+      const roomUrl = window.location.href;
+      const matchText = document.getElementById("pk-room-match")?.textContent?.trim() || "这场世界杯比赛";
+      await shareLink({
+        title: "今晚预测一下？",
+        text: `${matchText}，猜中就生成你的世界杯高光海报。`,
+        url: roomUrl,
+      }, btn);
     };
 
     window.editRoomPrediction = function editRoomPrediction() {
@@ -1647,14 +1746,10 @@
       if (lastMsg) lastMsg.textContent = "我：" + (btn.textContent || "...");
     };
 
-    window.submitSecondHalf = function submitSecondHalf() {
-      showToast("闪电预测已提交（原型演示）");
-    };
-
     window.openSharedPredictionRoom = async function openSharedPredictionRoom(joinCode) {
       if (!predictionService) return;
       try {
-        const room = await predictionService.joinRoom(joinCode);
+        const room = normalizePredictionRoom(await predictionService.joinRoom(joinCode));
         if (room) {
           currentPredictionRoomId = room.id;
           renderPredictionRoom(room);
@@ -1784,6 +1879,25 @@
 
     /* ── Init ── */
 
+    async function loadCloudBaseClient() {
+      const config = window.APP_CONFIG || {};
+      if (!config.cloudbaseEnvId || window.cloudbase?.init) return;
+      await new Promise((resolve) => {
+        const script = document.createElement("script");
+        const timeout = window.setTimeout(resolve, 4000);
+        script.src = config.cloudbaseSdkUrl || "https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.3/cloudbase.full.js";
+        script.onload = () => {
+          window.clearTimeout(timeout);
+          resolve();
+        };
+        script.onerror = () => {
+          window.clearTimeout(timeout);
+          resolve();
+        };
+        document.head.append(script);
+      });
+    }
+
     async function loadSupabaseClient() {
       const config = window.APP_CONFIG || {};
       if (!config.supabaseUrl || !config.supabaseAnonKey || window.supabase?.createClient) return;
@@ -1804,6 +1918,7 @@
     }
 
     async function initPredictionApp() {
+      await loadCloudBaseClient();
       await loadSupabaseClient();
       predictionService = window.PredictionService.create(window.APP_CONFIG || {});
       populateChallengeMatches();
@@ -1813,6 +1928,7 @@
         event.preventDefault();
         const nickname = document.getElementById("profile-nickname").value.trim();
         if (!nickname) return;
+        window.localStorage.setItem("wechat_nickname", nickname);
         document.getElementById("profile-dialog").close();
         pendingProfileResolver?.(nickname);
         pendingProfileResolver = null;

@@ -133,6 +133,157 @@
     }
   }
 
+  class CloudBasePredictionService {
+    constructor(app) {
+      this.mode = "cloudbase";
+      this.app = app;
+      this.auth = app.auth({ persistence: "local" });
+      this.db = app.database();
+      this.userId = null;
+    }
+
+    async authenticate() {
+      if (this.userId) return this.userId;
+      let loginState = await this.auth.getLoginState?.();
+      if (!loginState) {
+        if (this.auth.anonymousAuthProvider) {
+          await this.auth.anonymousAuthProvider().signIn();
+        } else if (this.auth.signInAnonymously) {
+          await this.auth.signInAnonymously();
+        } else {
+          throw new Error("CloudBase 匿名登录不可用，请在控制台开启匿名登录");
+        }
+        loginState = await this.auth.getLoginState?.();
+      }
+      this.userId = loginState?.user?.uid || loginState?.user?.openid || loginState?.user?.uuid;
+      if (!this.userId) throw new Error("CloudBase 登录失败，请检查登录方式配置");
+      return this.userId;
+    }
+
+    async getProfile() {
+      await this.authenticate();
+      try {
+        const result = await this.db.collection("profiles").doc(this.userId).get();
+        return result.data?.[0] || result.data || null;
+      } catch {
+        return null;
+      }
+    }
+
+    async ensureProfile(nickname) {
+      await this.authenticate();
+      const current = await this.getProfile();
+      if (!current && !nickname) return null;
+      if (current && !nickname) return current;
+      const now = new Date().toISOString();
+      const profile = {
+        nickname: nickname.trim(),
+        avatar_text: avatarText(nickname),
+        updated_at: now,
+      };
+      if (!current) profile.created_at = now;
+      await this.db.collection("profiles").doc(this.userId).set(profile);
+      return { _id: this.userId, ...profile };
+    }
+
+    async createRoom(payload) {
+      await this.authenticate();
+      const now = new Date().toISOString();
+      const roomPayload = {
+        code: Math.random().toString(36).slice(2, 8).toUpperCase(),
+        creator_id: this.userId,
+        match_id: payload.matchId,
+        match_label: payload.matchLabel,
+        status: "open",
+        max_players: 20,
+        created_at: now,
+      };
+      const added = await this.db.collection("prediction_rooms").add(roomPayload);
+      const roomId = added.id || added._id;
+      await this.db.collection("room_members").doc(`${roomId}_${this.userId}`).set({ room_id: roomId, user_id: this.userId, joined_at: now });
+      await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).set({
+        room_id: roomId,
+        user_id: this.userId,
+        answers: payload.answers,
+        points: 0,
+        hits: 0,
+        is_winner: false,
+        submitted_at: now,
+      });
+      return this.getRoom(roomId);
+    }
+
+    async joinRoom(roomId) {
+      await this.authenticate();
+      await this.db.collection("room_members").doc(`${roomId}_${this.userId}`).set({
+        room_id: roomId,
+        user_id: this.userId,
+        joined_at: new Date().toISOString(),
+      });
+      return this.getRoom(roomId);
+    }
+
+    async savePrediction(roomId, answers) {
+      await this.authenticate();
+      await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).set({
+        room_id: roomId,
+        user_id: this.userId,
+        answers,
+        points: 0,
+        hits: 0,
+        is_winner: false,
+        submitted_at: new Date().toISOString(),
+      });
+      return this.getRoom(roomId);
+    }
+
+    async getRoom(roomId) {
+      await this.authenticate();
+      const roomResult = await this.db.collection("prediction_rooms").doc(roomId).get();
+      const room = roomResult.data?.[0] || roomResult.data;
+      if (!room) throw new Error("预测房不存在或已失效");
+
+      const membersResult = await this.db.collection("room_members").where({ room_id: roomId }).get();
+      const memberRows = membersResult.data || [];
+      const members = [];
+      for (const member of memberRows) {
+        try {
+          const profileResult = await this.db.collection("profiles").doc(member.user_id).get();
+          const profile = profileResult.data?.[0] || profileResult.data;
+          if (profile) members.push(profile);
+        } catch {
+          // Ignore profiles that have not been completed yet.
+        }
+      }
+
+      let prediction = null;
+      try {
+        const predictionResult = await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).get();
+        prediction = predictionResult.data?.[0] || predictionResult.data || null;
+      } catch {
+        prediction = null;
+      }
+      return { room: { id: room._id || roomId, ...room }, members, prediction };
+    }
+
+    async getLeaderboard() {
+      const profilesResult = await this.db.collection("profiles").limit(200).get();
+      const predictionsResult = await this.db.collection("predictions").limit(1000).get();
+      const predictions = predictionsResult.data || [];
+      return (profilesResult.data || []).map((profile) => {
+        const userPredictions = predictions.filter((item) => item.user_id === (profile._id || profile.id));
+        return {
+          user_id: profile._id || profile.id,
+          nickname: profile.nickname,
+          avatar_text: profile.avatar_text,
+          total_points: userPredictions.reduce((sum, item) => sum + (item.points || 0), 0),
+          predictions_count: userPredictions.length,
+          wins: userPredictions.filter((item) => item.is_winner).length,
+        };
+      }).sort((a, b) => b.total_points - a.total_points).slice(0, 20);
+    }
+  }
+
   class SupabasePredictionService {
     constructor(client) {
       this.mode = "cloud";
@@ -229,6 +380,8 @@
 
   global.PredictionService = {
     create(config = {}) {
+      const canUseCloudBase = config.cloudbaseEnvId && global.cloudbase?.init;
+      if (canUseCloudBase) return new CloudBasePredictionService(global.cloudbase.init({ env: config.cloudbaseEnvId }));
       const canUseCloud = config.supabaseUrl && config.supabaseAnonKey && global.supabase?.createClient;
       if (!canUseCloud) return new DemoPredictionService();
       return new SupabasePredictionService(global.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey));
