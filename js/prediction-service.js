@@ -114,7 +114,15 @@
         .map((member) => data.profiles.find((profile) => profile.id === member.user_id))
         .filter(Boolean);
       const prediction = data.predictions.find((item) => item.room_id === roomId && item.user_id === this.userId) || null;
-      return { room, members, prediction };
+      const predictions = data.predictions
+        .filter((item) => item.room_id === roomId)
+        .map((item) => ({
+          ...item,
+          nickname: data.profiles.find((profile) => profile.id === item.user_id)?.nickname || "匿名球迷",
+          is_creator: item.user_id === room.creator_id,
+          is_me: item.user_id === this.userId,
+        }));
+      return { room, members, prediction, predictions };
     }
 
     async getLeaderboard() {
@@ -263,7 +271,22 @@
       } catch {
         prediction = null;
       }
-      return { room: { id: room._id || roomId, ...room }, members, prediction };
+      let predictions = [];
+      try {
+        const predictionsResult = await this.db.collection("predictions").where({ room_id: roomId }).get();
+        predictions = (predictionsResult.data || []).map((item) => {
+          const profile = members.find((member) => (member._id || member.id) === item.user_id);
+          return {
+            ...item,
+            nickname: profile?.nickname || "匿名球迷",
+            is_creator: item.user_id === room.creator_id,
+            is_me: item.user_id === this.userId,
+          };
+        });
+      } catch {
+        predictions = prediction ? [{ ...prediction, nickname: "我", is_me: true }] : [];
+      }
+      return { room: { id: room._id || roomId, ...room }, members, prediction, predictions };
     }
 
     async getLeaderboard() {
@@ -368,7 +391,19 @@
       }
       const { data: prediction, error: predictionError } = await this.client.from("predictions").select("answers,points,hits,submitted_at").eq("room_id", roomId).eq("user_id", this.userId).maybeSingle();
       if (predictionError) throw predictionError;
-      return { room, members, prediction };
+      const { data: predictions, error: predictionsError } = await this.client.from("predictions").select("room_id,user_id,answers,points,hits,submitted_at").eq("room_id", roomId);
+      if (predictionsError) throw predictionsError;
+      return {
+        room,
+        members,
+        prediction,
+        predictions: (predictions || []).map((item) => ({
+          ...item,
+          nickname: members.find((member) => member.id === item.user_id)?.nickname || "匿名球迷",
+          is_creator: item.user_id === room.creator_id,
+          is_me: item.user_id === this.userId,
+        })),
+      };
     }
 
     async getLeaderboard() {

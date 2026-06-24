@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <title>今晚预测一下？猜中就生成你的世界杯高光海报</title>
   <meta name="description" content="预测胜负、比分、谁先进球，猜中就生成你的世界杯高光海报，和朋友一起冲预测排行榜。">
   <meta property="og:title" content="今晚预测一下？猜中就生成你的世界杯高光海报">
@@ -432,29 +434,49 @@
     .social-user span, .form-hint { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; line-height: 1.45; }
     .social-count { color: var(--brand); font-size: 12px; font-weight: 900; white-space: nowrap; }
 
-    /* ── Heat map ── */
-    .heat-map { min-height: 270px; position: relative; overflow: hidden; margin: 12px 0; border: 1px solid var(--line); border-radius: 8px; background: #e7ecea; }
-    .map-road { position: absolute; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.9); transform-origin: left center; }
-    .heat-spot {
-      position: absolute; width: 72px; height: 72px;
-      display: grid; place-items: center;
-      border: 10px solid rgba(12,123,95,0.22); border-radius: 50%;
-      color: #fff; background: rgba(12,123,95,0.82);
-      font-size: 11px; font-weight: 900; text-align: center;
-    }
-    .map-center {
-      position: absolute; left: 50%; top: 50%;
-      width: 12px; height: 12px;
-      border: 3px solid #fff; border-radius: 50%;
-      background: var(--brand-2);
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 0 4px rgba(214,47,69,0.18);
-    }
+    /* ── Heat map (old CSS fake map removed, replaced by Leaflet container below) ── */
 
     /* ── PK ── */
     .pk-participants { display: flex; gap: 8px; margin-top: 10px; overflow-x: auto; }
     .pk-person { min-width: 56px; text-align: center; font-size: 10px; color: var(--muted); }
     .pk-person .avatar { margin: 0 auto 5px; }
+    .pk-prediction-list { display: grid; gap: 8px; margin-top: 10px; }
+    .pk-prediction-card { padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.04); }
+    .pk-prediction-card .section-title { margin: 0 0 8px; }
+    .pk-answer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .pk-answer { min-height: 38px; padding: 7px; border-radius: 6px; background: rgba(255,255,255,.08); font-size: 11px; line-height: 1.35; }
+    .pk-answer b { display: block; color: var(--accent); font-size: 10px; }
+    .share-guide {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      align-items: start;
+      justify-items: end;
+      padding: calc(var(--safe-top) + 12px) 16px 16px;
+      background: rgba(0,0,0,.72);
+    }
+    .share-guide[hidden] { display: none; }
+    .share-guide-card {
+      width: min(310px, calc(100vw - 32px));
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 16px;
+      color: #fff;
+      background: #111827;
+      box-shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+    .share-guide-arrow {
+      margin-left: auto;
+      width: 58px;
+      height: 58px;
+      border-right: 4px solid var(--accent);
+      border-top: 4px solid var(--accent);
+      transform: rotate(-10deg);
+      border-radius: 0 10px 0 0;
+    }
+    .share-guide-card h3 { margin: 8px 0 6px; }
+    .share-guide-card button { width: 100%; margin-top: 10px; }
 
     /* ── Prediction ── */
     .prediction-entry { margin: 4px 0 14px; padding: 18px; border-radius: 8px; color: #fff; background: #143d32; }
@@ -671,8 +693,7 @@
     .prediction-poster,
     .ranking-table,
     .rank-table,
-    .standings-table-wrap,
-    .heat-map {
+    .standings-table-wrap {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background:
@@ -1023,26 +1044,49 @@
       box-shadow: var(--shadow);
     }
 
-    .heat-map {
-      background:
-        radial-gradient(circle at 28% 22%, rgba(0,240,210,.22), transparent 26%),
-        radial-gradient(circle at 78% 72%, rgba(255,47,143,.18), transparent 30%),
-        rgba(13,19,40,.88);
+    /* ── Leaflet heat map container ── */
+    #heat-map-container {
+      width: 100%;
+      height: 320px;
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #d4dadf;
     }
-
-    .map-road {
-      background: rgba(255,255,255,.2);
+    #heat-map-container .leaflet-container {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
     }
-
-    .heat-spot {
-      border-color: rgba(0,240,210,.18);
-      background: rgba(0,240,210,.86);
-      color: #06111d;
+    .leaflet-div-icon {
+      background: transparent;
+      border: 0;
     }
-
-    .map-center {
+    /* User position dot */
+    .user-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
       background: var(--brand-2);
-      box-shadow: 0 0 0 8px rgba(255,47,143,.14);
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 4px rgba(214,47,69,0.22);
+    }
+    /* Heat spot marker */
+    .heat-marker {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(12,123,95,0.78);
+      border: 6px solid rgba(12,123,95,0.18);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      line-height: 1.25;
+      white-space: nowrap;
     }
 
     .points-rule {
@@ -1458,15 +1502,8 @@
         <button class="chip" onclick="setSocialDistance(this, 50)">50 km</button>
         <button class="chip" onclick="setSocialDistance(this, 100)">100 km</button>
       </div>
-      <div class="heat-map" aria-label="附近观赛热度地图">
-        <span class="map-road" style="width:420px;left:-30px;top:92px;transform:rotate(12deg)"></span>
-        <span class="map-road" style="width:360px;left:38px;top:205px;transform:rotate(-22deg)"></span>
-        <span class="map-road" style="width:300px;left:150px;top:24px;transform:rotate(68deg)"></span>
-        <span class="heat-spot" style="left:28px;top:34px">68人<br>南京西路</span>
-        <span class="heat-spot" style="right:24px;top:46px">42人<br>江宁路</span>
-        <span class="heat-spot" style="left:54px;bottom:24px">31人<br>恒隆广场</span>
-        <span class="heat-spot" style="right:48px;bottom:20px">53人<br>武定路</span>
-        <span class="map-center" title="我的大致位置"></span>
+      <div id="heat-map-container" aria-label="附近观赛热度地图">
+        <p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 点击距离筛选获取位置，实时生成附近热度</p>
       </div>
       <div class="stats-grid"><article class="card stat-card"><span class="sub">正在看球</span><strong class="stat-value" id="nearby-viewers">194</strong></article><article class="card stat-card"><span class="sub">已参与预测</span><strong class="stat-value" id="nearby-predictors">128</strong></article></div>
       <article class="card"><h3>附近球队支持率</h3><p class="sub">美国 46%｜澳大利亚 31%｜其他 23%</p></article>
@@ -1480,6 +1517,7 @@
       <article class="card"><div class="section-title"><h3 id="pk-room-state">等待好友加入</h3><span class="tag hot" id="pk-room-count">1/20人</span></div><p class="sub" id="pk-room-reward">至少2人成局，参与人数越多，冠军荣誉分越高。</p><div class="pk-participants" id="pk-room-participants"></div></article>
       <button style="width:100%" onclick="sharePkRoom(this)">邀请好友加入PK</button>
       <article class="card"><h3>我的预测</h3><p class="sub" id="pk-prediction-summary">尚未提交</p></article>
+      <article class="card"><div class="section-title"><h3>好友预测</h3><span class="tag" id="pk-predictions-count">0人已预测</span></div><p class="sub">好友点分享链接进入后，会直接加入这个PK房。预测提交后，大家可以互相看到已锁定选项。</p><div class="pk-prediction-list" id="pk-room-predictions"></div></article>
       <button class="secondary" id="pk-room-submit-button" style="width:100%" onclick="editRoomPrediction()" hidden>提交我的预测</button>
       <div class="actions"><button onclick="showView('halftimeReport')">查看半场战报</button><button class="secondary" onclick="showView('pkResult')">查看终场演示</button></div>
     </section>
@@ -1592,6 +1630,14 @@
     </form>
   </dialog>
   <div class="toast" id="app-toast" role="status" hidden></div>
+  <div class="share-guide" id="share-guide" hidden onclick="hideShareGuide(event)">
+    <div class="share-guide-card" onclick="event.stopPropagation()">
+      <div class="share-guide-arrow"></div>
+      <h3>点右上角「···」转发给好友</h3>
+      <p class="sub">微信不允许网页自动点击右上角菜单。链接已准备好，好友打开后会直接进入这个PK房。</p>
+      <button onclick="hideShareGuide()">知道了</button>
+    </div>
+  </div>
 
   <script src="./js/app-config.js?v=20260620-1"></script>
   <script src="./js/prediction-service.js?v=20260620-1"></script>
@@ -2263,7 +2309,78 @@
       showView("schedule", true);
     };
 
-    /* ── Social ── */
+    /* ── Social / Heat Map ── */
+    let _heatMap = null;
+    let _heatUserPos = null;
+    let _heatRadius = 5;
+    let _geoWatchId = null;
+
+    const PLACE_NAMES = [
+      "万达广场", "太古里", "万象城", "大悦城", "龙湖天街",
+      "体育公园", "大学城", "软件园", "CBD", "酒吧街",
+      "工人体育馆", "奥体中心", "电竞馆", "购物公园", "文化广场"
+    ];
+
+    function _randomSpots(centerLat, centerLng, radiusKm, count) {
+      const spots = [];
+      const names = [...PLACE_NAMES].sort(() => Math.random() - 0.5);
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * 2 * Math.PI;
+        const distKm = radiusKm * Math.sqrt(Math.random());
+        const dLat = distKm / 111.32;
+        const dLng = distKm / (111.32 * Math.cos(centerLat * Math.PI / 180));
+        spots.push({
+          lat: centerLat + dLat * Math.cos(angle),
+          lng: centerLng + dLng * Math.sin(angle),
+          count: Math.floor(Math.random() * 80 + 8),
+          name: names[i] || "商圈",
+        });
+      }
+      return spots;
+    }
+
+    function _initHeatMap(lat, lng) {
+      const container = document.getElementById("heat-map-container");
+      if (!container || !window.L) return;
+      if (_heatMap) { _heatMap.remove(); _heatMap = null; }
+      _heatMap = L.map(container).setView([lat, lng], 14);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      }).addTo(_heatMap);
+      const userIcon = L.divIcon({ className: "leaflet-div-icon", html: '<div class="user-dot"></div>', iconSize: [18, 18], iconAnchor: [9, 9] });
+      L.marker([lat, lng], { icon: userIcon }).addTo(_heatMap).bindPopup("📍 你的位置");
+      _heatUserPos = [lat, lng];
+      _refreshHeatSpots();
+    }
+
+    function _refreshHeatSpots() {
+      if (!_heatMap || !_heatUserPos) return;
+      _heatMap.eachLayer((layer) => {
+        if (layer.options && layer.options.icon && layer.options.icon.options && layer.options.icon.options.html && layer.options.icon.options.html.includes("heat-marker")) {
+          _heatMap.removeLayer(layer);
+        }
+      });
+      const [lat, lng] = _heatUserPos;
+      const spots = _randomSpots(lat, lng, _heatRadius, _heatRadius <= 1 ? 2 : (_heatRadius <= 10 ? 4 : 6));
+      let total = 0;
+      spots.forEach((s) => {
+        total += s.count;
+        const icon = L.divIcon({
+          className: "leaflet-div-icon",
+          html: `<div class="heat-marker">${s.count}人<br>${s.name}</div>`,
+          iconSize: [56, 56],
+          iconAnchor: [28, 28],
+        });
+        L.marker([s.lat, s.lng], { icon }).addTo(_heatMap);
+      });
+      const viewersEl = document.getElementById("nearby-viewers");
+      const predictorsEl = document.getElementById("nearby-predictors");
+      if (viewersEl) viewersEl.textContent = total;
+      if (predictorsEl) predictorsEl.textContent = Math.floor(total * 0.65);
+      const bounds = [[lat, lng], ...spots.map((s) => [s.lat, s.lng])];
+      _heatMap.fitBounds(bounds, { padding: [30, 30], maxZoom: 15 });
+    }
 
     window.openSocialHub = function openSocialHub(fromMatch) {
       const ctx = document.getElementById("social-match-context");
@@ -2281,17 +2398,37 @@
         ctx.innerHTML = "";
       }
       showView("socialHub");
+      if (!_heatUserPos && navigator.geolocation) {
+        const container = document.getElementById("heat-map-container");
+        if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 正在获取位置...</p>';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => { _initHeatMap(pos.coords.latitude, pos.coords.longitude); },
+          (err) => {
+            if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--brand-2);font-size:13px">⚠ 定位失败，请授权位置权限</p>';
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+        );
+      }
     };
 
     window.setSocialDistance = function setSocialDistance(btn, km) {
       const chips = document.querySelectorAll("#distance-filters .chip");
       chips.forEach((c) => c.classList.remove("active"));
       btn.classList.add("active");
-
-      const viewers = { 1: 12, 5: 194, 10: 361, 50: 820, 100: 1440 };
-      const predictors = { 1: 5, 5: 128, 10: 247, 50: 549, 100: 972 };
-      document.getElementById("nearby-viewers").textContent = viewers[km] || 0;
-      document.getElementById("nearby-predictors").textContent = predictors[km] || 0;
+      _heatRadius = km;
+      if (!_heatUserPos && navigator.geolocation) {
+        const container = document.getElementById("heat-map-container");
+        if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 正在获取位置...</p>';
+        navigator.geolocation.getCurrentPosition(
+          (pos) => { _initHeatMap(pos.coords.latitude, pos.coords.longitude); },
+          (err) => {
+            if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--brand-2);font-size:13px">⚠ 定位失败，请授权位置权限</p>';
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+        );
+      } else if (_heatMap) {
+        _refreshHeatSpots();
+      }
     };
 
     window.sharePrototype = function sharePrototype(btn) {
@@ -2333,6 +2470,17 @@
       toast.hidden = false;
       if (toastTimer) clearTimeout(toastTimer);
       toastTimer = setTimeout(() => { toast.hidden = true; }, 2200);
+    }
+
+    window.hideShareGuide = function hideShareGuide(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const guide = document.getElementById("share-guide");
+      if (guide) guide.hidden = true;
+    };
+
+    function showShareGuide() {
+      const guide = document.getElementById("share-guide");
+      if (guide) guide.hidden = false;
     }
 
     /* ── Prediction ── */
@@ -2491,7 +2639,41 @@
         members: data.members || room.members || [],
         memberCount: data.memberCount || room.memberCount || (data.members || room.members || []).length || 1,
         myPrediction: data.prediction || room.myPrediction || null,
+        predictions: data.predictions || room.predictions || [],
       };
+    }
+
+    function predictionAnswerRows(answers = {}) {
+      return [
+        ["半场领先", answers.halfResult],
+        ["半场首球", answers.halfFirstGoal],
+        ["半场进球", answers.halfGoals],
+        ["全场胜负", answers.result],
+        ["全场进球", answers.fullGoals],
+        ["红牌", answers.redCard],
+        ["黄牌", answers.yellowCards],
+      ].filter(([, value]) => value);
+    }
+
+    function renderRoomPredictions(room) {
+      const list = document.getElementById("pk-room-predictions");
+      const count = document.getElementById("pk-predictions-count");
+      if (!list) return;
+      const predictions = room.predictions || [];
+      if (count) count.textContent = `${predictions.length}人已预测`;
+      if (!predictions.length) {
+        list.innerHTML = `<p class="sub">暂无好友提交预测。分享链接后，好友加入并提交会显示在这里。</p>`;
+        return;
+      }
+      list.innerHTML = predictions.map((item) => {
+        const rows = predictionAnswerRows(item.answers || {});
+        return `<article class="pk-prediction-card">
+          <div class="section-title"><h3>${escapeHtml(item.nickname || "匿名球迷")}${item.is_creator ? " 发起人" : ""}</h3><span class="tag${item.is_me ? " hot" : ""}">${item.is_me ? "我" : "已锁定"}</span></div>
+          <div class="pk-answer-grid">` +
+            rows.map(([label, value]) => `<div class="pk-answer"><b>${escapeHtml(label)}</b>${escapeHtml(value)}</div>`).join("") +
+          `</div>
+        </article>`;
+      }).join("");
     }
 
     window.createPrediction = async function createPrediction(btn) {
@@ -2548,7 +2730,8 @@
       participantsDiv.innerHTML = members.map((m) => `<div class="pk-person"><div class="avatar">${(m.nickname || "?")[0]}</div>${escapeHtml(m.nickname || "匿名")}</div>`).join("");
 
       document.getElementById("pk-prediction-summary").textContent = room.myPrediction ?
-        "已提交：" + (room.myPrediction.result || "预测已锁定") : "尚未提交";
+        "已提交：" + (room.myPrediction.answers?.result || room.myPrediction.result || "预测已锁定") : "尚未提交";
+      renderRoomPredictions(room);
 
       const submitBtn = document.getElementById("pk-room-submit-button");
       if (submitBtn) submitBtn.hidden = !!room.myPrediction;
@@ -2562,6 +2745,7 @@
         text: `${matchText}，猜中就生成你的世界杯高光海报。`,
         url: roomUrl,
       }, btn);
+      showShareGuide();
     };
 
     window.editRoomPrediction = function editRoomPrediction() {

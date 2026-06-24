@@ -1,5 +1,5 @@
 window.PROTOTYPE_DATA = {
-  "generatedAt": "2026-06-24T02:49:51.707Z",
+  "generatedAt": "2026-06-24T09:41:59.797Z",
   "teams": [
     {
       "id": "fifa-team-alg",
