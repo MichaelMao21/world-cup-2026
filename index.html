@@ -1404,7 +1404,8 @@
         <p style="margin:0 0 16px;font-size:15px;opacity:0.9;font-weight:700;">猜中就生成你的世界杯高光海报</p>
         <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=80" alt="世界杯预测PK" width="280" height="150" style="border-radius:10px;object-fit:cover;display:block;width:100%;max-width:280px;margin:0 auto 12px;" loading="lazy">
         <p style="margin:0;font-size:11px;opacity:0.7;">点击链接进入预测PK</p>
-        <p style="margin:6px 0 0;font-size:10px;opacity:0.5;word-break:break-all;">worldcup2026.tcloudbaseapp.com</p>
+        <p style="margin:6px 0 8px;font-size:10px;opacity:0.5;word-break:break-all;">worldcup2026.tcloudbaseapp.com</p>
+        <button onclick="openSharePosterModal()" style="width:100%;background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;">📤 生成分享海报</button>
       </div>
     </section>
 
@@ -1684,6 +1685,17 @@
       <img id="poster-preview-image" alt="我的神预言海报">
       <p>长按图片保存，然后发到朋友圈</p>
       <button onclick="hidePosterPreview()">关闭</button>
+    </div>
+  </div>
+  <div id="share-poster-modal" style="display:none;position:fixed;inset:0;z-index:902;background:rgba(0,0,0,0.88);flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;box-sizing:border-box;" onclick="closeSharePosterModal(event)">
+    <p style="color:rgba(255,255,255,0.88);margin:0;font-size:14px;font-weight:600;">长按图片保存到相册，发给微信好友</p>
+    <div onclick="event.stopPropagation()" style="width:min(320px,88vw);">
+      <canvas id="share-poster-canvas" style="width:100%;border-radius:14px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.5);"></canvas>
+    </div>
+    <p id="share-poster-hint" style="color:rgba(255,255,255,0.55);margin:0;font-size:12px;text-align:center;">生成中…</p>
+    <div style="display:flex;gap:10px;width:min(320px,88vw);">
+      <button onclick="closeSharePosterModal()" style="flex:1;background:rgba(255,255,255,0.15);color:#fff;border:none;padding:11px;border-radius:8px;font-size:14px;cursor:pointer;">关闭</button>
+      <button onclick="copyShareLink()" style="flex:1;background:#1e9e6e;color:#fff;border:none;padding:11px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">复制链接</button>
     </div>
   </div>
 
@@ -2601,13 +2613,7 @@
     async function shareLink({ title, text, url }, btn) {
       const shareUrl = url || window.location.href;
       if (isWeChatBrowser()) {
-        showToast("请用右上角「···」转发，不要直接发送网址");
-        showShareGuide();
-        if (btn) {
-          const orig = btn.textContent;
-          btn.textContent = "请点右上角···转发";
-          setTimeout(() => { btn.textContent = orig; }, 2200);
-        }
+        openSharePosterModal();
         return;
       }
       if (navigator.share) {
@@ -2650,6 +2656,168 @@
     function showShareGuide() {
       const guide = document.getElementById("share-guide");
       if (guide) guide.hidden = false;
+    }
+
+    /* ── Share Poster ── */
+    const _SHARE_URL = 'https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com';
+
+    window.openSharePosterModal = function openSharePosterModal() {
+      const modal = document.getElementById('share-poster-modal');
+      if (!modal) return;
+      modal.style.display = 'flex';
+      const hint = document.getElementById('share-poster-hint');
+      if (hint) hint.textContent = '生成中…';
+      const canvas = document.getElementById('share-poster-canvas');
+      if (canvas) {
+        _drawSharePoster(canvas)
+          .then(() => { if (hint) hint.textContent = '↑ 长按图片保存到相册，然后发给好友'; })
+          .catch(() => { if (hint) hint.textContent = '生成失败，请点"复制链接"分享'; });
+      }
+    };
+
+    window.closeSharePosterModal = function closeSharePosterModal(e) {
+      if (e && e.target !== e.currentTarget) return;
+      const modal = document.getElementById('share-poster-modal');
+      if (modal) modal.style.display = 'none';
+    };
+
+    window.copyShareLink = function copyShareLink() {
+      navigator.clipboard?.writeText(_SHARE_URL)
+        .then(() => showToast('链接已复制'))
+        .catch(() => showToast('链接复制失败'));
+    };
+
+    async function _drawSharePoster(canvas) {
+      const W = 750, H = 1100;
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      // Background gradient
+      const bg = ctx.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, '#0c7b5f');
+      bg.addColorStop(0.55, '#143d32');
+      bg.addColorStop(1, '#081a12');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // Decorative blobs
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      [[640, 90, 200], [60, 350, 140], [700, 750, 110]].forEach(([cx, cy, r]) => {
+        ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+      });
+
+      // Header
+      ctx.fillStyle = 'rgba(0,0,0,0.18)';
+      ctx.fillRect(0, 0, W, 132);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 50px -apple-system, PingFang SC, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('⚽  2026 FIFA 世界杯', W / 2, 58);
+      ctx.font = '26px -apple-system, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.62)';
+      ctx.fillText('实时赛果 · 赛程 · 积分榜', W / 2, 104);
+
+      // Latest results
+      const allMatches = window.APP_DATA?.matches || [];
+      const recent = allMatches.filter(m => m.status === 'completed').slice(-4);
+      let y = 158;
+      ctx.font = 'bold 26px -apple-system, sans-serif';
+      ctx.fillStyle = '#7dffb0';
+      ctx.textAlign = 'left';
+      ctx.fillText('📊 最新赛果', 50, y + 20);
+      y += 50;
+      for (const m of recent) {
+        ctx.fillStyle = 'rgba(255,255,255,0.09)';
+        _spRR(ctx, 40, y, W - 80, 74, 10); ctx.fill();
+        ctx.font = 'bold 34px -apple-system, sans-serif';
+        ctx.fillStyle = '#7dffb0';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${m.homeScore}  :  ${m.awayScore}`, W / 2, y + 47);
+        ctx.font = '25px -apple-system, sans-serif';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'right';
+        ctx.fillText(m.homeTeam, W / 2 - 68, y + 47);
+        ctx.textAlign = 'left';
+        ctx.fillText(m.awayTeam, W / 2 + 68, y + 47);
+        if (m.group) {
+          ctx.font = '18px -apple-system, sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.35)';
+          ctx.textAlign = 'right';
+          ctx.fillText(m.group, W - 50, y + 20);
+        }
+        y += 86;
+      }
+
+      // Divider
+      y += 14;
+      ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W - 50, y); ctx.stroke();
+      y += 28;
+
+      // QR label
+      ctx.font = '26px -apple-system, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.82)';
+      ctx.textAlign = 'center';
+      ctx.fillText('扫码查看完整赛程 · 积分榜 · 球队数据', W / 2, y + 22);
+      y += 56;
+
+      // QR code
+      const qrSize = 230;
+      const qrX = W / 2 - qrSize / 2;
+      try {
+        const qr = await _spLoadImg(
+          `https://api.qrserver.com/v1/create-qr-code/?size=460x460&color=143d32&data=${encodeURIComponent(_SHARE_URL)}`
+        );
+        ctx.fillStyle = '#ffffff';
+        _spRR(ctx, qrX - 14, y - 14, qrSize + 28, qrSize + 28, 14); ctx.fill();
+        ctx.drawImage(qr, qrX, y, qrSize, qrSize);
+      } catch {
+        ctx.fillStyle = 'rgba(255,255,255,0.12)';
+        _spRR(ctx, qrX - 14, y - 14, qrSize + 28, qrSize + 28, 14); ctx.fill();
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.font = '20px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(_SHARE_URL.replace('https://', '').substring(0, 40), W / 2, y + qrSize / 2);
+      }
+      y += qrSize + 32;
+
+      // Stats
+      const done = allMatches.filter(m => m.status === 'completed').length;
+      ctx.fillStyle = 'rgba(255,255,255,0.38)';
+      ctx.font = '22px -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(`已完成 ${done} 场 / 共 ${allMatches.length} 场`, W / 2, y + 20);
+
+      // Bottom bar
+      ctx.fillStyle = 'rgba(0,0,0,0.22)';
+      ctx.fillRect(0, H - 52, W, 52);
+      ctx.fillStyle = 'rgba(255,255,255,0.22)';
+      ctx.font = '20px -apple-system, sans-serif';
+      ctx.fillText('2026 FIFA World Cup Viewing Guide', W / 2, H - 18);
+    }
+
+    function _spRR(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function _spLoadImg(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        setTimeout(() => reject(new Error('timeout')), 8000);
+        img.src = src;
+      });
     }
 
     /* ── Prediction ── */
