@@ -31,6 +31,14 @@
     return Array.from(nickname.trim()).slice(-1)[0] || "球";
   }
 
+  function addedDocumentId(result) {
+    return result?.id || result?._id || result?.ids?.[0] || result?.data?.id || result?.data?._id || "";
+  }
+
+  function missingCloudBackendError() {
+    return new Error("CloudBase 服务未连接，请刷新页面后重试");
+  }
+
   class DemoPredictionService {
     constructor() {
       this.mode = "demo";
@@ -58,64 +66,111 @@
 
     async createRoom(payload) {
       const data = readDemoData();
+      const now = new Date().toISOString();
+      const roomId = Math.random().toString(36).slice(2, 8).toUpperCase();
       const room = {
-        id: makeId(),
-        code: Math.random().toString(36).slice(2, 8).toUpperCase(),
+        id: roomId,
+        code: roomId,
         creator_id: this.userId,
         match_id: payload.matchId,
         match_label: payload.matchLabel,
         status: "open",
         max_players: 20,
-        created_at: new Date().toISOString(),
+        created_at: now,
       };
       data.rooms.push(room);
       data.members.push({ room_id: room.id, user_id: this.userId, joined_at: room.created_at });
       data.predictions.push({
         room_id: room.id,
         user_id: this.userId,
+        match_id: payload.matchId,
+        match_label: payload.matchLabel,
         answers: payload.answers,
         points: 0,
         hits: 0,
         submitted_at: room.created_at,
       });
+      this.syncDemoMatchPredictions(data, payload.matchId, payload.matchLabel, payload.answers, now);
       writeDemoData(data);
       return this.getRoom(room.id);
     }
 
     async joinRoom(roomId) {
+      const room = await this.getRoom(roomId);
+      const resolvedRoomId = room.room.id;
       const data = readDemoData();
-      if (!data.rooms.some((room) => room.id === roomId)) throw new Error("预测房不存在或已失效");
-      if (!data.members.some((member) => member.room_id === roomId && member.user_id === this.userId)) {
-        data.members.push({ room_id: roomId, user_id: this.userId, joined_at: new Date().toISOString() });
+      if (!data.members.some((member) => member.room_id === resolvedRoomId && member.user_id === this.userId)) {
+        data.members.push({ room_id: resolvedRoomId, user_id: this.userId, joined_at: new Date().toISOString() });
         writeDemoData(data);
       }
-      return this.getRoom(roomId);
+      return this.getRoom(resolvedRoomId);
     }
 
     async savePrediction(roomId, answers) {
       const data = readDemoData();
-      const existing = data.predictions.find((item) => item.room_id === roomId && item.user_id === this.userId);
+      const room = data.rooms.find((item) => item.id === roomId || item.code === roomId);
+      if (!room) throw new Error("预测房不存在或已失效");
+      const now = new Date().toISOString();
+      const existing = data.predictions.find((item) => item.room_id === room.id && item.user_id === this.userId);
       if (existing) {
         existing.answers = answers;
-        existing.submitted_at = new Date().toISOString();
+        existing.match_id = room.match_id;
+        existing.match_label = room.match_label;
+        existing.submitted_at = now;
       } else {
-        data.predictions.push({ room_id: roomId, user_id: this.userId, answers, points: 0, hits: 0, submitted_at: new Date().toISOString() });
+        data.predictions.push({ room_id: room.id, user_id: this.userId, match_id: room.match_id, match_label: room.match_label, answers, points: 0, hits: 0, submitted_at: now });
       }
+      this.syncDemoMatchPredictions(data, room.match_id, room.match_label, answers, now);
       writeDemoData(data);
-      return this.getRoom(roomId);
+      return this.getRoom(room.id);
+    }
+
+    async savePersonalPrediction(payload) {
+      const data = readDemoData();
+      const roomId = `personal:${payload.matchId}:${this.userId}`;
+      const existing = data.predictions.find((item) => item.room_id === roomId && item.user_id === this.userId);
+      const record = {
+        room_id: roomId,
+        user_id: this.userId,
+        match_id: payload.matchId,
+        match_label: payload.matchLabel,
+        answers: payload.answers,
+        points: 0,
+        hits: 0,
+        is_personal: true,
+        submitted_at: new Date().toISOString(),
+      };
+      if (existing) Object.assign(existing, record);
+      else data.predictions.push(record);
+      this.syncDemoMatchPredictions(data, payload.matchId, payload.matchLabel, payload.answers, record.submitted_at);
+      writeDemoData(data);
+      return record;
+    }
+
+    syncDemoMatchPredictions(data, matchId, matchLabel, answers, submittedAt) {
+      data.predictions.forEach((prediction) => {
+        const room = data.rooms.find((item) => item.id === prediction.room_id);
+        const predictionMatchId = prediction.match_id || room?.match_id;
+        if (prediction.user_id === this.userId && String(predictionMatchId || "") === String(matchId || "")) {
+          prediction.match_id = matchId;
+          prediction.match_label = matchLabel || prediction.match_label || room?.match_label || "";
+          prediction.answers = answers;
+          prediction.submitted_at = submittedAt;
+        }
+      });
     }
 
     async getRoom(roomId) {
       const data = readDemoData();
-      const room = data.rooms.find((item) => item.id === roomId);
+      const room = data.rooms.find((item) => item.id === roomId || item.code === roomId);
       if (!room) throw new Error("预测房不存在或已失效");
       const members = data.members
-        .filter((item) => item.room_id === roomId)
+        .filter((item) => item.room_id === room.id)
         .map((member) => data.profiles.find((profile) => profile.id === member.user_id))
         .filter(Boolean);
-      const prediction = data.predictions.find((item) => item.room_id === roomId && item.user_id === this.userId) || null;
+      const prediction = data.predictions.find((item) => item.room_id === room.id && item.user_id === this.userId) || null;
       const predictions = data.predictions
-        .filter((item) => item.room_id === roomId)
+        .filter((item) => item.room_id === room.id)
         .map((item) => ({
           ...item,
           nickname: data.profiles.find((profile) => profile.id === item.user_id)?.nickname || "匿名球迷",
@@ -138,6 +193,18 @@
           wins: 0,
         };
       }).sort((a, b) => b.total_points - a.total_points).slice(0, 20);
+    }
+
+    async getMyPredictions() {
+      const data = readDemoData();
+      return data.predictions
+        .filter((item) => item.user_id === this.userId)
+        .map((prediction) => ({
+          prediction,
+          room: data.rooms.find((room) => room.id === prediction.room_id) || null,
+        }))
+        .filter((item) => item.room || item.prediction.is_personal)
+        .sort((a, b) => String(b.prediction.submitted_at || "").localeCompare(String(a.prediction.submitted_at || "")));
     }
   }
 
@@ -171,10 +238,15 @@
     async getProfile() {
       await this.authenticate();
       try {
-        const result = await this.db.collection("profiles").doc(this.userId).get();
-        return result.data?.[0] || result.data || null;
+        const result = await this.db.collection("profiles").where({ user_id: this.userId }).limit(1).get();
+        return result.data?.[0] || null;
       } catch {
-        return null;
+        try {
+          const result = await this.db.collection("profiles").doc(this.userId).get();
+          return result.data?.[0] || result.data || null;
+        } catch {
+          return null;
+        }
       }
     }
 
@@ -185,20 +257,24 @@
       if (current && !nickname) return current;
       const now = new Date().toISOString();
       const profile = {
+        user_id: this.userId,
         nickname: nickname.trim(),
         avatar_text: avatarText(nickname),
         updated_at: now,
       };
       if (!current) profile.created_at = now;
-      await this.db.collection("profiles").doc(this.userId).set(profile);
-      return { _id: this.userId, ...profile };
+      if (current?._id) {
+        await this.db.collection("profiles").doc(current._id).set(profile);
+        return { ...current, ...profile };
+      }
+      const result = await this.db.collection("profiles").add(profile);
+      return { _id: addedDocumentId(result), ...profile };
     }
 
     async createRoom(payload) {
       await this.authenticate();
       const now = new Date().toISOString();
       const roomPayload = {
-        code: Math.random().toString(36).slice(2, 8).toUpperCase(),
         creator_id: this.userId,
         match_id: payload.matchId,
         match_label: payload.matchLabel,
@@ -206,76 +282,195 @@
         max_players: 20,
         created_at: now,
       };
-      const added = await this.db.collection("prediction_rooms").add(roomPayload);
-      const roomId = added.id || added._id;
-      await this.db.collection("room_members").doc(`${roomId}_${this.userId}`).set({ room_id: roomId, user_id: this.userId, joined_at: now });
-      await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).set({
+      const roomResult = await this.db.collection("prediction_rooms").add(roomPayload);
+      const roomId = addedDocumentId(roomResult);
+      if (!roomId) throw new Error("PK房创建失败，请重试");
+      await this.db.collection("room_members").add({ room_id: roomId, user_id: this.userId, joined_at: now });
+      await this.db.collection("predictions").add({
         room_id: roomId,
         user_id: this.userId,
+        match_id: payload.matchId,
+        match_label: payload.matchLabel,
         answers: payload.answers,
         points: 0,
         hits: 0,
         is_winner: false,
         submitted_at: now,
       });
+      await this.safeSyncUserMatchPredictions(payload.matchId, payload.matchLabel, payload.answers, now);
       return this.getRoom(roomId);
     }
 
     async joinRoom(roomId) {
       await this.authenticate();
-      await this.db.collection("room_members").doc(`${roomId}_${this.userId}`).set({
-        room_id: roomId,
-        user_id: this.userId,
-        joined_at: new Date().toISOString(),
-      });
-      return this.getRoom(roomId);
+      const resolvedRoomId = await this.resolveRoomId(roomId);
+      const existing = await this.db.collection("room_members").where({ room_id: resolvedRoomId, user_id: this.userId }).limit(1).get();
+      if (!(existing.data || []).length) {
+        await this.db.collection("room_members").add({
+          room_id: resolvedRoomId,
+          user_id: this.userId,
+          joined_at: new Date().toISOString(),
+        });
+      }
+      return this.getRoom(resolvedRoomId);
     }
 
     async savePrediction(roomId, answers) {
       await this.authenticate();
-      await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).set({
-        room_id: roomId,
+      const resolvedRoomId = await this.resolveRoomId(roomId);
+      const roomResult = await this.db.collection("prediction_rooms").doc(resolvedRoomId).get();
+      const room = roomResult.data?.[0] || roomResult.data;
+      if (!room) throw new Error("预测房不存在或已失效");
+      const now = new Date().toISOString();
+      const payload = {
+        room_id: resolvedRoomId,
         user_id: this.userId,
+        match_id: room.match_id,
+        match_label: room.match_label,
         answers,
         points: 0,
         hits: 0,
         is_winner: false,
-        submitted_at: new Date().toISOString(),
-      });
-      return this.getRoom(roomId);
+        submitted_at: now,
+      };
+      const existing = await this.db.collection("predictions").where({ room_id: resolvedRoomId, user_id: this.userId }).limit(1).get();
+      const current = (existing.data || [])[0];
+      if (current?._id) {
+        await this.db.collection("predictions").doc(current._id).set(payload);
+      } else {
+        await this.db.collection("predictions").add(payload);
+      }
+      await this.safeSyncUserMatchPredictions(room.match_id, room.match_label, answers, now);
+      return this.getRoom(resolvedRoomId);
+    }
+
+    async savePersonalPrediction(payload) {
+      await this.authenticate();
+      const now = new Date().toISOString();
+      const roomId = `personal:${payload.matchId}:${this.userId}`;
+      const record = {
+        room_id: roomId,
+        user_id: this.userId,
+        match_id: payload.matchId,
+        match_label: payload.matchLabel,
+        answers: payload.answers,
+        points: 0,
+        hits: 0,
+        is_winner: false,
+        is_personal: true,
+        submitted_at: now,
+      };
+      const existing = await this.db.collection("predictions").where({ room_id: roomId, user_id: this.userId }).limit(1).get();
+      const current = (existing.data || [])[0];
+      if (current?._id) {
+        await this.db.collection("predictions").doc(current._id).set(record);
+        await this.safeSyncUserMatchPredictions(payload.matchId, payload.matchLabel, payload.answers, now);
+        return { ...current, ...record };
+      }
+      const result = await this.db.collection("predictions").add(record);
+      await this.safeSyncUserMatchPredictions(payload.matchId, payload.matchLabel, payload.answers, now);
+      return { _id: addedDocumentId(result), ...record };
+    }
+
+    async safeSyncUserMatchPredictions(matchId, matchLabel, answers, submittedAt) {
+      try {
+        await this.syncUserMatchPredictions(matchId, matchLabel, answers, submittedAt);
+      } catch (error) {
+        console.warn("Sync user match predictions failed:", error);
+      }
+    }
+
+    async syncUserMatchPredictions(matchId, matchLabel, answers, submittedAt) {
+      if (!matchId) return;
+      const result = await this.db.collection("predictions").where({ user_id: this.userId }).limit(200).get();
+      const predictions = result.data || [];
+      for (const prediction of predictions) {
+        let predictionMatchId = prediction.match_id;
+        let predictionMatchLabel = prediction.match_label;
+        if (!predictionMatchId && prediction.room_id && !prediction.is_personal) {
+          try {
+            const roomResult = await this.db.collection("prediction_rooms").doc(prediction.room_id).get();
+            const room = roomResult.data?.[0] || roomResult.data;
+            predictionMatchId = room?.match_id;
+            predictionMatchLabel = room?.match_label;
+          } catch {
+            // Ignore legacy records that cannot be resolved.
+          }
+        }
+        if (String(predictionMatchId || "") !== String(matchId || "")) continue;
+        const id = prediction._id || prediction.id;
+        if (!id) continue;
+        const { _id, id: ignoredId, ...record } = prediction;
+        await this.db.collection("predictions").doc(id).set({
+          ...record,
+          match_id: matchId,
+          match_label: matchLabel || predictionMatchLabel || prediction.match_label || "",
+          answers,
+          submitted_at: submittedAt,
+        });
+      }
+    }
+
+    async getProfileByUserId(userId) {
+      try {
+        const result = await this.db.collection("profiles").where({ user_id: userId }).limit(1).get();
+        const profile = result.data?.[0];
+        if (profile) return profile;
+      } catch {
+        // Fall back to legacy profiles stored with user id as document id.
+      }
+      try {
+        const result = await this.db.collection("profiles").doc(userId).get();
+        return result.data?.[0] || result.data || null;
+      } catch {
+        return null;
+      }
+    }
+
+    async resolveRoomId(roomRef) {
+      const ref = String(roomRef || "").trim();
+      if (!ref) throw new Error("预测房不存在或已失效");
+      try {
+        const directResult = await this.db.collection("prediction_rooms").doc(ref).get();
+        const directRoom = directResult.data?.[0] || directResult.data;
+        if (directRoom) return directRoom._id || directRoom.id || ref;
+      } catch {
+        // Try short room code below.
+      }
+      const codeResult = await this.db.collection("prediction_rooms").where({ code: ref }).limit(1).get();
+      const room = codeResult.data?.[0];
+      const id = room?._id || room?.id;
+      if (!id) throw new Error("预测房不存在或已失效");
+      return id;
     }
 
     async getRoom(roomId) {
       await this.authenticate();
-      const roomResult = await this.db.collection("prediction_rooms").doc(roomId).get();
+      const resolvedRoomId = await this.resolveRoomId(roomId);
+      const roomResult = await this.db.collection("prediction_rooms").doc(resolvedRoomId).get();
       const room = roomResult.data?.[0] || roomResult.data;
       if (!room) throw new Error("预测房不存在或已失效");
 
-      const membersResult = await this.db.collection("room_members").where({ room_id: roomId }).get();
+      const membersResult = await this.db.collection("room_members").where({ room_id: resolvedRoomId }).get();
       const memberRows = membersResult.data || [];
       const members = [];
       for (const member of memberRows) {
-        try {
-          const profileResult = await this.db.collection("profiles").doc(member.user_id).get();
-          const profile = profileResult.data?.[0] || profileResult.data;
-          if (profile) members.push(profile);
-        } catch {
-          // Ignore profiles that have not been completed yet.
-        }
+        const profile = await this.getProfileByUserId(member.user_id);
+        if (profile) members.push({ id: member.user_id, user_id: member.user_id, ...profile });
       }
 
       let prediction = null;
       try {
-        const predictionResult = await this.db.collection("predictions").doc(`${roomId}_${this.userId}`).get();
-        prediction = predictionResult.data?.[0] || predictionResult.data || null;
+        const predictionResult = await this.db.collection("predictions").where({ room_id: resolvedRoomId, user_id: this.userId }).limit(1).get();
+        prediction = predictionResult.data?.[0] || null;
       } catch {
         prediction = null;
       }
       let predictions = [];
       try {
-        const predictionsResult = await this.db.collection("predictions").where({ room_id: roomId }).get();
+        const predictionsResult = await this.db.collection("predictions").where({ room_id: resolvedRoomId }).get();
         predictions = (predictionsResult.data || []).map((item) => {
-          const profile = members.find((member) => (member._id || member.id) === item.user_id);
+          const profile = members.find((member) => (member.user_id || member.id) === item.user_id);
           return {
             ...item,
             nickname: profile?.nickname || "匿名球迷",
@@ -286,7 +481,7 @@
       } catch {
         predictions = prediction ? [{ ...prediction, nickname: "我", is_me: true }] : [];
       }
-      return { room: { id: room._id || roomId, ...room }, members, prediction, predictions };
+      return { room: { ...room, id: room._id || room.id || resolvedRoomId }, members, prediction, predictions };
     }
 
     async getLeaderboard() {
@@ -304,6 +499,29 @@
           wins: userPredictions.filter((item) => item.is_winner).length,
         };
       }).sort((a, b) => b.total_points - a.total_points).slice(0, 20);
+    }
+
+    async getMyPredictions() {
+      await this.authenticate();
+      const result = await this.db.collection("predictions").where({ user_id: this.userId }).limit(200).get();
+      const predictions = result.data || [];
+      const items = [];
+      for (const prediction of predictions) {
+        const roomId = prediction.room_id;
+        if (!roomId) continue;
+        if (prediction.is_personal) {
+          items.push({ prediction, room: null });
+          continue;
+        }
+        try {
+          const roomResult = await this.db.collection("prediction_rooms").doc(roomId).get();
+          const room = roomResult.data?.[0] || roomResult.data;
+          if (room) items.push({ prediction, room: { ...room, id: room._id || room.id || roomId } });
+        } catch {
+          // Keep history usable even if one legacy room cannot be read.
+        }
+      }
+      return items.sort((a, b) => String(b.prediction.submitted_at || "").localeCompare(String(a.prediction.submitted_at || "")));
     }
   }
 
@@ -411,12 +629,25 @@
       if (error) throw error;
       return data;
     }
+
+    async getMyPredictions() {
+      await this.authenticate();
+      const { data: predictions, error } = await this.client.from("predictions").select("*").eq("user_id", this.userId).order("submitted_at", { ascending: false }).limit(200);
+      if (error) throw error;
+      const items = [];
+      for (const prediction of predictions || []) {
+        const { data: room } = await this.client.from("prediction_rooms").select("*").eq("id", prediction.room_id).maybeSingle();
+        if (room) items.push({ prediction, room });
+      }
+      return items;
+    }
   }
 
   global.PredictionService = {
     create(config = {}) {
       const canUseCloudBase = config.cloudbaseEnvId && global.cloudbase?.init;
       if (canUseCloudBase) return new CloudBasePredictionService(global.cloudbase.init({ env: config.cloudbaseEnvId }));
+      if (config.cloudbaseEnvId) throw missingCloudBackendError();
       const canUseCloud = config.supabaseUrl && config.supabaseAnonKey && global.supabase?.createClient;
       if (!canUseCloud) return new DemoPredictionService();
       return new SupabasePredictionService(global.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey));

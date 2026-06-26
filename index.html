@@ -7,13 +7,21 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <title>今晚预测一下？猜中就生成你的世界杯高光海报</title>
   <meta name="description" content="预测胜负、比分、谁先进球，猜中就生成你的世界杯高光海报，和朋友一起冲预测排行榜。">
+  <meta name="theme-color" content="#06111d">
+  <link rel="image_src" href="https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com/assets/share-card.png">
   <meta property="og:title" content="今晚预测一下？猜中就生成你的世界杯高光海报">
   <meta property="og:description" content="预测胜负、比分、谁先进球，和朋友一起冲世界杯预测排行榜。">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1200&h=630&q=80">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://derek2026.github.io/world-cup-2026/">
+  <meta property="og:image" content="https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com/assets/share-card.png">
+  <meta property="og:image:secure_url" content="https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com/assets/share-card.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta property="og:url" content="https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="世界杯观赛指南">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="今晚预测一下？猜中就生成你的世界杯高光海报">
+  <meta name="twitter:description" content="预测胜负、比分、谁先进球，和朋友一起冲世界杯预测排行榜。">
+  <meta name="twitter:image" content="https://worldcup2026-d7gfmdarw394a4109-1312940160.tcloudbaseapp.com/assets/share-card.png">
   <style>
     :root {
       --bg: #eef2f4;
@@ -228,6 +236,19 @@
       border: 0;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+    }
+    .page-back-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 8px 0 12px;
+    }
+    .page-back-actions .back {
+      justify-content: center;
+      margin: 0;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
     }
 
     /* ── Section title ── */
@@ -506,6 +527,20 @@
     .poster-bottom { display: grid; grid-template-columns: 1fr 68px; gap: 14px; align-items: end; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.2); }
     .poster-score { color: var(--accent); font-size: 26px; font-weight: 900; }
     .poster-code { width: 68px; height: 68px; display: grid; place-items: center; border-radius: 4px; color: #143d32; background: #fff; font-size: 10px; font-weight: 900; text-align: center; }
+    .poster-preview {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: calc(var(--safe-top) + 18px) 18px calc(var(--safe-bottom) + 18px);
+      background: rgba(0,0,0,.78);
+    }
+    .poster-preview[hidden] { display: none; }
+    .poster-preview-card { width: min(360px, 100%); }
+    .poster-preview-card img { width: 100%; display: block; border-radius: 14px; box-shadow: 0 20px 80px rgba(0,0,0,.45); }
+    .poster-preview-card p { margin: 10px 0; color: rgba(255,255,255,.82); text-align: center; font-size: 12px; }
+    .poster-preview-card button { width: 100%; }
 
     /* ── Points rule ── */
     .points-rule { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
@@ -1369,7 +1404,7 @@
         <p style="margin:0 0 16px;font-size:15px;opacity:0.9;font-weight:700;">猜中就生成你的世界杯高光海报</p>
         <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=80" alt="世界杯预测PK" width="280" height="150" style="border-radius:10px;object-fit:cover;display:block;width:100%;max-width:280px;margin:0 auto 12px;" loading="lazy">
         <p style="margin:0;font-size:11px;opacity:0.7;">点击链接进入预测PK</p>
-        <p style="margin:6px 0 0;font-size:10px;opacity:0.5;word-break:break-all;">derek2026.github.io/world-cup-2026</p>
+        <p style="margin:6px 0 0;font-size:10px;opacity:0.5;word-break:break-all;">worldcup2026.tcloudbaseapp.com</p>
       </div>
     </section>
 
@@ -1502,8 +1537,13 @@
         <button class="chip" onclick="setSocialDistance(this, 50)">50 km</button>
         <button class="chip" onclick="setSocialDistance(this, 100)">100 km</button>
       </div>
+      <div style="display:flex;gap:8px;margin:0 0 10px">
+        <input type="text" id="city-search-input" placeholder="输入城市名，如：上海、深圳、成都" style="flex:1;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff">
+        <button onclick="searchCity()" style="min-height:36px;padding:0 14px;font-size:13px;flex-shrink:0">🔍 定位</button>
+        <button onclick="retryGps()" style="min-height:36px;padding:0 10px;font-size:13px;flex-shrink:0;background:#e8edf2;color:#233140">🛰️ GPS</button>
+      </div>
       <div id="heat-map-container" aria-label="附近观赛热度地图">
-        <p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 点击距离筛选获取位置，实时生成附近热度</p>
+        <p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 输入城市名搜索，或点击 GPS 获取定位</p>
       </div>
       <div class="stats-grid"><article class="card stat-card"><span class="sub">正在看球</span><strong class="stat-value" id="nearby-viewers">194</strong></article><article class="card stat-card"><span class="sub">已参与预测</span><strong class="stat-value" id="nearby-predictors">128</strong></article></div>
       <article class="card"><h3>附近球队支持率</h3><p class="sub">美国 46%｜澳大利亚 31%｜其他 23%</p></article>
@@ -1512,14 +1552,14 @@
     </section>
 
     <section class="view" id="pkRoom">
-      <button class="back" onclick="showView('home', true)">返回首页</button>
+      <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
       <header class="topbar"><p class="eyebrow">多人预测PK</p><h1 id="pk-room-title">预测房</h1><p class="sub" id="pk-room-match">正在读取比赛</p></header>
       <article class="card"><div class="section-title"><h3 id="pk-room-state">等待好友加入</h3><span class="tag hot" id="pk-room-count">1/20人</span></div><p class="sub" id="pk-room-reward">至少2人成局，参与人数越多，冠军荣誉分越高。</p><div class="pk-participants" id="pk-room-participants"></div></article>
       <button style="width:100%" onclick="sharePkRoom(this)">邀请好友加入PK</button>
-      <article class="card"><h3>我的预测</h3><p class="sub" id="pk-prediction-summary">尚未提交</p></article>
+      <article class="card" id="pk-my-prediction-card"><h3>我的预测</h3><div id="pk-my-prediction-content"><p class="sub">尚未提交</p></div></article>
       <article class="card"><div class="section-title"><h3>好友预测</h3><span class="tag" id="pk-predictions-count">0人已预测</span></div><p class="sub">好友点分享链接进入后，会直接加入这个PK房。预测提交后，大家可以互相看到已锁定选项。</p><div class="pk-prediction-list" id="pk-room-predictions"></div></article>
       <button class="secondary" id="pk-room-submit-button" style="width:100%" onclick="editRoomPrediction()" hidden>提交我的预测</button>
-      <div class="actions"><button onclick="showView('halftimeReport')">查看半场战报</button><button class="secondary" onclick="showView('pkResult')">查看终场演示</button></div>
+      <div class="actions"><button onclick="showView('halftimeReport')">查看半场战报</button><button class="secondary" id="final-settlement-button" onclick="openFinalSettlement()">终场结算</button></div>
     </section>
 
     <section class="view" id="halftimeReport">
@@ -1534,8 +1574,8 @@
 
     <section class="view" id="pkResult">
       <button class="back" onclick="showView('pkRoom')">返回PK房</button>
-      <header class="topbar"><p class="eyebrow">终场结算</p><h1>预测PK战报</h1><p class="sub">美国 2-1 澳大利亚｜6人完成预测</p></header>
-      <div class="prediction-poster champion-poster prophecy-poster">
+      <header class="topbar"><p class="eyebrow">终场结算</p><h1>预测PK战报</h1><p class="sub" id="final-result-summary">等待比赛结束后生成</p></header>
+      <div class="prediction-poster champion-poster prophecy-poster" id="final-poster-preview">
         <div>
           <div class="poster-brand"><span>世界杯观赛指南</span><span>2026·预测PK</span></div>
           <div class="poster-avatar">峰</div>
@@ -1553,13 +1593,13 @@
           <div class="poster-qr">扫码<br>来PK</div>
         </div>
       </div>
-      <article class="card"><h3>每个人都有可分享战报</h3><p class="sub">未夺冠的用户也会生成"预测对了几项"的个人海报，冠军版额外展示击败人数和PK荣誉分。</p></article>
-      <div class="rank-table"><div class="rank-line me"><strong>1</strong><span>阿峰·我</span><strong>125</strong></div><div class="rank-line"><strong>2</strong><span>小王</span><strong>108</strong></div><div class="rank-line"><strong>3</strong><span>Leo</span><strong>95</strong></div><div class="rank-line"><strong>4</strong><span>小鹿</span><strong>80</strong></div></div>
-      <div class="actions"><button onclick="sharePrototype(this)">分享我的神预言</button><button class="secondary" onclick="showView('challengeCreate')">发起下一场PK</button></div>
+      <article class="card"><h3>每个人都有可分享战报</h3><p class="sub" id="final-result-note">比赛结束前不可打开，结束后按实际比分结算。</p></article>
+      <div class="rank-table" id="final-rank-table"><div class="rank-line me"><strong>--</strong><span>等待结算</span><strong>--</strong></div></div>
+      <div class="actions"><button onclick="generateProphecyPoster(this)">分享我的神预言</button><button class="secondary" onclick="showView('challengeCreate')">发起下一场PK</button></div>
     </section>
 
     <section class="view" id="challengeCreate">
-      <button class="back" onclick="showView('home', true)">返回首页</button>
+      <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
       <header class="topbar prediction-topbar">
         <p class="eyebrow">单场预测PK</p>
         <h1 id="challenge-title">发起预测PK</h1>
@@ -1577,15 +1617,14 @@
         <select class="form-control" id="match-yellow-cards"><option>0-2张</option><option>3-5张</option><option>6张及以上</option></select>
       </div>
       <section id="prediction-question-cards"></section>
-      <article class="prediction-room-preview">
-        <h3>本房已有 12 人加入</h3>
-        <div class="avatars"><span class="avatar">峰</span><span class="avatar">M</span><span class="avatar">凯</span><span class="avatar">林</span><span class="avatar">+8</span></div>
-      </article>
-      <button id="create-prediction-button" style="width:100%" onclick="createPrediction(this)">保存预测并创建PK房</button>
+      <div class="actions">
+        <button id="save-prediction-button" onclick="savePredictionResult(this)">保存预测结果</button>
+        <button class="secondary" id="invite-prediction-button" onclick="inviteFriendsWithPrediction(this)">邀请好友一起PK</button>
+      </div>
     </section>
 
     <section class="view" id="predictionLeaderboard">
-      <button class="back" onclick="showView('home', true)">返回首页</button>
+      <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
       <header class="topbar"><p class="eyebrow">预测得准，排名就要稳</p><h1>全民预测榜</h1><p class="sub">实力分看准确度，PK荣誉分看多人房间战绩。</p></header>
       <article class="card"><div class="section-title"><h3>我的排名</h3><strong class="social-count" id="leaderboard-my-rank">--</strong></div><p class="sub" id="leaderboard-my-summary">完成一次预测后生成排名</p></article>
       <div class="points-rule"><div><strong>+10</strong>胜平负</div><div><strong>+10</strong>进球区间</div><div><strong>+15</strong>红黄牌</div></div>
@@ -1596,12 +1635,14 @@
     </section>
 
     <section class="view" id="mySocial">
-      <button class="back" onclick="showView('home', true)">返回首页</button>
-      <header class="topbar"><p class="eyebrow">我的PK记录</p><h1>我的预测</h1><p class="sub">实力分 86｜全国第128名｜PK冠军 2 次</p></header>
-      <div id="social-created"></div>
-      <div class="section-title"><h2>进行中</h2><small>2 项</small></div>
-      <article class="card"><span class="tag hot">等待开赛</span><h3 style="margin-top:10px">美国 vs 澳大利亚·猜主队胜</h3><p class="sub">已生成赛前预测卡｜开赛后自动锁定并结算积分</p></article>
-      <article class="card"><span class="tag">多人PK·已成局</span><h3 style="margin-top:10px">美国 vs 澳大利亚·6人房</h3><p class="sub">所有人答案已锁定｜半场即时结算</p></article>
+      <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
+      <header class="topbar"><p class="eyebrow">我的预测档案</p><h1>我的预测结果</h1><p class="sub">查看之前的预测、命中项和可保存的神预言海报。</p></header>
+      <div class="stats-grid" id="my-prediction-summary">
+        <article class="card stat-card"><span class="sub">总预测</span><strong class="stat-value">--</strong></article>
+        <article class="card stat-card"><span class="sub">已结算</span><strong class="stat-value">--</strong></article>
+      </div>
+      <div class="section-title"><h2>历史预测</h2><small id="my-prediction-count">读取中</small></div>
+      <div id="my-prediction-results-list"><article class="card"><p class="sub">正在读取你的预测记录。</p></article></div>
     </section>
 
   </main>
@@ -1634,24 +1675,37 @@
     <div class="share-guide-card" onclick="event.stopPropagation()">
       <div class="share-guide-arrow"></div>
       <h3>点右上角「···」转发给好友</h3>
-      <p class="sub">微信不允许网页自动点击右上角菜单。链接已准备好，好友打开后会直接进入这个PK房。</p>
+      <p class="sub">不要把网址粘贴到聊天框发送。请回到网页，点右上角「···」里的“发送给朋友”，微信才会按网页卡片展示标题、文案和图片。</p>
       <button onclick="hideShareGuide()">知道了</button>
     </div>
   </div>
+  <div class="poster-preview" id="poster-preview" hidden onclick="hidePosterPreview(event)">
+    <div class="poster-preview-card" onclick="event.stopPropagation()">
+      <img id="poster-preview-image" alt="我的神预言海报">
+      <p>长按图片保存，然后发到朋友圈</p>
+      <button onclick="hidePosterPreview()">关闭</button>
+    </div>
+  </div>
 
-  <script src="./js/app-config.js?v=20260620-1"></script>
-  <script src="./js/prediction-service.js?v=20260620-1"></script>
-  <script src="./data/prototype-data.js?v=20260620-1200"></script>
+  <script src="./js/app-config.js?v=20260625-2"></script>
+  <script src="./js/prediction-service.js?v=20260625-7"></script>
+  <script src="./data/prototype-data.js?v=20260625-3"></script>
   <script>
     const views = Array.from(document.querySelectorAll(".view"));
     const tabs = Array.from(document.querySelectorAll(".tab"));
     let lastTab = "home";
+    let viewHistory = [];
+    let restoringPreviousView = false;
     let predictionService;
     let currentPredictionRoomId = "";
     let currentPredictionMatchId = "";
     let submittingToExistingRoom = false;
     let pendingProfileResolver = null;
+    let lastFinalSettlement = null;
+    let myPredictionHistoryCache = [];
     let toastTimer = null;
+    const LOCAL_PROFILE_KEY = "world-cup-prediction-profile-v1";
+    const LOCAL_HISTORY_KEY = "world-cup-prediction-history-v1";
 
     const teamNames = {
       Algeria: "阿尔及利亚",
@@ -2032,7 +2086,7 @@
           <p class="sub">每场比赛独立开局。分享对应比赛链接，朋友进同一场PK。</p>
           <button onclick="startPredictionPk()">预测最近一场</button>
           <button class="prediction-link" onclick="showView('predictionLeaderboard')">查看全民预测榜</button>
-          <button class="prediction-link" onclick="showView('mySocial')">我的预测</button>
+          <button class="prediction-link" onclick="showView('mySocial')">我的预测结果</button>
         </article>`;
       }
 
@@ -2143,6 +2197,7 @@
     function renderStandings(list, data) {
       const standings = data.standings || [];
       if (!standings.length) { list.innerHTML = `<p class="sub">暂无小组积分数据。</p>`; return; }
+      const statValue = (row, longKey, shortKey) => row[longKey] ?? row[shortKey] ?? 0;
       list.innerHTML = standings.map((g) => `<div class="standings-group">
         <h3>${escapeHtml(g.group)} 组</h3>
         <div class="standings-table-wrap">
@@ -2153,7 +2208,7 @@
           <td><span class="standings-rank${r.rank <= 2 ? " qualifying" : ""}">${r.rank}</span></td>
           <td><span class="team">${displayTeamWithFlag(r.team)}</span></td>
           <td>${r.played}</td><td>${r.won}</td><td>${r.drawn}</td><td>${r.lost}</td>
-          <td>${r.goalsFor}</td><td>${r.goalsAgainst}</td><td>${r.goalDifference}</td><td><strong>${r.points}</strong></td>
+          <td>${statValue(r, "goalsFor", "gf")}</td><td>${statValue(r, "goalsAgainst", "ga")}</td><td>${statValue(r, "goalDifference", "gd")}</td><td><strong>${r.points}</strong></td>
         </tr>`).join("") +
         `</tbody></table></div></div>`).join("");
     }
@@ -2339,19 +2394,80 @@
       return spots;
     }
 
-    function _initHeatMap(lat, lng) {
+    function _initHeatMap(lat, lng, accuracy) {
       const container = document.getElementById("heat-map-container");
       if (!container || !window.L) return;
       if (_heatMap) { _heatMap.remove(); _heatMap = null; }
-      _heatMap = L.map(container).setView([lat, lng], 14);
+      _heatMap = L.map(container).setView([lat, lng], 15);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
       }).addTo(_heatMap);
       const userIcon = L.divIcon({ className: "leaflet-div-icon", html: '<div class="user-dot"></div>', iconSize: [18, 18], iconAnchor: [9, 9] });
-      L.marker([lat, lng], { icon: userIcon }).addTo(_heatMap).bindPopup("📍 你的位置");
+      const accText = accuracy ? `<br>精度 ≈ ${Math.round(accuracy)}m` : "";
+      L.marker([lat, lng], { icon: userIcon }).addTo(_heatMap)
+        .bindPopup(`📍 你的位置${accText}<br><small style='color:var(--muted)'>GPS定位，${accuracy < 30 ? '精度好' : accuracy > 100 ? '精度较低，仅供参考' : '一般'}</small>`);
+      // Draw accuracy circle
+      if (accuracy && accuracy > 0) {
+        L.circle([lat, lng], { radius: accuracy, color: "rgba(12,123,95,0.25)", fillColor: "rgba(12,123,95,0.08)", weight: 1 }).addTo(_heatMap);
+      }
       _heatUserPos = [lat, lng];
       _refreshHeatSpots();
+    }
+
+    // Request high-accuracy position with retry. Falls back to IP if GPS fails.
+    function _requestPosition(onSuccess, onError) {
+      if (!navigator.geolocation) {
+        onError(new Error("not supported"));
+        return;
+      }
+      let bestPos = null;
+      let bestAcc = Infinity;
+      let started = Date.now();
+      const MAX_WAIT = 12000; // 12s max wait for good accuracy
+      const MIN_ACCURACY = 80; // accept any fix under 80m
+      let resolved = false;
+
+      const finish = (pos) => {
+        if (resolved) return;
+        resolved = true;
+        navigator.geolocation.clearWatch(watchId);
+        onSuccess(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+      };
+
+      const watchId = navigator.geolocation.watchPosition(
+        (pos) => {
+          const acc = pos.coords.accuracy || Infinity;
+          if (acc < bestAcc) { bestAcc = acc; bestPos = pos; }
+          // Accept immediately if accuracy is good enough OR we've waited long enough with an OK fix
+          const elapsed = Date.now() - started;
+          if (acc <= MIN_ACCURACY) {
+            finish(pos);
+          } else if (elapsed > MAX_WAIT && bestPos) {
+            finish(bestPos);
+          }
+        },
+        (err) => {
+          if (resolved) return;
+          // If watch fails, try a one-shot getCurrentPosition as fallback
+          navigator.geolocation.clearWatch(watchId);
+          navigator.geolocation.getCurrentPosition(
+            (pos) => { if (!resolved) finish(pos); },
+            (e2) => { if (!resolved) onError(e2); },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 }
+          );
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+      );
+
+      // Timeout fallback
+      setTimeout(() => {
+        if (!resolved && bestPos) finish(bestPos);
+        else if (!resolved) {
+          navigator.geolocation.clearWatch(watchId);
+          onError(new Error("timeout"));
+        }
+      }, MAX_WAIT + 3000);
     }
 
     function _refreshHeatSpots() {
@@ -2398,15 +2514,14 @@
         ctx.innerHTML = "";
       }
       showView("socialHub");
-      if (!_heatUserPos && navigator.geolocation) {
+      if (!_heatUserPos) {
         const container = document.getElementById("heat-map-container");
-        if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 正在获取位置...</p>';
-        navigator.geolocation.getCurrentPosition(
-          (pos) => { _initHeatMap(pos.coords.latitude, pos.coords.longitude); },
+        if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--muted);font-size:13px">🛰️ 正在获取高精度 GPS 位置...<br><small>最多等待12秒</small></p>';
+        _requestPosition(
+          (lat, lng, accuracy) => { _initHeatMap(lat, lng, accuracy); },
           (err) => {
-            if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--brand-2);font-size:13px">⚠ 定位失败，请授权位置权限</p>';
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+            if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--brand-2);font-size:13px">⚠ 定位失败<br><small>请授权位置权限，或尝试用 Safari 打开</small></p>';
+          }
         );
       }
     };
@@ -2416,20 +2531,60 @@
       chips.forEach((c) => c.classList.remove("active"));
       btn.classList.add("active");
       _heatRadius = km;
-      if (!_heatUserPos && navigator.geolocation) {
+      if (!_heatUserPos) {
         const container = document.getElementById("heat-map-container");
-        if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--muted);font-size:13px">📍 正在获取位置...</p>';
-        navigator.geolocation.getCurrentPosition(
-          (pos) => { _initHeatMap(pos.coords.latitude, pos.coords.longitude); },
+        if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--muted);font-size:13px">🛰️ 正在获取 GPS 位置...</p>';
+        _requestPosition(
+          (lat, lng, accuracy) => { _initHeatMap(lat, lng, accuracy); },
           (err) => {
-            if (container) container.innerHTML = '<p style="text-align:center;padding-top:140px;color:var(--brand-2);font-size:13px">⚠ 定位失败，请授权位置权限</p>';
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 }
+            if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--brand-2);font-size:13px">⚠ 定位失败，请授权位置权限</p>';
+          }
         );
       } else if (_heatMap) {
         _refreshHeatSpots();
       }
     };
+
+    // Retry GPS with forced fresh fix
+    window.retryGps = function retryGps() {
+      const container = document.getElementById("heat-map-container");
+      if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--muted);font-size:13px">🛰️ 正在重新获取高精度 GPS...</p>';
+      if (_heatMap) { _heatMap.remove(); _heatMap = null; }
+      _heatUserPos = null;
+      _requestPosition(
+        (lat, lng, accuracy) => { _initHeatMap(lat, lng, accuracy); },
+        (err) => {
+          if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--brand-2);font-size:13px">⚠ GPS 定位失败<br><small>请在输入框输入城市名手动定位</small></p>';
+        }
+      );
+    };
+
+    // Search city via free OpenStreetMap geocoding
+    window.searchCity = async function searchCity() {
+      const input = document.getElementById("city-search-input");
+      const container = document.getElementById("heat-map-container");
+      const city = (input?.value || "").trim();
+      if (!city) return;
+      if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--muted);font-size:13px">🔍 正在搜索「' + city + '」...</p>';
+      try {
+        const resp = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(city)}`);
+        const results = await resp.json();
+        if (results.length) {
+          const { lat, lon, display_name } = results[0];
+          _heatUserPos = null;
+          _initHeatMap(parseFloat(lat), parseFloat(lon), 0);
+          input.value = display_name.split(",").slice(0, 2).join(",");
+        } else {
+          if (container) container.innerHTML = `<p style="text-align:center;padding-top:110px;color:var(--brand-2);font-size:13px">⚠ 未找到「${city}」<br><small>试试更具体的城市名，如"上海"、"深圳南山"</small></p>`;
+        }
+      } catch (e) {
+        if (container) container.innerHTML = '<p style="text-align:center;padding-top:110px;color:var(--brand-2);font-size:13px">⚠ 搜索失败，请检查网络后重试</p>';
+      }
+    };
+
+    // Enter key submits city search
+    const _cityInput = document.getElementById("city-search-input");
+    if (_cityInput) _cityInput.addEventListener("keydown", (e) => { if (e.key === "Enter") searchCity(); });
 
     window.sharePrototype = function sharePrototype(btn) {
       const orig = btn.textContent;
@@ -2439,8 +2594,22 @@
       showToast("分享卡已生成（原型演示）");
     };
 
+    function isWeChatBrowser() {
+      return /MicroMessenger/i.test(navigator.userAgent || "");
+    }
+
     async function shareLink({ title, text, url }, btn) {
       const shareUrl = url || window.location.href;
+      if (isWeChatBrowser()) {
+        showToast("请用右上角「···」转发，不要直接发送网址");
+        showShareGuide();
+        if (btn) {
+          const orig = btn.textContent;
+          btn.textContent = "请点右上角···转发";
+          setTimeout(() => { btn.textContent = orig; }, 2200);
+        }
+        return;
+      }
       if (navigator.share) {
         try {
           await navigator.share({ title, text, url: shareUrl });
@@ -2485,10 +2654,70 @@
 
     /* ── Prediction ── */
 
+    function readLocalProfile() {
+      try {
+        return JSON.parse(window.localStorage.getItem(LOCAL_PROFILE_KEY) || "null");
+      } catch {
+        return null;
+      }
+    }
+
+    function writeLocalProfile(profile) {
+      if (!profile?.nickname) return;
+      const localProfile = {
+        nickname: profile.nickname,
+        avatar_text: profile.avatar_text || Array.from(profile.nickname).slice(-1)[0] || "球",
+        saved_at: new Date().toISOString(),
+      };
+      window.localStorage.setItem(LOCAL_PROFILE_KEY, JSON.stringify(localProfile));
+      window.localStorage.setItem("wechat_nickname", profile.nickname);
+    }
+
+    function readLocalPredictionHistory() {
+      try {
+        const items = JSON.parse(window.localStorage.getItem(LOCAL_HISTORY_KEY) || "[]");
+        return Array.isArray(items) ? items : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function writeLocalPredictionHistoryItem({ matchId, roomId = "", source = "personal", answers }) {
+      if (!matchId || !answers) return;
+      const now = new Date().toISOString();
+      const profile = readLocalProfile();
+      const items = readLocalPredictionHistory();
+      const key = `${source}:${roomId || matchId}`;
+      const nextItem = {
+        key,
+        source,
+        roomId,
+        matchId,
+        prediction: { answers, submitted_at: now },
+        nickname: profile?.nickname || window.localStorage.getItem("wechat_nickname") || "我",
+        savedAt: now,
+      };
+      const nextItems = [nextItem, ...items.filter((item) => item.key !== key)].slice(0, 100);
+      window.localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(nextItems));
+    }
+
     window.ensurePredictionProfile = async function ensurePredictionProfile() {
       if (!predictionService) return null;
-      let profile = await predictionService.getProfile();
-      if (profile) return profile;
+      const localProfile = readLocalProfile();
+      let profile = null;
+      try {
+        profile = await predictionService.getProfile();
+      } catch (e) {
+        console.warn("Read profile failed:", e);
+      }
+      if (profile) {
+        writeLocalProfile(profile);
+        return profile;
+      }
+      if (localProfile?.nickname) {
+        predictionService.ensureProfile?.(localProfile.nickname).catch((e) => console.warn("Background profile sync failed:", e));
+        return localProfile;
+      }
       return new Promise((resolve) => {
         pendingProfileResolver = resolve;
         const input = document.getElementById("profile-nickname");
@@ -2536,8 +2765,26 @@
       if (halfResult) halfResult.innerHTML = halfResultOptions;
       if (fullResult) fullResult.innerHTML = resultOptions;
       if (halfFirstGoal) halfFirstGoal.innerHTML = firstGoalOptions;
+      const draft = readLocalPredictionDraft(match.id);
+      if (draft?.answers) applyPredictionAnswers(draft.answers);
       renderPredictionCreateView(match);
     };
+
+    function applyPredictionAnswers(answers = {}) {
+      const mapping = {
+        "half-result": answers.halfResult,
+        "half-first-goal": answers.halfFirstGoal,
+        "half-goals": answers.halfGoals,
+        "prediction-result": answers.result,
+        "full-goals": answers.fullGoals,
+        "match-red-card": answers.redCard,
+        "match-yellow-cards": answers.yellowCards,
+      };
+      Object.entries(mapping).forEach(([id, value]) => {
+        const select = document.getElementById(id);
+        if (select && value) select.value = value;
+      });
+    }
 
     function selectPredictionOption(selectId, value, btn) {
       const select = document.getElementById(selectId);
@@ -2626,6 +2873,31 @@
       };
     };
 
+    function predictionDraftKey(matchId) {
+      return `world-cup-prediction-draft:${matchId || "default"}`;
+    }
+
+    function saveLocalPredictionDraft(matchId, answers) {
+      window.localStorage.setItem(predictionDraftKey(matchId), JSON.stringify({
+        matchId,
+        answers,
+        savedAt: new Date().toISOString(),
+      }));
+    }
+
+    function readLocalPredictionDraft(matchId) {
+      try {
+        return JSON.parse(window.localStorage.getItem(predictionDraftKey(matchId)) || "null");
+      } catch {
+        return null;
+      }
+    }
+
+    function currentPredictionMatchAndAnswers() {
+      const matchId = document.getElementById("challenge-match")?.value || currentPredictionMatchId || "";
+      return { matchId, match: getPredictionMatch(matchId), answers: collectPredictionAnswers() };
+    }
+
     function normalizePredictionRoom(data) {
       if (!data) return null;
       const room = data.room ? { ...data.room } : { ...data };
@@ -2633,7 +2905,7 @@
       return {
         ...room,
         id: room.id || room._id || data.id || data._id || "",
-        joinCode: room.joinCode || room.id || room._id || data.joinCode || data.id || data._id || "",
+        joinCode: room.joinCode || room.code || data.joinCode || data.code || room.id || room._id || data.id || data._id || "",
         matchId,
         name: room.name || room.match_label || room.matchLabel || "预测PK房",
         members: data.members || room.members || [],
@@ -2655,6 +2927,27 @@
       ].filter(([, value]) => value);
     }
 
+    function renderMyPredictionPanel(room) {
+      const content = document.getElementById("pk-my-prediction-content");
+      if (!content) return;
+      const prediction = room.myPrediction;
+      if (!prediction) {
+        content.innerHTML = `
+          <p class="sub">你还没有提交这场比赛的预测。提交后才能解锁查看好友的具体预测选项。</p>
+          <button class="primary" style="width:100%;margin-top:12px" onclick="editRoomPrediction()">立即提交我的预测</button>
+        `;
+        return;
+      }
+      const rows = predictionAnswerRows(prediction.answers || {});
+      content.innerHTML = `
+        <div class="section-title"><span class="tag hot">已锁定</span><small>可用同一份预测发起新房间</small></div>
+        <div class="pk-answer-grid">` +
+          rows.map(([label, value]) => `<div class="pk-answer"><b>${escapeHtml(label)}</b>${escapeHtml(value)}</div>`).join("") +
+        `</div>
+        <button class="secondary" style="width:100%;margin-top:12px" onclick="createNewPkRoomFromMyPrediction(this)">发起新组局邀请好友</button>
+      `;
+    }
+
     function renderRoomPredictions(room) {
       const list = document.getElementById("pk-room-predictions");
       const count = document.getElementById("pk-predictions-count");
@@ -2663,6 +2956,13 @@
       if (count) count.textContent = `${predictions.length}人已预测`;
       if (!predictions.length) {
         list.innerHTML = `<p class="sub">暂无好友提交预测。分享链接后，好友加入并提交会显示在这里。</p>`;
+        return;
+      }
+      if (!room.myPrediction) {
+        list.innerHTML = predictions.map((item) => `<article class="pk-prediction-card">
+          <div class="section-title"><h3>${escapeHtml(item.nickname || "匿名球迷")}${item.is_creator ? " 发起人" : ""}</h3><span class="tag">已锁定</span></div>
+          <p class="sub">你提交自己的预测后，即可查看这位好友的具体预测选项。</p>
+        </article>`).join("");
         return;
       }
       list.innerHTML = predictions.map((item) => {
@@ -2676,29 +2976,580 @@
       }).join("");
     }
 
-    window.createPrediction = async function createPrediction(btn) {
-      const profile = await ensurePredictionProfile();
-      if (!profile) return;
+    function matchCompleted(match) {
+      return match && match.status === "completed" && match.homeScore != null && match.awayScore != null;
+    }
 
-      const matchId = document.getElementById("challenge-match")?.value || "";
-      const answers = collectPredictionAnswers();
+    function finalWinnerLabel(match) {
+      const home = displayTeamName(match.homeTeam);
+      const away = displayTeamName(match.awayTeam);
+      if (Number(match.homeScore) > Number(match.awayScore)) return `${home}胜`;
+      if (Number(match.homeScore) < Number(match.awayScore)) return `${away}胜`;
+      return "平局";
+    }
 
-      btn.disabled = true;
-      btn.textContent = "创建中...";
+    function finalGoalsBucket(match) {
+      const total = Number(match.homeScore || 0) + Number(match.awayScore || 0);
+      if (total <= 1) return "0-1球";
+      if (total <= 3) return "2-3球";
+      return "4球及以上";
+    }
+
+    function scorePredictionAgainstMatch(prediction, match) {
+      const answers = prediction?.answers || {};
+      const details = predictionScoreDetails(answers, match);
+      const hitLabels = details.filter((item) => item.status === "hit").map((item) => `${item.label}：${item.answer}`);
+      const points = details.reduce((sum, item) => sum + (item.status === "hit" ? item.points : 0), 0);
+      return { hits: hitLabels.length, points, hitLabels, details };
+    }
+
+    function predictionScoreDetails(answers = {}, match) {
+      const completed = matchCompleted(match);
+      const checks = [
+        { label: "全场胜负", answer: answers.result, actual: completed ? finalWinnerLabel(match) : "等待赛果", points: 50, verifiable: true },
+        { label: "全场进球", answer: answers.fullGoals, actual: completed ? finalGoalsBucket(match) : "等待赛果", points: 35, verifiable: true },
+        { label: "半场领先", answer: answers.halfResult, actual: "待接入官方半场数据", points: 0, verifiable: false },
+        { label: "半场首球", answer: answers.halfFirstGoal, actual: "待接入官方事件数据", points: 0, verifiable: false },
+        { label: "半场进球", answer: answers.halfGoals, actual: "待接入官方半场数据", points: 0, verifiable: false },
+        { label: "红牌", answer: answers.redCard, actual: "待接入官方事件数据", points: 0, verifiable: false },
+        { label: "黄牌", answer: answers.yellowCards, actual: "待接入官方事件数据", points: 0, verifiable: false },
+      ].filter((item) => item.answer);
+      return checks.map((item) => {
+        if (!completed || !item.verifiable) return { ...item, status: "pending" };
+        return { ...item, status: item.answer === item.actual ? "hit" : "miss" };
+      });
+    }
+
+    function buildFinalSettlement(room, match) {
+      const predictions = room.predictions || [];
+      const rows = predictions.map((prediction) => {
+        const score = scorePredictionAgainstMatch(prediction, match);
+        return {
+          ...prediction,
+          ...score,
+          nickname: prediction.nickname || "匿名球迷",
+        };
+      }).sort((a, b) => b.points - a.points || b.hits - a.hits);
+      return {
+        room,
+        match,
+        rows,
+        actualWinner: finalWinnerLabel(match),
+        actualGoals: finalGoalsBucket(match),
+      };
+    }
+
+    function renderFinalSettlement(room, match) {
+      const settlement = buildFinalSettlement(room, match);
+      lastFinalSettlement = settlement;
+      const home = displayTeamName(match.homeTeam);
+      const away = displayTeamName(match.awayTeam);
+      const summary = document.getElementById("final-result-summary");
+      if (summary) {
+        summary.textContent = `${home} ${match.homeScore} - ${match.awayScore} ${away}｜${settlement.rows.length}人完成预测`;
+      }
+      const me = settlement.rows.find((row) => row.is_me) || settlement.rows[0];
+      const rank = me ? settlement.rows.indexOf(me) + 1 : "--";
+      const hits = me?.hitLabels || [];
+      const poster = document.getElementById("final-poster-preview");
+      if (poster) {
+        const hitMarkup = (hits.length ? hits : ["等待更多可结算项目"]).slice(0, 4).map((item, index) =>
+          `<div class="prophecy-hit"><b>命中 ${String.fromCharCode(65 + index)}</b> ${escapeHtml(item)}</div>`
+        ).join("");
+        poster.innerHTML = `
+          <div>
+            <div class="poster-brand"><span>世界杯观赛指南</span><span>2026·预测PK</span></div>
+            <div class="poster-avatar">${escapeHtml((me?.nickname || "我").slice(0, 1))}</div>
+            <h2 class="prophecy-title">太厉害了，${escapeHtml(me?.nickname || "我")}又神预言了 ${me?.hits || 0} 项</h2>
+            <div class="prophecy-match"><span>${displayTeamWithFlag(match.homeTeam)}</span><strong>VS</strong><span>${displayTeamWithFlag(match.awayTeam)}</span></div>
+            <div class="prophecy-hits">${hitMarkup}</div>
+          </div>
+          <div class="prophecy-footer">
+            <div><span class="tag hot">神预言玩家</span><div class="poster-score">${me?.points || 0} 分</div><p class="sub">本房第${rank}名｜${settlement.actualWinner}｜${settlement.actualGoals}</p><p class="sub">下一场，敢来和我预测PK吗？</p></div>
+            <div class="poster-qr">长按<br>参战</div>
+          </div>`;
+      }
+      const note = document.getElementById("final-result-note");
+      if (note) note.textContent = `当前按可验证赛果结算：全场胜负、全场总进球区间。红黄牌和半场事件等待接入官方事件数据后纳入。`;
+      const table = document.getElementById("final-rank-table");
+      if (table) {
+        table.innerHTML = settlement.rows.length ? settlement.rows.map((row, index) =>
+          `<div class="rank-line${row.is_me ? " me" : ""}"><strong>${index + 1}</strong><span>${escapeHtml(row.nickname)} · 命中${row.hits}项</span><strong>${row.points}分</strong></div>`
+        ).join("") : `<div class="rank-line"><strong>--</strong><span>暂无预测记录</span><strong>--</strong></div>`;
+      }
+    }
+
+    window.openFinalSettlement = async function openFinalSettlement() {
+      if (!currentPredictionRoomId || !predictionService) {
+        showToast("请先进入PK房");
+        return;
+      }
       try {
-        const match = getPredictionMatch(matchId);
-        const matchLabel = match ? `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}` : "预测PK";
-        const room = normalizePredictionRoom(await predictionService.createRoom({ matchId, matchLabel, answers }));
+        const room = normalizePredictionRoom(await predictionService.getRoom(currentPredictionRoomId));
+        const match = getPredictionMatch(room.matchId || currentPredictionMatchId);
+        if (!matchCompleted(match)) {
+          showToast("比赛结束后才能查看终场结算");
+          return;
+        }
+        currentPredictionRoomId = room.id;
+        renderFinalSettlement(room, match);
+        showView("pkResult");
+      } catch (e) {
+        console.error("Open final settlement failed:", e);
+        showToast("终场结算生成失败，请重试");
+      }
+    };
+
+    function canvasWrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3) {
+      const chars = Array.from(String(text || ""));
+      let line = "";
+      let lines = 0;
+      chars.forEach((char) => {
+        const test = line + char;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          if (lines < maxLines) ctx.fillText(line, x, y + lines * lineHeight);
+          line = char;
+          lines += 1;
+        } else {
+          line = test;
+        }
+      });
+      if (line && lines < maxLines) ctx.fillText(line, x, y + lines * lineHeight);
+    }
+
+    function drawRoundedRect(ctx, x, y, width, height, radius) {
+      const r = Math.min(radius, width / 2, height / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + width, y, x + width, y + height, r);
+      ctx.arcTo(x + width, y + height, x, y + height, r);
+      ctx.arcTo(x, y + height, x, y, r);
+      ctx.arcTo(x, y, x + width, y, r);
+      ctx.closePath();
+    }
+
+    function drawPosterBadge(ctx, text, x, y, width) {
+      drawRoundedRect(ctx, x, y, width, 74, 30);
+      ctx.fillStyle = "rgba(8,20,32,.72)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(0,245,210,.55)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = "#dfff47";
+      ctx.font = "700 26px Arial, PingFang SC, sans-serif";
+      ctx.fillText(text, x + 32, y + 47);
+    }
+
+    window.generateProphecyPoster = async function generateProphecyPoster(btn) {
+      try {
+        if (!currentPredictionRoomId || !predictionService) {
+          showToast("请先进入PK房");
+          return;
+        }
+        const room = normalizePredictionRoom(await predictionService.getRoom(currentPredictionRoomId));
+        const match = getPredictionMatch(room.matchId || currentPredictionMatchId);
+        if (!matchCompleted(match)) {
+          showToast("比赛结束后才能生成神预言海报");
+          return;
+        }
+        const settlement = lastFinalSettlement?.room?.id === room.id ? lastFinalSettlement : buildFinalSettlement(room, match);
+        const me = settlement.rows.find((row) => row.is_me) || settlement.rows[0] || { nickname: "我", points: 0, hits: 0, hitLabels: [] };
+        const canvas = document.createElement("canvas");
+        canvas.width = 900;
+        canvas.height = 1600;
+        const ctx = canvas.getContext("2d");
+        const bg = ctx.createLinearGradient(0, 0, 900, 1600);
+        bg.addColorStop(0, "#041315");
+        bg.addColorStop(.45, "#07263a");
+        bg.addColorStop(1, "#260014");
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, 900, 1600);
+
+        ctx.fillStyle = "rgba(0,245,210,.14)";
+        for (let x = 0; x < 900; x += 80) ctx.fillRect(x, 0, 1, 1600);
+        for (let y = 0; y < 1600; y += 80) ctx.fillRect(0, y, 900, 1);
+        ctx.fillStyle = "rgba(255,45,139,.18)";
+        ctx.beginPath();
+        ctx.arc(760, 1060, 360, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "rgba(0,245,210,.20)";
+        ctx.beginPath();
+        ctx.arc(120, 250, 300, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#00f5d2";
+        ctx.font = "800 34px Arial, PingFang SC, sans-serif";
+        ctx.fillText("世界杯观赛指南", 70, 105);
+        ctx.fillStyle = "rgba(255,255,255,.68)";
+        ctx.font = "700 24px Arial, PingFang SC, sans-serif";
+        ctx.fillText("2026 · 预测PK战报", 620, 105);
+
+        ctx.fillStyle = "#dfff47";
+        ctx.font = "900 92px Arial, PingFang SC, sans-serif";
+        canvasWrapText(ctx, `太厉害了，${me.nickname || "我"}又神预言了 ${me.hits || 0} 项`, 70, 250, 760, 108, 3);
+
+        drawRoundedRect(ctx, 70, 520, 760, 156, 34);
+        ctx.fillStyle = "rgba(255,255,255,.08)";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.18)";
+        ctx.stroke();
+        ctx.fillStyle = "#fff";
+        ctx.font = "900 40px Arial, PingFang SC, sans-serif";
+        ctx.fillText(displayTeamName(match.homeTeam), 120, 605);
+        ctx.fillStyle = "#00f5d2";
+        ctx.font = "900 48px Arial, PingFang SC, sans-serif";
+        ctx.fillText("VS", 430, 605);
+        ctx.fillStyle = "#fff";
+        ctx.font = "900 40px Arial, PingFang SC, sans-serif";
+        ctx.fillText(displayTeamName(match.awayTeam), 530, 605);
+        ctx.fillStyle = "rgba(255,255,255,.72)";
+        ctx.font = "700 26px Arial, PingFang SC, sans-serif";
+        ctx.fillText(`${match.homeScore} - ${match.awayScore}｜${settlement.actualWinner}｜${settlement.actualGoals}`, 120, 650);
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "900 38px Arial, PingFang SC, sans-serif";
+        ctx.fillText("本场预测命中", 90, 770);
+        const hits = (me.hitLabels || []).length ? me.hitLabels : ["暂无命中项，下一场再战"];
+        hits.slice(0, 4).forEach((hit, index) => {
+          drawPosterBadge(ctx, hit, 90, 815 + index * 100, 720);
+          ctx.fillStyle = "#00f5d2";
+          ctx.font = "900 34px Arial, PingFang SC, sans-serif";
+          ctx.fillText("✓", 748, 862 + index * 100);
+        });
+
+        drawRoundedRect(ctx, 70, 1250, 760, 190, 36);
+        ctx.fillStyle = "rgba(255,255,255,.10)";
+        ctx.fill();
+        ctx.fillStyle = "#ffe28a";
+        ctx.font = "900 92px Arial, PingFang SC, sans-serif";
+        ctx.fillText(`${me.points || 0}`, 115, 1360);
+        ctx.font = "900 34px Arial, PingFang SC, sans-serif";
+        ctx.fillText("分", 290, 1358);
+        ctx.fillStyle = "#fff";
+        ctx.font = "800 32px Arial, PingFang SC, sans-serif";
+        const rank = settlement.rows.indexOf(me) + 1 || "--";
+        ctx.fillText(`本房第 ${rank} 名`, 470, 1325);
+        ctx.fillText(`击败 ${Math.max((settlement.rows.length || 1) - rank, 0)} 位好友`, 470, 1380);
+
+        ctx.fillStyle = "#00f5d2";
+        ctx.font = "900 44px Arial, PingFang SC, sans-serif";
+        ctx.fillText("下一场，敢来和我预测PK吗？", 70, 1510);
+        ctx.fillStyle = "rgba(255,255,255,.78)";
+        ctx.font = "700 24px Arial, PingFang SC, sans-serif";
+        ctx.fillText("长按保存图片，发朋友圈邀请好友参战", 70, 1550);
+
+        const image = document.getElementById("poster-preview-image");
+        const preview = document.getElementById("poster-preview");
+        if (image && preview) {
+          image.src = canvas.toDataURL("image/png");
+          preview.hidden = false;
+        }
+        if (btn) btn.textContent = "已生成神预言海报";
+      } catch (e) {
+        console.error("Generate prophecy poster failed:", e);
+        showToast("海报生成失败，请重试");
+      }
+    };
+
+    window.hidePosterPreview = function hidePosterPreview(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const preview = document.getElementById("poster-preview");
+      if (preview) preview.hidden = true;
+    };
+
+    function getLocalPredictionDrafts() {
+      const drafts = [];
+      for (let i = 0; i < window.localStorage.length; i += 1) {
+        const key = window.localStorage.key(i);
+        if (!key || !key.startsWith("world-cup-prediction-draft:")) continue;
+        try {
+          const draft = JSON.parse(window.localStorage.getItem(key) || "null");
+          if (draft?.matchId && draft.answers) {
+            drafts.push({
+              source: "draft",
+              matchId: draft.matchId,
+              prediction: { answers: draft.answers, submitted_at: draft.savedAt || "" },
+              savedAt: draft.savedAt || "",
+            });
+          }
+        } catch {
+          // Ignore malformed local drafts.
+        }
+      }
+      return drafts;
+    }
+
+    function getLocalStoredPredictionHistory() {
+      return readLocalPredictionHistory().map((item) => ({
+        source: item.source || "personal",
+        roomId: item.roomId || "",
+        matchId: item.matchId,
+        prediction: item.prediction,
+        nickname: item.nickname || readLocalProfile()?.nickname || "我",
+        savedAt: item.savedAt || item.prediction?.submitted_at || "",
+      })).filter((item) => item.matchId && item.prediction?.answers);
+    }
+
+    async function getMyPredictionHistory() {
+      const remoteItems = [];
+      if (predictionService?.getMyPredictions) {
+        try {
+          const profile = await predictionService.getProfile();
+          const items = await predictionService.getMyPredictions();
+          items.forEach((item) => {
+            const room = item.room ? normalizePredictionRoom({ room: item.room, prediction: item.prediction }) : null;
+            remoteItems.push({
+              source: room ? "room" : "personal",
+              roomId: room?.id || "",
+              matchId: room?.matchId || item.room?.match_id || item.prediction?.match_id,
+              room,
+              prediction: item.prediction,
+              nickname: profile?.nickname || "我",
+              savedAt: item.prediction?.submitted_at || item.room?.created_at || "",
+            });
+          });
+        } catch (e) {
+          console.warn("Read remote prediction history failed:", e);
+        }
+      }
+      const localItems = [...getLocalStoredPredictionHistory(), ...getLocalPredictionDrafts()];
+      const byKey = new Map();
+      [...remoteItems, ...localItems].forEach((item) => {
+        const key = `${item.source}:${item.roomId || item.matchId}:${item.savedAt || ""}`;
+        byKey.set(key, item);
+      });
+      return Array.from(byKey.values()).sort((a, b) => String(b.savedAt || "").localeCompare(String(a.savedAt || "")));
+    }
+
+    function predictionHistoryCard(item, index) {
+      const match = getPredictionMatch(item.matchId);
+      const prediction = item.prediction || {};
+      const details = predictionScoreDetails(prediction.answers || {}, match);
+      const completed = matchCompleted(match);
+      const score = completed ? scorePredictionAgainstMatch(prediction, match) : { hits: 0, points: 0 };
+      const hitCount = details.filter((row) => row.status === "hit").length;
+      const missCount = details.filter((row) => row.status === "miss").length;
+      const pendingCount = details.filter((row) => row.status === "pending").length;
+      const statusLabel = completed ? "已结算" : "等待赛果";
+      const statusClass = completed ? "hot" : "";
+      const detailHtml = details.length ? details.map((row) => {
+        const mark = row.status === "hit" ? "✓" : row.status === "miss" ? "×" : "·";
+        const cls = row.status === "hit" ? "hot" : "";
+        const actual = completed && row.status !== "pending" ? `｜实际：${escapeHtml(row.actual)}` : row.actual && row.status === "pending" ? `｜${escapeHtml(row.actual)}` : "";
+        return `<div class="rank-line"><strong class="tag ${cls}">${mark}</strong><span>${escapeHtml(row.label)}：${escapeHtml(row.answer)}${actual}</span><strong>${row.status === "hit" ? "+" + row.points : ""}</strong></div>`;
+      }).join("") : `<p class="sub">暂无预测选项。</p>`;
+      const source = item.source === "room" ? "PK房预测" : "自己保存";
+      return `<article class="card">
+        <div class="section-title"><h3>${match ? `${displayTeamWithFlag(match.homeTeam)} VS ${displayTeamWithFlag(match.awayTeam)}` : "未知比赛"}</h3><span class="tag ${statusClass}">${statusLabel}</span></div>
+        <p class="sub">${escapeHtml(source)} · ${match ? `${escapeHtml(displayDate(match.dateText))} · ${escapeHtml(match.venue || "")}` : "比赛信息缺失"}</p>
+        ${completed ? `<div class="points-rule"><div><strong>${score.points}</strong>积分</div><div><strong>${hitCount}</strong>命中</div><div><strong>${missCount}</strong>未中</div></div>` : `<p class="sub">比赛结束并同步比分后，将自动显示命中项和积分。</p>`}
+        <div class="rank-table">${detailHtml}</div>
+        <div class="actions">
+          ${completed ? `<button onclick="generatePredictionHistoryPoster(${index}, this)">生成神预言海报</button>` : `<button disabled>赛后生成海报</button>`}
+          ${item.roomId ? `<button class="secondary" onclick="openPredictionHistoryRoom(${index})">进入PK房</button>` : `<button class="secondary" onclick="startPredictionPk('${escapeHtml(item.matchId || "")}')">再次预测</button>`}
+        </div>
+        ${pendingCount ? `<p class="sub">半场、红黄牌等事件项将在接入官方事件数据后继续结算。</p>` : ""}
+      </article>`;
+    }
+
+    window.renderMyPredictionResults = async function renderMyPredictionResults() {
+      const list = document.getElementById("my-prediction-results-list");
+      const summary = document.getElementById("my-prediction-summary");
+      const count = document.getElementById("my-prediction-count");
+      if (list) list.innerHTML = `<article class="card"><p class="sub">正在读取你的预测记录。</p></article>`;
+      const items = await getMyPredictionHistory();
+      myPredictionHistoryCache = items;
+      const settled = items.filter((item) => matchCompleted(getPredictionMatch(item.matchId)));
+      const totalPoints = settled.reduce((sum, item) => sum + scorePredictionAgainstMatch(item.prediction, getPredictionMatch(item.matchId)).points, 0);
+      const totalHits = settled.reduce((sum, item) => sum + scorePredictionAgainstMatch(item.prediction, getPredictionMatch(item.matchId)).hits, 0);
+      if (summary) {
+        summary.innerHTML = `
+          <article class="card stat-card"><span class="sub">总预测</span><strong class="stat-value">${items.length}</strong></article>
+          <article class="card stat-card"><span class="sub">已结算</span><strong class="stat-value">${settled.length}</strong></article>
+          <article class="card stat-card"><span class="sub">命中项</span><strong class="stat-value">${totalHits}</strong></article>
+          <article class="card stat-card"><span class="sub">积分</span><strong class="stat-value">${totalPoints}</strong></article>`;
+      }
+      if (count) count.textContent = `${items.length} 条`;
+      if (!list) return;
+      if (!items.length) {
+        list.innerHTML = `<article class="card"><h3>还没有预测记录</h3><p class="sub">从首页选择一场比赛，保存预测或邀请好友PK后，这里会出现你的历史预测和赛后海报。</p><button onclick="startPredictionPk()">去预测最近一场</button></article>`;
+        return;
+      }
+      list.innerHTML = items.map((item, index) => predictionHistoryCard(item, index)).join("");
+    };
+
+    window.openPredictionHistoryRoom = async function openPredictionHistoryRoom(index) {
+      const item = myPredictionHistoryCache[index];
+      if (!item?.roomId || !predictionService) return;
+      try {
+        const room = normalizePredictionRoom(await predictionService.getRoom(item.roomId));
         currentPredictionRoomId = room.id;
         updateRoomUrl(room);
         renderPredictionRoom(room);
         showView("pkRoom");
-        showToast("PK房已创建，分享给好友吧");
       } catch (e) {
-        showToast("创建失败，请重试");
+        console.error("Open prediction history room failed:", e);
+        showToast("PK房读取失败，请稍后重试");
+      }
+    };
+
+    window.generatePredictionHistoryPoster = async function generatePredictionHistoryPoster(index, btn) {
+      const item = myPredictionHistoryCache[index];
+      const match = getPredictionMatch(item?.matchId);
+      if (!item || !matchCompleted(match)) {
+        showToast("比赛结束后才能生成神预言海报");
+        return;
+      }
+      const score = scorePredictionAgainstMatch(item.prediction, match);
+      const canvas = document.createElement("canvas");
+      canvas.width = 900;
+      canvas.height = 1600;
+      const ctx = canvas.getContext("2d");
+      const bg = ctx.createLinearGradient(0, 0, 900, 1600);
+      bg.addColorStop(0, "#041315");
+      bg.addColorStop(.45, "#07263a");
+      bg.addColorStop(1, "#260014");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, 900, 1600);
+      ctx.fillStyle = "rgba(0,245,210,.14)";
+      for (let x = 0; x < 900; x += 80) ctx.fillRect(x, 0, 1, 1600);
+      for (let y = 0; y < 1600; y += 80) ctx.fillRect(0, y, 900, 1);
+      ctx.fillStyle = "rgba(255,45,139,.18)";
+      ctx.beginPath();
+      ctx.arc(760, 1060, 360, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#00f5d2";
+      ctx.font = "800 34px Arial, PingFang SC, sans-serif";
+      ctx.fillText("世界杯观赛指南", 70, 105);
+      ctx.fillStyle = "rgba(255,255,255,.68)";
+      ctx.font = "700 24px Arial, PingFang SC, sans-serif";
+      ctx.fillText("2026 · 我的预测战报", 600, 105);
+      ctx.fillStyle = "#dfff47";
+      ctx.font = "900 92px Arial, PingFang SC, sans-serif";
+      canvasWrapText(ctx, `太厉害了，${item.nickname || "我"}又神预言了 ${score.hits || 0} 项`, 70, 250, 760, 108, 3);
+      drawRoundedRect(ctx, 70, 520, 760, 156, 34);
+      ctx.fillStyle = "rgba(255,255,255,.08)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,.18)";
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.font = "900 40px Arial, PingFang SC, sans-serif";
+      ctx.fillText(displayTeamName(match.homeTeam), 120, 605);
+      ctx.fillStyle = "#00f5d2";
+      ctx.font = "900 48px Arial, PingFang SC, sans-serif";
+      ctx.fillText("VS", 430, 605);
+      ctx.fillStyle = "#fff";
+      ctx.font = "900 40px Arial, PingFang SC, sans-serif";
+      ctx.fillText(displayTeamName(match.awayTeam), 530, 605);
+      ctx.fillStyle = "rgba(255,255,255,.72)";
+      ctx.font = "700 26px Arial, PingFang SC, sans-serif";
+      ctx.fillText(`${match.homeScore} - ${match.awayScore}｜${finalWinnerLabel(match)}｜${finalGoalsBucket(match)}`, 120, 650);
+      ctx.fillStyle = "#fff";
+      ctx.font = "900 38px Arial, PingFang SC, sans-serif";
+      ctx.fillText("本场预测命中", 90, 770);
+      const hits = (score.hitLabels || []).length ? score.hitLabels : ["暂无命中项，下一场再战"];
+      hits.slice(0, 4).forEach((hit, hitIndex) => {
+        drawPosterBadge(ctx, hit, 90, 815 + hitIndex * 100, 720);
+        ctx.fillStyle = "#00f5d2";
+        ctx.font = "900 34px Arial, PingFang SC, sans-serif";
+        ctx.fillText("✓", 748, 862 + hitIndex * 100);
+      });
+      drawRoundedRect(ctx, 70, 1250, 760, 190, 36);
+      ctx.fillStyle = "rgba(255,255,255,.10)";
+      ctx.fill();
+      ctx.fillStyle = "#ffe28a";
+      ctx.font = "900 92px Arial, PingFang SC, sans-serif";
+      ctx.fillText(`${score.points || 0}`, 115, 1360);
+      ctx.font = "900 34px Arial, PingFang SC, sans-serif";
+      ctx.fillText("分", 290, 1358);
+      ctx.fillStyle = "#fff";
+      ctx.font = "800 32px Arial, PingFang SC, sans-serif";
+      ctx.fillText(item.source === "room" ? "PK房预测" : "个人预测", 470, 1325);
+      ctx.fillText(`命中 ${score.hits || 0} 项`, 470, 1380);
+      ctx.fillStyle = "#00f5d2";
+      ctx.font = "900 44px Arial, PingFang SC, sans-serif";
+      ctx.fillText("下一场，敢来和我预测PK吗？", 70, 1510);
+      ctx.fillStyle = "rgba(255,255,255,.78)";
+      ctx.font = "700 24px Arial, PingFang SC, sans-serif";
+      ctx.fillText("长按保存图片，发朋友圈邀请好友参战", 70, 1550);
+      const image = document.getElementById("poster-preview-image");
+      const preview = document.getElementById("poster-preview");
+      if (image && preview) {
+        image.src = canvas.toDataURL("image/png");
+        preview.hidden = false;
+      }
+      if (btn) btn.textContent = "已生成神预言海报";
+    };
+
+    window.savePredictionResult = async function savePredictionResult(btn) {
+      const profile = await ensurePredictionProfile();
+      if (!profile) return;
+
+      const { matchId, answers } = currentPredictionMatchAndAnswers();
+      const originalText = btn?.textContent || "保存预测结果";
+      btn.disabled = true;
+      btn.textContent = "保存中...";
+      try {
+        if (submittingToExistingRoom && currentPredictionRoomId) {
+          const room = normalizePredictionRoom(await predictionService.savePrediction(currentPredictionRoomId, answers));
+          currentPredictionRoomId = room.id;
+          writeLocalPredictionHistoryItem({ matchId, roomId: room.id, source: "room", answers });
+          renderPredictionRoom(room);
+          showToast("已保存您的预测");
+        } else {
+          if (predictionService?.savePersonalPrediction) {
+            const match = getPredictionMatch(matchId);
+            const matchLabel = match ? `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}` : "个人预测";
+            await predictionService.savePersonalPrediction({ matchId, matchLabel, answers });
+          }
+          saveLocalPredictionDraft(matchId, answers);
+          writeLocalPredictionHistoryItem({ matchId, source: "personal", answers });
+          showToast("已保存您的预测");
+        }
+        btn.textContent = "已保存您的预测";
+      } catch (e) {
+        console.error("Save prediction failed:", e);
+        showToast("保存失败，请重试");
+        btn.textContent = originalText;
       }
       btn.disabled = false;
-      btn.textContent = submittingToExistingRoom ? "加入PK房" : "保存预测并创建PK房";
+    };
+
+    window.inviteFriendsWithPrediction = async function inviteFriendsWithPrediction(btn) {
+      const profile = await ensurePredictionProfile();
+      if (!profile) return;
+
+      const { matchId, match, answers } = currentPredictionMatchAndAnswers();
+      const originalText = btn?.textContent || "邀请好友一起PK";
+      btn.disabled = true;
+      btn.textContent = "创建房间中...";
+      try {
+        let room;
+        if (submittingToExistingRoom && currentPredictionRoomId) {
+          room = normalizePredictionRoom(await predictionService.savePrediction(currentPredictionRoomId, answers));
+        } else {
+          const matchLabel = match ? `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}` : "预测PK";
+          room = normalizePredictionRoom(await predictionService.createRoom({ matchId, matchLabel, answers }));
+        }
+        currentPredictionRoomId = room.id;
+        writeLocalPredictionHistoryItem({ matchId, roomId: room.id, source: "room", answers });
+        updateRoomUrl(room);
+        renderPredictionRoom(room);
+        showView("pkRoom");
+        showToast(submittingToExistingRoom ? "已进入PK房，可以邀请好友了" : "PK房已创建，分享给好友吧");
+        submittingToExistingRoom = false;
+        await sharePkRoom(btn);
+      } catch (e) {
+        console.error("Invite prediction failed:", e);
+        showToast("创建PK房失败，请重试");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }
+    };
+
+    window.createPrediction = function createPrediction(btn) {
+      return inviteFriendsWithPrediction(btn);
     };
 
     function updateRoomUrl(room) {
@@ -2729,12 +3580,17 @@
       const members = room.members || [];
       participantsDiv.innerHTML = members.map((m) => `<div class="pk-person"><div class="avatar">${(m.nickname || "?")[0]}</div>${escapeHtml(m.nickname || "匿名")}</div>`).join("");
 
-      document.getElementById("pk-prediction-summary").textContent = room.myPrediction ?
-        "已提交：" + (room.myPrediction.answers?.result || room.myPrediction.result || "预测已锁定") : "尚未提交";
+      renderMyPredictionPanel(room);
       renderRoomPredictions(room);
 
       const submitBtn = document.getElementById("pk-room-submit-button");
       if (submitBtn) submitBtn.hidden = !!room.myPrediction;
+      const finalBtn = document.getElementById("final-settlement-button");
+      if (finalBtn) {
+        const canSettle = matchCompleted(match);
+        finalBtn.disabled = !canSettle;
+        finalBtn.textContent = canSettle ? "终场结算" : "终场结算（赛后开放）";
+      }
     };
 
     window.sharePkRoom = async function sharePkRoom(btn) {
@@ -2748,9 +3604,72 @@
       showShareGuide();
     };
 
-    window.editRoomPrediction = function editRoomPrediction() {
+    window.createNewPkRoomFromMyPrediction = async function createNewPkRoomFromMyPrediction(btn) {
+      if (!predictionService || !currentPredictionRoomId) return;
+      const originalText = btn?.textContent || "发起新组局邀请好友";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "正在新建房间...";
+      }
+      try {
+        const currentRoom = normalizePredictionRoom(await predictionService.getRoom(currentPredictionRoomId));
+        const answers = currentRoom.myPrediction?.answers;
+        if (!answers) {
+          showToast("请先提交自己的预测");
+          return;
+        }
+        const match = getPredictionMatch(currentRoom.matchId);
+        const matchLabel = match ? `${displayTeamName(match.homeTeam)} vs ${displayTeamName(match.awayTeam)}` : (currentRoom.name || "预测PK");
+        const room = normalizePredictionRoom(await predictionService.createRoom({
+          matchId: currentRoom.matchId,
+          matchLabel,
+          answers,
+        }));
+        currentPredictionRoomId = room.id;
+        updateRoomUrl(room);
+        renderPredictionRoom(room);
+        showToast("新PK房已创建，分享给好友吧");
+        await sharePkRoom(btn);
+      } catch (e) {
+        console.error("Create new PK room failed:", e);
+        showToast("新组局创建失败，请重试");
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalText;
+        }
+      }
+    };
+
+    window.editRoomPrediction = async function editRoomPrediction() {
       submittingToExistingRoom = true;
-      document.getElementById("create-prediction-button").textContent = "保存预测";
+      const saveBtn = document.getElementById("save-prediction-button");
+      const inviteBtn = document.getElementById("invite-prediction-button");
+      if (saveBtn) {
+        saveBtn.textContent = "保存预测结果";
+        saveBtn.disabled = false;
+      }
+      if (inviteBtn) {
+        inviteBtn.textContent = "邀请好友一起PK";
+        inviteBtn.disabled = false;
+      }
+      const select = document.getElementById("challenge-match");
+      if (select && currentPredictionMatchId) {
+        select.value = currentPredictionMatchId;
+        syncPredictionMatch();
+      }
+      if (predictionService && currentPredictionRoomId) {
+        try {
+          const room = normalizePredictionRoom(await predictionService.getRoom(currentPredictionRoomId));
+          if (room?.myPrediction?.answers) {
+            applyPredictionAnswers(room.myPrediction.answers);
+            const match = getPredictionMatch(room.matchId || currentPredictionMatchId);
+            renderPredictionCreateView(match);
+          }
+        } catch {
+          // If the room cannot be re-read, keep the local form state.
+        }
+      }
       showView("challengeCreate");
     };
 
@@ -2765,12 +3684,14 @@
         const room = normalizePredictionRoom(await predictionService.joinRoom(joinCode));
         if (room) {
           currentPredictionRoomId = room.id;
+          updateRoomUrl(room);
           renderPredictionRoom(room);
           showView("pkRoom");
           showToast("已加入PK房");
         }
       } catch (e) {
-        showToast("加入失败，请检查邀请码");
+        console.error("Join prediction room failed:", e);
+        showToast(e?.message || "加入失败，请检查邀请码");
       }
     };
 
@@ -2861,10 +3782,35 @@
 
     /* ── Navigation ── */
 
+    window.goPreviousView = function goPreviousView() {
+      const previous = viewHistory.pop();
+      if (previous && document.getElementById(previous)) {
+        restoringPreviousView = true;
+        showView(previous, ["home", "schedule", "results", "teams", "stats"].includes(previous));
+        restoringPreviousView = false;
+        return;
+      }
+      showView("home", true);
+    };
+
     function showView(id, fromTab = false) {
+      const currentView = views.find((view) => view.classList.contains("active"))?.id;
+      if (!restoringPreviousView && currentView && currentView !== id) {
+        viewHistory.push(currentView);
+        if (viewHistory.length > 20) viewHistory = viewHistory.slice(-20);
+      }
       if (id === "challengeCreate" && !submittingToExistingRoom) {
         currentPredictionRoomId = "";
-        document.getElementById("create-prediction-button").textContent = "保存预测并创建PK房";
+        const saveBtn = document.getElementById("save-prediction-button");
+        const inviteBtn = document.getElementById("invite-prediction-button");
+        if (saveBtn) {
+          saveBtn.textContent = "保存预测结果";
+          saveBtn.disabled = false;
+        }
+        if (inviteBtn) {
+          inviteBtn.textContent = "邀请好友一起PK";
+          inviteBtn.disabled = false;
+        }
       }
       if (fromTab) {
         lastTab = id;
@@ -2888,8 +3834,14 @@
       if (id === "predictionLeaderboard") {
         void refreshLeaderboard();
       }
+      if (id === "mySocial") {
+        void renderMyPredictionResults();
+      }
       if (id === "schedule") {
         renderScheduleMode();
+      }
+      if (id === "results") {
+        renderMatchData();
       }
     }
 
@@ -2900,8 +3852,8 @@
       if (!config.cloudbaseEnvId || window.cloudbase?.init) return;
       await new Promise((resolve) => {
         const script = document.createElement("script");
-        const timeout = window.setTimeout(resolve, 4000);
-        script.src = config.cloudbaseSdkUrl || "https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.3/cloudbase.full.js";
+        const timeout = window.setTimeout(resolve, 12000);
+        script.src = config.cloudbaseSdkUrl || "https://static.cloudbase.net/cloudbase-js-sdk/3.0.1/cloudbase.full.js";
         script.onload = () => {
           window.clearTimeout(timeout);
           resolve();
@@ -2933,21 +3885,86 @@
       });
     }
 
+    async function loadCloudMatchOverrides() {
+      const config = window.APP_CONFIG || {};
+      if (!config.cloudbaseEnvId || !window.cloudbase?.init) return false;
+      try {
+        const app = window.cloudbase.init({ env: config.cloudbaseEnvId });
+        const auth = app.auth({ persistence: "local" });
+        let loginState = await auth.getLoginState?.();
+        if (!loginState) {
+          if (auth.anonymousAuthProvider) {
+            await auth.anonymousAuthProvider().signIn();
+          } else if (auth.signInAnonymously) {
+            await auth.signInAnonymously();
+          }
+        }
+        const db = app.database();
+        const result = await db.collection("matches").limit(200).get();
+        const rows = result.data || [];
+        if (!rows.length) return false;
+        const data = window.PROTOTYPE_DATA || {};
+        const matches = data.matches || [];
+        const byId = new Map(rows.map((row) => [row.match_id || `fifa-match-${row.fifa_match_id}`, row]));
+        let changed = 0;
+        matches.forEach((match) => {
+          const row = byId.get(match.id) || byId.get(`fifa-match-${match.fifaMatchId}`);
+          if (!row) return;
+          const nextStatus = row.status || match.status;
+          const nextHomeScore = row.home_score == null ? null : Number(row.home_score);
+          const nextAwayScore = row.away_score == null ? null : Number(row.away_score);
+          if (match.status !== nextStatus || match.homeScore !== nextHomeScore || match.awayScore !== nextAwayScore) {
+            changed += 1;
+          }
+          match.status = nextStatus;
+          match.homeScore = nextHomeScore;
+          match.awayScore = nextAwayScore;
+        });
+        if (data.matchCounts) {
+          data.matchCounts.completed = matches.filter((match) => match.status === "completed").length;
+          data.matchCounts.scheduled = matches.filter((match) => match.status !== "completed").length;
+        }
+        if (changed) {
+          renderHome();
+          renderMatchData();
+          renderScheduleMode();
+          populateChallengeMatches();
+        }
+        return true;
+      } catch (error) {
+        console.warn("Cloud match override unavailable:", error);
+        return false;
+      }
+    }
+
     async function initPredictionApp() {
       await loadCloudBaseClient();
+      await loadCloudMatchOverrides();
       await loadSupabaseClient();
-      predictionService = window.PredictionService.create(window.APP_CONFIG || {});
+      try {
+        predictionService = window.PredictionService.create(window.APP_CONFIG || {});
+      } catch (e) {
+        console.error("Prediction service init failed:", e);
+        showToast(e?.message || "预测服务连接失败，请刷新重试");
+        return;
+      }
       populateChallengeMatches();
 
       const profileForm = document.getElementById("profile-form");
-      profileForm.addEventListener("submit", (event) => {
+      profileForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const nickname = document.getElementById("profile-nickname").value.trim();
         if (!nickname) return;
-        window.localStorage.setItem("wechat_nickname", nickname);
-        document.getElementById("profile-dialog").close();
-        pendingProfileResolver?.(nickname);
-        pendingProfileResolver = null;
+        try {
+          const profile = await predictionService.ensureProfile(nickname);
+          writeLocalProfile(profile || { nickname });
+          document.getElementById("profile-dialog").close();
+          pendingProfileResolver?.(profile || readLocalProfile());
+          pendingProfileResolver = null;
+        } catch (e) {
+          console.error("Profile save failed:", e);
+          showToast("昵称保存失败，请重试");
+        }
       });
       document.getElementById("profile-dialog").addEventListener("cancel", (event) => {
         event.preventDefault();
@@ -2967,6 +3984,7 @@
     setInterval(updateStatusTime, 60000);
     setInterval(renderHome, 60000);
     setInterval(renderMatchData, 60000);
+    setInterval(loadCloudMatchOverrides, 300000);
     void initPredictionApp();
   </script>
 </body>
