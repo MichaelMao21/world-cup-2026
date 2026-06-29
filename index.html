@@ -4270,16 +4270,21 @@
         event.preventDefault();
         const nickname = document.getElementById("profile-nickname").value.trim();
         if (!nickname) return;
+        let profile = {
+          nickname,
+          avatar_text: Array.from(nickname).slice(-1)[0] || "球",
+        };
         try {
-          const profile = await predictionService.ensureProfile(nickname);
-          writeLocalProfile(profile || { nickname });
-          document.getElementById("profile-dialog").close();
-          pendingProfileResolver?.(profile || readLocalProfile());
-          pendingProfileResolver = null;
+          const cloudProfile = await predictionService.ensureProfile(nickname);
+          profile = cloudProfile || profile;
         } catch (e) {
-          console.error("Profile save failed:", e);
-          showToast("昵称保存失败，请重试");
+          console.warn("Cloud profile save failed, using local profile:", e);
+          showToast("已保存昵称，可继续预测");
         }
+        writeLocalProfile(profile);
+        document.getElementById("profile-dialog").close();
+        pendingProfileResolver?.(profile);
+        pendingProfileResolver = null;
       });
       document.getElementById("profile-dialog").addEventListener("cancel", (event) => {
         event.preventDefault();
