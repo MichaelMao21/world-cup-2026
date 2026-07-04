@@ -219,6 +219,17 @@
     .match-actions.single { grid-template-columns: 1fr; }
     .match-actions button { width: 100%; }
     .match-actions .ghost { text-align: center; }
+    .detail-actions { grid-template-columns: 1fr; }
+    .detail-team-actions { grid-template-columns: 1fr 1fr; }
+    .watchpoint-list { display: grid; gap: 8px; margin-top: 8px; }
+    .watchpoint-item {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 700;
+    }
 
     /* ── Back button ── */
     .back {
@@ -1546,6 +1557,10 @@
         <h3>比赛场地</h3>
         <p class="sub" id="match-detail-venue"></p>
       </article>
+      <article class="card">
+        <h3>主要看点</h3>
+        <div class="watchpoint-list" id="match-detail-watchpoints"></div>
+      </article>
       <article class="card social-entry">
         <div>
           <h3>附近观赛热度</h3>
@@ -1553,12 +1568,10 @@
         </div>
         <button onclick="openSocialHub(true)">查看地图</button>
       </article>
-      <div class="actions">
-        <a class="button" id="match-source-link" href="#" target="_blank" rel="noreferrer">FIFA 比赛页</a>
-        <a class="button secondary" id="match-highlight-link" href="#" target="_blank" rel="noreferrer" hidden>搜索央视集锦</a>
+      <div class="actions detail-actions">
         <button id="match-prediction-button" onclick="startPredictionPk()">预测这场PK</button>
-        <button class="secondary" id="match-team-button" onclick="showView('teams', true)">看球队</button>
       </div>
+      <div class="actions detail-team-actions" id="match-team-buttons"></div>
     </section>
 
     <section class="view" id="teamDetail">
@@ -2622,26 +2635,8 @@
 
       document.getElementById("match-detail-venue").textContent = (match.venue || "待定") + (match.city ? " · " + match.city : "");
 
-      const sourceLink = document.getElementById("match-source-link");
-      sourceLink.href = match.sourceUrl || "#";
-      sourceLink.hidden = !match.sourceUrl;
-
-      const highlightLink = document.getElementById("match-highlight-link");
-      if (match.status === "completed") {
-        highlightLink.hidden = false;
-        highlightLink.href = "https://search.cctv.com/search.php?q=" + encodeURIComponent(match.homeTeam + " " + match.awayTeam + " 集锦");
-        highlightLink.textContent = "搜索央视集锦";
-      } else if (isLive) {
-        highlightLink.hidden = false;
-        highlightLink.textContent = "⚡ 查看文字直播";
-        highlightLink.href = "https://www.zhibo8.cc/";
-      } else {
-        highlightLink.hidden = true;
-      }
-
-      const teamBtn = document.getElementById("match-team-button");
-      teamBtn.onclick = () => { openTeamFromMatch(match.homeTeam); };
-      teamBtn.textContent = "看" + displayTeamName(match.homeTeam);
+      renderMatchWatchpoints(match);
+      renderMatchTeamButtons(match);
 
       const predictionBtn = document.getElementById("match-prediction-button");
       if (predictionBtn) {
@@ -2652,6 +2647,54 @@
       window.currentSocialMatch = match;
       showView("matchDetail");
     };
+
+    function keyPlayerNames(teamName) {
+      const data = window.PROTOTYPE_DATA || { players: [] };
+      const team = teamRecord(teamName);
+      if (!team) return [];
+      const order = { Forward: 1, Midfielder: 2, Defender: 3, Goalkeeper: 4 };
+      return (data.players || [])
+        .filter((p) => p.teamId === team.id)
+        .slice()
+        .sort((a, b) => (order[a.position] || 9) - (order[b.position] || 9))
+        .slice(0, 2)
+        .map((p) => p.name);
+    }
+
+    function renderMatchWatchpoints(match) {
+      const el = document.getElementById("match-detail-watchpoints");
+      if (!el) return;
+      const home = displayTeamName(match.homeTeam);
+      const away = displayTeamName(match.awayTeam);
+      const homeStars = keyPlayerNames(match.homeTeam).join("、");
+      const awayStars = keyPlayerNames(match.awayTeam).join("、");
+      const stage = displayStage(match);
+      const points = [
+        `${stage}对决：${home}与${away}的攻防节奏、定位球质量和临场换人会直接影响走势。`,
+        homeStars || awayStars
+          ? `明星球员：重点关注${homeStars ? home + "的" + homeStars : home}，以及${awayStars ? away + "的" + awayStars : away}。`
+          : `明星球员：双方核心球员名单待官方阵容进一步更新。`,
+        match.status === "completed"
+          ? `赛后评价：结合终场比分复盘两队进攻效率、防守稳定性和关键球处理。`
+          : `媒体观察：赛前与赛中重点看两队近期状态、阵型选择和比赛强度变化。`,
+        `伤停信息：当前页面暂未接入官方伤停源，若赛前公布重要缺阵，会在后续数据同步中更新。`,
+      ];
+      el.innerHTML = points.map((point) => `<div class="watchpoint-item">${escapeHtml(point)}</div>`).join("");
+    }
+
+    function renderMatchTeamButtons(match) {
+      const el = document.getElementById("match-team-buttons");
+      if (!el) return;
+      const teams = [match.homeTeam, match.awayTeam].filter(Boolean);
+      el.innerHTML = "";
+      teams.forEach((teamName) => {
+        const btn = document.createElement("button");
+        btn.className = "secondary";
+        btn.textContent = "看" + displayTeamName(teamName);
+        btn.onclick = () => { openTeamFromMatch(teamName); };
+        el.appendChild(btn);
+      });
+    }
 
     function openTeamFromMatch(teamName) {
       const data = window.PROTOTYPE_DATA || { teams: [] };
