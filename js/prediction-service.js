@@ -31,6 +31,22 @@
     return Array.from(nickname.trim()).slice(-1)[0] || "球";
   }
 
+  function normalizeNickname(nickname) {
+    return String(nickname || "").trim().replace(/\s+/g, " ").slice(0, 20);
+  }
+
+  function nicknameTakenError() {
+    const error = new Error("这个昵称已经被使用了，请换一个昵称");
+    error.code = "NICKNAME_TAKEN";
+    return error;
+  }
+
+  function randomNicknameCandidate(base = "球迷") {
+    const cleanBase = normalizeNickname(base).replace(/[0-9A-Za-z]{2,}$/g, "") || "球迷";
+    const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
+    return normalizeNickname(`${cleanBase}${suffix}`);
+  }
+
   function addedDocumentId(result) {
     return result?.id || result?._id || result?.ids?.[0] || result?.data?.id || result?.data?._id || "";
   }
@@ -51,17 +67,35 @@
 
     async ensureProfile(nickname) {
       const data = readDemoData();
+      const cleanNickname = normalizeNickname(nickname);
       let profile = data.profiles.find((item) => item.id === this.userId);
-      if (!profile && !nickname) return null;
+      if (!profile && !cleanNickname) return null;
+      if (cleanNickname && data.profiles.some((item) => item.id !== this.userId && item.nickname === cleanNickname)) {
+        throw nicknameTakenError();
+      }
       if (!profile) {
-        profile = { id: this.userId, nickname: nickname.trim(), avatar_text: avatarText(nickname) };
+        profile = { id: this.userId, nickname: cleanNickname, avatar_text: avatarText(cleanNickname) };
         data.profiles.push(profile);
-      } else if (nickname && profile.nickname !== nickname.trim()) {
-        profile.nickname = nickname.trim();
-        profile.avatar_text = avatarText(nickname);
+      } else if (cleanNickname && profile.nickname !== cleanNickname) {
+        profile.nickname = cleanNickname;
+        profile.avatar_text = avatarText(cleanNickname);
       }
       writeDemoData(data);
       return profile;
+    }
+
+    async updateNickname(nickname) {
+      return this.ensureProfile(nickname);
+    }
+
+    async generateAvailableNickname(base = "球迷") {
+      const data = readDemoData();
+      const used = new Set((data.profiles || []).map((profile) => profile.nickname).filter(Boolean));
+      for (let i = 0; i < 20; i += 1) {
+        const candidate = randomNicknameCandidate(base);
+        if (!used.has(candidate)) return candidate;
+      }
+      return normalizeNickname(`${base || "球迷"}${Date.now().toString().slice(-4)}`);
     }
 
     async createRoom(payload) {
@@ -266,14 +300,21 @@
 
     async ensureProfile(nickname) {
       await this.authenticate();
+      const cleanNickname = normalizeNickname(nickname);
       const current = await this.getProfile();
-      if (!current && !nickname) return null;
-      if (current && !nickname) return current;
+      if (!current && !cleanNickname) return null;
+      if (current && !cleanNickname) return current;
+      const duplicated = await this.findProfileByNickname(cleanNickname);
+      const duplicateUserId = duplicated?.user_id || duplicated?.id || duplicated?._id;
+      const currentDocId = current?._id || current?.id;
+      if (duplicated && duplicateUserId !== this.userId && duplicated._id !== currentDocId) {
+        throw nicknameTakenError();
+      }
       const now = new Date().toISOString();
       const profile = {
         user_id: this.userId,
-        nickname: nickname.trim(),
-        avatar_text: avatarText(nickname),
+        nickname: cleanNickname,
+        avatar_text: avatarText(cleanNickname),
         updated_at: now,
       };
       if (!current) profile.created_at = now;
@@ -283,6 +324,29 @@
       }
       const result = await this.db.collection("profiles").add(profile);
       return { _id: addedDocumentId(result), ...profile };
+    }
+
+    async updateNickname(nickname) {
+      return this.ensureProfile(nickname);
+    }
+
+    async findProfileByNickname(nickname) {
+      try {
+        const result = await this.db.collection("profiles").where({ nickname }).limit(1).get();
+        return result.data?.[0] || null;
+      } catch {
+        return null;
+      }
+    }
+
+    async generateAvailableNickname(base = "球迷") {
+      await this.authenticate();
+      for (let i = 0; i < 20; i += 1) {
+        const candidate = randomNicknameCandidate(base);
+        const existing = await this.findProfileByNickname(candidate);
+        if (!existing) return candidate;
+      }
+      return normalizeNickname(`${base || "球迷"}${Date.now().toString().slice(-4)}`);
     }
 
     async createRoom(payload) {
@@ -619,13 +683,31 @@
 
     async ensureProfile(nickname) {
       await this.authenticate();
+      const cleanNickname = normalizeNickname(nickname);
       const current = await this.getProfile();
-      if (!current && !nickname) return null;
-      if (current && !nickname) return current;
-      const profile = { id: this.userId, nickname: nickname.trim(), avatar_text: avatarText(nickname) };
+      if (!current && !cleanNickname) return null;
+      if (current && !cleanNickname) return current;
+      const { data: duplicated, error: duplicateError } = await this.client.from("profiles").select("id").eq("nickname", cleanNickname).maybeSingle();
+      if (duplicateError) throw duplicateError;
+      if (duplicated && duplicated.id !== this.userId) throw nicknameTakenError();
+      const profile = { id: this.userId, nickname: cleanNickname, avatar_text: avatarText(cleanNickname) };
       const { data, error } = await this.client.from("profiles").upsert(profile).select("id,nickname,avatar_text").single();
       if (error) throw error;
       return data;
+    }
+
+    async updateNickname(nickname) {
+      return this.ensureProfile(nickname);
+    }
+
+    async generateAvailableNickname(base = "球迷") {
+      for (let i = 0; i < 20; i += 1) {
+        const candidate = randomNicknameCandidate(base);
+        const { data, error } = await this.client.from("profiles").select("id").eq("nickname", candidate).maybeSingle();
+        if (error) throw error;
+        if (!data) return candidate;
+      }
+      return normalizeNickname(`${base || "球迷"}${Date.now().toString().slice(-4)}`);
     }
 
     async createRoom(payload) {

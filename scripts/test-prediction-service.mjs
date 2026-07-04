@@ -43,4 +43,30 @@ await secondGuest.ensureProfile("小李");
 const codeRoom = await secondGuest.joinRoom(created.room.code);
 if (codeRoom.room.id !== created.room.id) throw new Error("Shared room code did not resolve to original room");
 
+values.clear();
+const nicknameOwner = window.PredictionService.create({});
+await nicknameOwner.ensureProfile("剑桥");
+await nicknameOwner.updateNickname("阿峰");
+const ownerProfile = await nicknameOwner.getProfile();
+if (ownerProfile.nickname !== "阿峰") throw new Error("Nickname update should overwrite the old nickname");
+
+localStorage.removeItem("world-cup-prediction-user-v1");
+const nicknameGuest = window.PredictionService.create({});
+let duplicateRejected = false;
+try {
+  await nicknameGuest.ensureProfile("阿峰");
+} catch (error) {
+  duplicateRejected = error?.code === "NICKNAME_TAKEN";
+}
+if (!duplicateRejected) throw new Error("Duplicate nickname should be rejected");
+
+const suggestedNickname = await nicknameGuest.generateAvailableNickname("阿峰");
+if (!suggestedNickname || suggestedNickname === "阿峰") throw new Error("Generated nickname should avoid existing nickname");
+await nicknameGuest.ensureProfile(suggestedNickname);
+
+await nicknameOwner.updateNickname("老王");
+await nicknameGuest.updateNickname("阿峰");
+const guestProfile = await nicknameGuest.getProfile();
+if (guestProfile.nickname !== "阿峰") throw new Error("Old nickname should be reusable after owner changes it");
+
 console.log(`Prediction flow passed: ${room.members.map((member) => member.nickname).join(", ")}`);

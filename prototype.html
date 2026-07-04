@@ -605,6 +605,12 @@
     .form-control { width: 100%; min-height: 42px; padding: 10px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--text); font: inherit; font-size: 13px; }
     textarea.form-control { min-height: 78px; resize: vertical; }
     .safety-note { margin: 12px 0; padding: 10px; border: 1px solid #f0d798; border-radius: 6px; color: #755514; background: #fff8e7; font-size: 11px; line-height: 1.5; }
+    .nickname-editor { display: grid; gap: 10px; }
+    .nickname-editor-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+    .nickname-editor-row button { min-height: 42px; white-space: nowrap; }
+    .nickname-message { min-height: 18px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .nickname-message.error { color: #ff7a7a; }
+    .nickname-message.success { color: var(--brand); }
 
     /* ── Dialog ── */
     .profile-dialog { width: min(340px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 8px; color: var(--text); background: var(--card); box-shadow: 0 24px 70px rgba(16,21,28,0.28); margin: auto; max-height: calc(100svh - var(--safe-top) - var(--safe-bottom) - 32px); }
@@ -1223,6 +1229,10 @@
       background: rgba(234,255,54,.08);
     }
 
+    .nickname-message.success {
+      color: var(--brand);
+    }
+
     .prophecy-poster,
     .champion-poster {
       background:
@@ -1706,6 +1716,15 @@
     <section class="view" id="mySocial">
       <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
       <header class="topbar"><p class="eyebrow">我的预测档案</p><h1>查看我的预测</h1><p class="sub">查看之前的预测、命中项和可保存的神预言海报。</p></header>
+      <article class="card nickname-editor">
+        <div class="section-title"><h2>我的昵称</h2><small id="profile-current-nickname">读取中</small></div>
+        <div class="nickname-editor-row">
+          <input class="form-control" id="profile-edit-nickname" maxlength="20" autocomplete="nickname" placeholder="输入新的预测昵称">
+          <button class="secondary" type="button" onclick="generateNicknameSuggestion()">随机生成</button>
+        </div>
+        <button type="button" onclick="saveEditedNickname()">保存新昵称</button>
+        <p class="nickname-message" id="profile-edit-message"></p>
+      </article>
       <div class="stats-grid" id="my-prediction-summary">
         <article class="card stat-card"><span class="sub">总预测</span><strong class="stat-value">--</strong></article>
         <article class="card stat-card"><span class="sub">已结算</span><strong class="stat-value">--</strong></article>
@@ -1736,6 +1755,7 @@
         <label for="profile-nickname">昵称</label>
         <input class="form-control" id="profile-nickname" name="nickname" maxlength="20" autocomplete="nickname" placeholder="例如：凌晨球迷" required>
       </div>
+      <p class="nickname-message" id="profile-form-message"></p>
       <div class="profile-actions">
         <button class="secondary" type="button" onclick="cancelProfile()">取消</button>
         <button type="submit">进入预测</button>
@@ -3470,6 +3490,98 @@
       window.localStorage.setItem("wechat_nickname", profile.nickname);
     }
 
+    function isNicknameTakenError(error) {
+      return error?.code === "NICKNAME_TAKEN" || /昵称.*使用|nickname.*taken/i.test(error?.message || "");
+    }
+
+    function fallbackNicknameSuggestion(base = "球迷") {
+      const cleanBase = String(base || "球迷").trim().replace(/[0-9A-Za-z]{2,}$/g, "") || "球迷";
+      return `${cleanBase}${Math.random().toString(36).slice(2, 6).toUpperCase()}`.slice(0, 20);
+    }
+
+    function setNicknameMessage(elementId, text = "", type = "") {
+      const message = document.getElementById(elementId);
+      if (!message) return;
+      message.textContent = text;
+      message.classList.toggle("error", type === "error");
+      message.classList.toggle("success", type === "success");
+    }
+
+    async function suggestAvailableNickname(base = "球迷") {
+      try {
+        if (predictionService?.generateAvailableNickname) {
+          return await predictionService.generateAvailableNickname(base);
+        }
+      } catch (error) {
+        console.warn("Generate nickname suggestion failed:", error);
+      }
+      return fallbackNicknameSuggestion(base);
+    }
+
+    async function saveProfileNickname(nickname) {
+      const cleanNickname = String(nickname || "").trim();
+      if (!cleanNickname) throw new Error("请先输入昵称");
+      let profile = {
+        nickname: cleanNickname,
+        avatar_text: Array.from(cleanNickname).slice(-1)[0] || "球",
+      };
+      if (predictionService) {
+        const cloudProfile = await (predictionService.updateNickname?.(cleanNickname) || predictionService.ensureProfile?.(cleanNickname));
+        profile = cloudProfile || profile;
+      }
+      writeLocalProfile(profile);
+      trackEvent("profile_saved", { nickname_set: true, updated: true });
+      return profile;
+    }
+
+    async function refreshNicknameEditor() {
+      const currentEl = document.getElementById("profile-current-nickname");
+      const input = document.getElementById("profile-edit-nickname");
+      let profile = readLocalProfile();
+      try {
+        const cloudProfile = await predictionService?.getProfile?.();
+        if (cloudProfile?.nickname) {
+          profile = cloudProfile;
+          writeLocalProfile(cloudProfile);
+        }
+      } catch (error) {
+        console.warn("Refresh profile failed:", error);
+      }
+      const nickname = profile?.nickname || window.localStorage.getItem("wechat_nickname") || "";
+      if (currentEl) currentEl.textContent = nickname ? `当前：${nickname}` : "未设置";
+      if (input && !input.value) input.value = nickname;
+    }
+
+    window.generateNicknameSuggestion = async function generateNicknameSuggestion() {
+      const input = document.getElementById("profile-edit-nickname");
+      const base = input?.value || readLocalProfile()?.nickname || "球迷";
+      const suggestion = await suggestAvailableNickname(base);
+      if (input) input.value = suggestion;
+      setNicknameMessage("profile-edit-message", `已生成可用昵称：${suggestion}`, "success");
+    };
+
+    window.saveEditedNickname = async function saveEditedNickname() {
+      const input = document.getElementById("profile-edit-nickname");
+      const nickname = input?.value?.trim();
+      if (!nickname) {
+        setNicknameMessage("profile-edit-message", "请先输入一个昵称。", "error");
+        return;
+      }
+      try {
+        const profile = await saveProfileNickname(nickname);
+        setNicknameMessage("profile-edit-message", `昵称已更新为：${profile.nickname}`, "success");
+        await refreshNicknameEditor();
+        showToast("昵称已更新");
+      } catch (error) {
+        if (isNicknameTakenError(error)) {
+          const suggestion = await suggestAvailableNickname(nickname);
+          setNicknameMessage("profile-edit-message", `这个昵称已经被使用了，请换一个昵称，或使用：${suggestion}`, "error");
+          return;
+        }
+        setNicknameMessage("profile-edit-message", error?.message || "昵称保存失败，请稍后重试。", "error");
+      }
+    };
+
     function urlWithoutWechatOauthParams() {
       const url = new URL(window.location.href);
       url.searchParams.delete("code");
@@ -3509,6 +3621,12 @@
             try {
               await predictionService?.ensureProfile?.(profile.nickname);
             } catch (error) {
+              if (isNicknameTakenError(error)) {
+                const suggestion = await suggestAvailableNickname(profile.nickname);
+                const suggestedProfile = await predictionService?.ensureProfile?.(suggestion);
+                writeLocalProfile(suggestedProfile || { ...profile, nickname: suggestion, avatar_text: Array.from(suggestion).slice(-1)[0] || "球" });
+                return readLocalProfile();
+              }
               console.warn("Cloud profile sync after WeChat OAuth failed:", error);
             }
             return profile;
@@ -3572,13 +3690,30 @@
         return profile;
       }
       if (localProfile?.nickname) {
-        predictionService.ensureProfile?.(localProfile.nickname).catch((e) => console.warn("Background profile sync failed:", e));
+        try {
+          const syncedProfile = await predictionService.ensureProfile?.(localProfile.nickname);
+          if (syncedProfile?.nickname) writeLocalProfile(syncedProfile);
+          return syncedProfile || localProfile;
+        } catch (error) {
+          if (isNicknameTakenError(error)) {
+            const suggestion = await suggestAvailableNickname(localProfile.nickname);
+            return new Promise((resolve) => {
+              pendingProfileResolver = resolve;
+              const input = document.getElementById("profile-nickname");
+              if (input) input.value = suggestion;
+              setNicknameMessage("profile-form-message", `原昵称已被使用，请换一个昵称，或使用：${suggestion}`, "error");
+              document.getElementById("profile-dialog").showModal();
+            });
+          }
+          console.warn("Background profile sync failed:", error);
+        }
         return localProfile;
       }
       return new Promise((resolve) => {
         pendingProfileResolver = resolve;
         const input = document.getElementById("profile-nickname");
         if (input && !input.value) input.value = suggestedWechatNickname();
+        setNicknameMessage("profile-form-message", "", "");
         document.getElementById("profile-dialog").showModal();
       });
     };
@@ -4081,6 +4216,149 @@
       ctx.fillText(text, x + 32, y + 47);
     }
 
+    let posterTemplateIndexCache = null;
+
+    function loadCanvasImage(src) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.crossOrigin = "anonymous";
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+      });
+    }
+
+    async function loadPosterTemplateIndex() {
+      if (posterTemplateIndexCache) return posterTemplateIndexCache;
+      try {
+        const response = await fetch("assets/poster-templates/index.json", { cache: "no-cache" });
+        if (!response.ok) throw new Error(`template index ${response.status}`);
+        const data = await response.json();
+        posterTemplateIndexCache = Array.isArray(data) ? data : [];
+      } catch (error) {
+        console.warn("Load poster template index failed:", error);
+        posterTemplateIndexCache = [];
+      }
+      return posterTemplateIndexCache;
+    }
+
+    function posterTeamSlug(name) {
+      return String(name || "")
+        .toLowerCase()
+        .replace(/cabo verde/g, "cape verde")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function findPosterTemplateSet(index, match) {
+      if (!match) return null;
+      const home = posterTeamSlug(match.homeTeam);
+      const away = posterTeamSlug(match.awayTeam);
+      const pair = `${home}-vs-${away}`;
+      const reversePair = `${away}-vs-${home}`;
+      const homeCn = displayTeamName(match.homeTeam);
+      const awayCn = displayTeamName(match.awayTeam);
+      return index.find((item) => {
+        const id = posterTeamSlug(item.matchId || item.dir || "");
+        const label = String(item.matchLabel || "");
+        return id.includes(pair) || id.includes(reversePair) || (label.includes(homeCn) && label.includes(awayCn));
+      }) || null;
+    }
+
+    function posterHeadline(templateSet, nickname, hits, totalChecks) {
+      const logic = templateSet?.headlineLogic || {};
+      let pattern = "太厉害了，{nickname}又神预言了 {correctCount} 项";
+      if (hits > 0 && totalChecks > 0 && hits >= totalChecks && logic.all) pattern = logic.all;
+      else if (hits >= 4 && logic["4+"]) pattern = logic["4+"];
+      else if (hits >= 2 && logic["2-3"]) pattern = logic["2-3"];
+      else if (hits === 1 && logic["1"]) pattern = logic["1"];
+      return pattern
+        .replace(/\{nickname\}/g, nickname || "我")
+        .replace(/\{correctCount\}/g, String(hits || 0));
+    }
+
+    function drawTemplatePosterText(ctx, payload) {
+      const W = ctx.canvas.width;
+      const H = ctx.canvas.height;
+      const scale = W / 900;
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,.52)";
+      ctx.shadowBlur = 18 * scale;
+      ctx.fillStyle = "#fff";
+      ctx.font = `900 ${Math.round(66 * scale)}px Arial, PingFang SC, sans-serif`;
+      canvasWrapText(ctx, payload.headline, W * 0.075, H * 0.115, W * 0.85, 78 * scale, 3);
+      ctx.restore();
+
+      const cardX = W * 0.075;
+      const cardY = H * 0.305;
+      const cardW = W * 0.85;
+      const cardH = H * 0.335;
+      drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 34 * scale);
+      ctx.fillStyle = "rgba(3,12,24,.72)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,226,138,.72)";
+      ctx.lineWidth = Math.max(2, 3 * scale);
+      ctx.stroke();
+
+      ctx.fillStyle = "#ffe28a";
+      ctx.font = `900 ${Math.round(28 * scale)}px Arial, PingFang SC, sans-serif`;
+      ctx.fillText(`${payload.matchLabel}｜${payload.resultText}`, cardX + 34 * scale, cardY + 52 * scale);
+
+      ctx.fillStyle = "#00f5d2";
+      ctx.font = `900 ${Math.round(34 * scale)}px Arial, PingFang SC, sans-serif`;
+      ctx.fillText(`本场命中 ${payload.hits || 0} 项`, cardX + 34 * scale, cardY + 106 * scale);
+
+      const items = payload.hitLabels?.length ? payload.hitLabels : ["这场暂未命中，下一场继续挑战"];
+      const rowH = 58 * scale;
+      items.slice(0, 4).forEach((item, index) => {
+        const y = cardY + 135 * scale + index * (rowH + 12 * scale);
+        drawRoundedRect(ctx, cardX + 34 * scale, y, cardW - 68 * scale, rowH, 22 * scale);
+        ctx.fillStyle = payload.hitLabels?.length ? "rgba(0,245,210,.18)" : "rgba(255,255,255,.12)";
+        ctx.fill();
+        ctx.fillStyle = payload.hitLabels?.length ? "#dfff47" : "rgba(255,255,255,.72)";
+        ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
+        ctx.fillText(payload.hitLabels?.length ? "✓" : "·", cardX + 58 * scale, y + 38 * scale);
+        ctx.fillStyle = "#fff";
+        ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
+        canvasWrapText(ctx, item, cardX + 100 * scale, y + 38 * scale, cardW - 160 * scale, 28 * scale, 1);
+      });
+
+      drawRoundedRect(ctx, W * 0.09, H * 0.665, W * 0.36, H * 0.078, 24 * scale);
+      ctx.fillStyle = "rgba(255,226,138,.92)";
+      ctx.fill();
+      ctx.fillStyle = "#07121f";
+      ctx.font = `900 ${Math.round(42 * scale)}px Arial, PingFang SC, sans-serif`;
+      ctx.fillText(`${payload.points || 0} 分`, W * 0.135, H * 0.715);
+
+      ctx.fillStyle = "#fff";
+      ctx.font = `900 ${Math.round(32 * scale)}px Arial, PingFang SC, sans-serif`;
+      ctx.fillText(payload.rankText || "预测战报", W * 0.5, H * 0.695);
+      ctx.fillStyle = "rgba(255,255,255,.82)";
+      ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
+      canvasWrapText(ctx, payload.cta || "下一场，敢来和我预测PK吗？", W * 0.5, H * 0.73, W * 0.42, 30 * scale, 2);
+    }
+
+    async function tryDrawTemplateProphecyPoster(canvas, payload) {
+      const index = await loadPosterTemplateIndex();
+      const templateSet = findPosterTemplateSet(index, payload.match);
+      const templates = templateSet?.templates || [];
+      if (!templateSet || !templates.length) return false;
+      const template = templates[Math.floor(Math.random() * templates.length)];
+      const imagePath = `assets/poster-templates/${templateSet.dir}/${template.file}`;
+      const image = await loadCanvasImage(imagePath);
+      canvas.width = image.naturalWidth || image.width;
+      canvas.height = image.naturalHeight || image.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const totalChecks = payload.details?.filter((item) => item.status !== "pending").length || payload.hitLabels?.length || 0;
+      drawTemplatePosterText(ctx, {
+        ...payload,
+        headline: posterHeadline(templateSet, payload.nickname, payload.hits, totalChecks),
+        matchLabel: templateSet.matchLabel || `${displayTeamName(payload.match.homeTeam)} VS ${displayTeamName(payload.match.awayTeam)}`,
+      });
+      return true;
+    }
+
     window.generateProphecyPoster = async function generateProphecyPoster(btn) {
       try {
         if (!currentPredictionRoomId || !predictionService) {
@@ -4096,6 +4374,27 @@
         const settlement = lastFinalSettlement?.room?.id === room.id ? lastFinalSettlement : buildFinalSettlement(room, match);
         const me = settlement.rows.find((row) => row.is_me) || settlement.rows[0] || { nickname: "我", points: 0, hits: 0, hitLabels: [] };
         const canvas = document.createElement("canvas");
+        const rank = settlement.rows.indexOf(me) + 1 || "--";
+        if (await tryDrawTemplateProphecyPoster(canvas, {
+          match,
+          nickname: me.nickname || "我",
+          hits: me.hits || 0,
+          hitLabels: me.hitLabels || [],
+          details: me.details || [],
+          points: me.points || 0,
+          resultText: `${match.homeScore} - ${match.awayScore}`,
+          rankText: `本房第 ${rank} 名`,
+          cta: "下一场，敢来和我预测PK吗？",
+        })) {
+          const image = document.getElementById("poster-preview-image");
+          const preview = document.getElementById("poster-preview");
+          if (image && preview) {
+            image.src = canvas.toDataURL("image/png");
+            preview.hidden = false;
+          }
+          if (btn) btn.textContent = "已生成神预言海报";
+          return;
+        }
         canvas.width = 900;
         canvas.height = 1600;
         const ctx = canvas.getContext("2d");
@@ -4168,7 +4467,6 @@
         ctx.fillText("分", 290, 1358);
         ctx.fillStyle = "#fff";
         ctx.font = "800 32px Arial, PingFang SC, sans-serif";
-        const rank = settlement.rows.indexOf(me) + 1 || "--";
         ctx.fillText(`本房第 ${rank} 名`, 470, 1325);
         ctx.fillText(`击败 ${Math.max((settlement.rows.length || 1) - rank, 0)} 位好友`, 470, 1380);
 
@@ -4350,6 +4648,26 @@
       }
       const score = scorePredictionAgainstMatch(item.prediction, match);
       const canvas = document.createElement("canvas");
+      if (await tryDrawTemplateProphecyPoster(canvas, {
+        match,
+        nickname: item.nickname || "我",
+        hits: score.hits || 0,
+        hitLabels: score.hitLabels || [],
+        details: score.details || [],
+        points: score.points || 0,
+        resultText: `${match.homeScore} - ${match.awayScore}`,
+        rankText: item.source === "room" ? "PK房预测" : "个人预测",
+        cta: "下一场，敢来和我预测PK吗？",
+      })) {
+        const image = document.getElementById("poster-preview-image");
+        const preview = document.getElementById("poster-preview");
+        if (image && preview) {
+          image.src = canvas.toDataURL("image/png");
+          preview.hidden = false;
+        }
+        if (btn) btn.textContent = "已生成神预言海报";
+        return;
+      }
       canvas.width = 900;
       canvas.height = 1600;
       const ctx = canvas.getContext("2d");
@@ -4829,6 +5147,7 @@
         void refreshLeaderboard();
       }
       if (id === "mySocial") {
+        void refreshNicknameEditor();
         void renderMyPredictionResults();
       }
       if (id === "schedule") {
@@ -4952,21 +5271,21 @@
         event.preventDefault();
         const nickname = document.getElementById("profile-nickname").value.trim();
         if (!nickname) return;
-        let profile = {
-          nickname,
-          avatar_text: Array.from(nickname).slice(-1)[0] || "球",
-        };
         try {
-          const cloudProfile = await predictionService.ensureProfile(nickname);
-          profile = cloudProfile || profile;
+          const profile = await saveProfileNickname(nickname);
+          writeLocalProfile(profile);
+          document.getElementById("profile-dialog").close();
+          pendingProfileResolver?.(profile);
+          pendingProfileResolver = null;
         } catch (e) {
-          console.warn("Cloud profile save failed, using local profile:", e);
-          showToast("已保存昵称，可继续预测");
+          if (isNicknameTakenError(e)) {
+            const suggestion = await suggestAvailableNickname(nickname);
+            setNicknameMessage("profile-form-message", `这个昵称已经被使用了，请换一个昵称，或使用：${suggestion}`, "error");
+            return;
+          }
+          console.warn("Cloud profile save failed:", e);
+          setNicknameMessage("profile-form-message", e?.message || "昵称保存失败，请稍后重试。", "error");
         }
-        writeLocalProfile(profile);
-        document.getElementById("profile-dialog").close();
-        pendingProfileResolver?.(profile);
-        pendingProfileResolver = null;
       });
       document.getElementById("profile-dialog").addEventListener("cancel", (event) => {
         event.preventDefault();

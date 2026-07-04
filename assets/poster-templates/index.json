@@ -1,0 +1,50 @@
+[
+  {
+    "dir": "20260704-argentina-vs-cape-verde",
+    "matchId": "20260704-argentina-vs-cape-verde",
+    "matchLabel": "阿根廷 VS 佛得角",
+    "templates": [
+      { "id": "template-1", "file": "template-1.png", "style": "memphis-duotone" },
+      { "id": "template-2", "file": "template-2.png", "style": "pop-art-halftone" },
+      { "id": "template-3", "file": "template-3.png", "style": "diffuse-aurora" }
+    ],
+    "headlineLogic": {
+      "1": "看准了，{nickname}在这场比赛中命中了 1 项",
+      "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+      "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+      "all": "封神了，{nickname}全场命中"
+    }
+  },
+  {
+    "dir": "20260704-australia-vs-egypt",
+    "matchId": "20260704-australia-vs-egypt",
+    "matchLabel": "澳大利亚 VS 埃及",
+    "templates": [
+      { "id": "template-1", "file": "template-1.png", "style": "diffuse-aurora" },
+      { "id": "template-2", "file": "template-2.png", "style": "memphis-duotone" },
+      { "id": "template-3", "file": "template-3.png", "style": "pop-art-halftone" }
+    ],
+    "headlineLogic": {
+      "1": "看准了，{nickname}命中了 1 项",
+      "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+      "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+      "all": "封神了，{nickname}全场命中"
+    }
+  },
+  {
+    "dir": "20260704-colombia-vs-ghana",
+    "matchId": "20260704-colombia-vs-ghana",
+    "matchLabel": "哥伦比亚 VS 加纳",
+    "templates": [
+      { "id": "template-1", "file": "template-1.png", "style": "diffuse-aurora" },
+      { "id": "template-2", "file": "template-2.png", "style": "memphis-duotone" },
+      { "id": "template-3", "file": "template-3.png", "style": "pop-art-halftone" }
+    ],
+    "headlineLogic": {
+      "1": "看准了，{nickname}命中了 1 项",
+      "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+      "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+      "all": "封神了，{nickname}全场命中"
+    }
+  }
+]

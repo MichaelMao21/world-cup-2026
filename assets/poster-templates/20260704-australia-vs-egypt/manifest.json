@@ -1,0 +1,85 @@
+{
+  "matchId": "20260704-australia-vs-egypt",
+  "matchLabel": "澳大利亚 VS 埃及",
+  "stage": "32强淘汰赛",
+  "venue": "Dallas Stadium",
+  "matchTime": "2026-07-04 02:00 ET",
+  "result": "Egypt wins (PSO 4-2 / 1-1 after 90+30min)",
+  "winner": "Egypt",
+  "keyMoment": "Egypt's first-ever World Cup knockout win; Hossam Abdelmaguid clinching penalty",
+  "qrEmbedded": true,
+  "qrNote": "QR pre-embedded ~76%-96% vertically, horizontally centered. Do NOT overlay additional QR.",
+  "templates": [
+    {
+      "id": "template-1",
+      "file": "template-1.png",
+      "style": "diffuse-aurora",
+      "size": "1003x1568",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR",
+        "qr": "pre-embedded bottom 25%"
+      }
+    },
+    {
+      "id": "template-2",
+      "file": "template-2.png",
+      "style": "memphis-duotone",
+      "size": "1728x2304",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR",
+        "qr": "pre-embedded bottom 25%"
+      }
+    },
+    {
+      "id": "template-3",
+      "file": "template-3.png",
+      "style": "pop-art-halftone",
+      "size": "1728x2304",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR",
+        "qr": "pre-embedded bottom 25%"
+      }
+    }
+  ],
+  "references": [
+    {
+      "file": "reference-1.png",
+      "note": "Egypt player celebrating penalty win — main composition reference"
+    },
+    {
+      "file": "reference-2.png",
+      "note": "Match action shot"
+    },
+    {
+      "file": "reference-3.png",
+      "note": "Extra time atmosphere"
+    }
+  ],
+  "overlayFields": {
+    "nickname": "string",
+    "matchLabel": "string",
+    "correctCount": "integer",
+    "correctItems": "string[]",
+    "points": "integer",
+    "beatText": "string",
+    "cta": "string"
+  },
+  "headlineLogic": {
+    "1": "看准了，{nickname}命中了 1 项",
+    "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+    "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+    "all": "封神了，{nickname}全场命中"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "matchId": "20260704-argentina-vs-cape-verde",
+  "matchLabel": "阿根廷 VS 佛得角",
+  "stage": "32强淘汰赛",
+  "venue": "Miami Stadium",
+  "matchTime": "2026-07-04 18:00 ET",
+  "result": "Argentina wins (AET)",
+  "keyMoment": "Messi 20th World Cup goal (29')",
+  "qrEmbedded": true,
+  "qrNote": "QR code pre-embedded at bottom ~76%-96% vertically, horizontally centered. Do NOT overlay additional QR.",
+  "templates": [
+    {
+      "id": "template-1",
+      "file": "template-1.png",
+      "style": "memphis-duotone",
+      "size": "1728x2304",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR area",
+        "qr": "pre-embedded bottom 25%"
+      }
+    },
+    {
+      "id": "template-2",
+      "file": "template-2.png",
+      "style": "pop-art-halftone",
+      "size": "1024x1536",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR area",
+        "qr": "pre-embedded bottom 25%"
+      }
+    },
+    {
+      "id": "template-3",
+      "file": "template-3.png",
+      "style": "diffuse-aurora",
+      "size": "1024x1536",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "top 20%",
+        "correctItems": "middle 45%",
+        "score": "lower middle",
+        "cta": "above QR area",
+        "qr": "pre-embedded bottom 25%"
+      }
+    }
+  ],
+  "references": [
+    {
+      "file": "reference-1.png",
+      "note": "Main composition reference — high-res Messi celebration, base image for all templates"
+    },
+    {
+      "file": "reference-2.png",
+      "note": "Secondary shot — Messi in action, alternate framing"
+    },
+    {
+      "file": "reference-3.png",
+      "note": "Match atmosphere — editorial wide-angle shot"
+    }
+  ],
+  "overlayFields": {
+    "nickname": "string",
+    "matchLabel": "string",
+    "correctCount": "integer",
+    "correctItems": "string[]",
+    "points": "integer",
+    "beatText": "string",
+    "cta": "string"
+  },
+  "headlineLogic": {
+    "1": "看准了，{nickname}在这场比赛中命中了 1 项",
+    "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+    "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+    "all": "封神了，{nickname}全场命中"
+  }
+}

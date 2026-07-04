@@ -14,6 +14,7 @@ await cp(resolve("data/prototype-data.js"), resolve(output, "data/prototype-data
 await cp(resolve("js/prediction-service.js"), resolve(output, "js/prediction-service.js"));
 await cp(resolve("assets/share-card.png"), resolve(output, "assets/share-card.png"));
 await cp(resolve("assets/share-thumb.png"), resolve(output, "assets/share-thumb.png"));
+await cp(resolve("assets/poster-templates"), resolve(output, "assets/poster-templates"), { recursive: true });
 
 const rootFiles = await readdir(".");
 for (const file of rootFiles.filter((name) => /^MP_verify_.+\.txt$/.test(name))) {
