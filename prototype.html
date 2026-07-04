@@ -611,6 +611,8 @@
     .nickname-message { min-height: 18px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
     .nickname-message.error { color: #ff7a7a; }
     .nickname-message.success { color: var(--brand); }
+    .profile-inline { align-items: center; margin: 4px 0 14px; }
+    .profile-inline button { min-height: 36px; padding: 8px 12px; }
 
     /* ── Dialog ── */
     .profile-dialog { width: min(340px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 8px; color: var(--text); background: var(--card); box-shadow: 0 24px 70px rgba(16,21,28,0.28); margin: auto; max-height: calc(100svh - var(--safe-top) - var(--safe-bottom) - 32px); }
@@ -1716,15 +1718,7 @@
     <section class="view" id="mySocial">
       <div class="page-back-actions"><button class="back" onclick="goPreviousView()">返回上一页</button><button class="back" onclick="showView('home', true)">回到首页</button></div>
       <header class="topbar"><p class="eyebrow">我的预测档案</p><h1>查看我的预测</h1><p class="sub">查看之前的预测、命中项和可保存的神预言海报。</p></header>
-      <article class="card nickname-editor">
-        <div class="section-title"><h2>我的昵称</h2><small id="profile-current-nickname">读取中</small></div>
-        <div class="nickname-editor-row">
-          <input class="form-control" id="profile-edit-nickname" maxlength="20" autocomplete="nickname" placeholder="输入新的预测昵称">
-          <button class="secondary" type="button" onclick="generateNicknameSuggestion()">随机生成</button>
-        </div>
-        <button type="button" onclick="saveEditedNickname()">保存新昵称</button>
-        <p class="nickname-message" id="profile-edit-message"></p>
-      </article>
+      <div class="section-title profile-inline"><div><h2>我的身份</h2><small id="profile-current-nickname-label">读取中</small></div><button class="secondary" type="button" onclick="openNicknameEditor()">修改昵称</button></div>
       <div class="stats-grid" id="my-prediction-summary">
         <article class="card stat-card"><span class="sub">总预测</span><strong class="stat-value">--</strong></article>
         <article class="card stat-card"><span class="sub">已结算</span><strong class="stat-value">--</strong></article>
@@ -1759,6 +1753,23 @@
       <div class="profile-actions">
         <button class="secondary" type="button" onclick="cancelProfile()">取消</button>
         <button type="submit">进入预测</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog class="profile-dialog" id="nickname-edit-dialog">
+    <form method="dialog" id="nickname-edit-form">
+      <p class="eyebrow">预测身份</p>
+      <h2>修改昵称</h2>
+      <p class="sub">昵称会覆盖旧昵称；每个昵称只能被一个用户使用。</p>
+      <div class="section-title"><h3>当前昵称</h3><small id="profile-current-nickname">读取中</small></div>
+      <div class="form-group">
+        <label for="profile-edit-nickname">新昵称</label>
+        <input class="form-control" id="profile-edit-nickname" maxlength="20" autocomplete="nickname" placeholder="输入新的预测昵称">
+      </div>
+      <p class="nickname-message" id="profile-edit-message"></p>
+      <div class="profile-actions">
+        <button class="secondary" type="button" onclick="generateNicknameSuggestion()">随机生成</button>
+        <button type="button" onclick="saveEditedNickname()">保存新昵称</button>
       </div>
     </form>
   </dialog>
@@ -3536,6 +3547,7 @@
 
     async function refreshNicknameEditor() {
       const currentEl = document.getElementById("profile-current-nickname");
+      const currentLabelEl = document.getElementById("profile-current-nickname-label");
       const input = document.getElementById("profile-edit-nickname");
       let profile = readLocalProfile();
       try {
@@ -3549,8 +3561,17 @@
       }
       const nickname = profile?.nickname || window.localStorage.getItem("wechat_nickname") || "";
       if (currentEl) currentEl.textContent = nickname ? `当前：${nickname}` : "未设置";
+      if (currentLabelEl) currentLabelEl.textContent = nickname ? `当前：${nickname}` : "未设置";
       if (input && !input.value) input.value = nickname;
     }
+
+    window.openNicknameEditor = async function openNicknameEditor() {
+      setNicknameMessage("profile-edit-message", "", "");
+      const input = document.getElementById("profile-edit-nickname");
+      if (input) input.value = "";
+      await refreshNicknameEditor();
+      document.getElementById("nickname-edit-dialog")?.showModal();
+    };
 
     window.generateNicknameSuggestion = async function generateNicknameSuggestion() {
       const input = document.getElementById("profile-edit-nickname");
@@ -3572,6 +3593,7 @@
         setNicknameMessage("profile-edit-message", `昵称已更新为：${profile.nickname}`, "success");
         await refreshNicknameEditor();
         showToast("昵称已更新");
+        document.getElementById("nickname-edit-dialog")?.close();
       } catch (error) {
         if (isNicknameTakenError(error)) {
           const suggestion = await suggestAvailableNickname(nickname);
