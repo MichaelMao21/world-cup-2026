@@ -1,0 +1,66 @@
+# World Cup 2026 match polling (system crontab)
+# Poll script runs every 5 min for 2.5h and auto-publishes
+
+# Thursday 25 June 2026 - 6 matches
+0 11 25 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Thursday 25 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Friday 26 June 2026 - 6 matches
+0 12 26 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Friday 26 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Saturday 27 June 2026 - 6 matches
+0 13 27 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Saturday 27 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Sunday 28 June 2026 - 6 matches
+0 12 28 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Sunday 28 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Monday 29 June 2026 - 1 matches
+0 5 29 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Monday 29 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Tuesday 30 June 2026 - 3 matches
+0 11 30 6 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Tuesday 30 June 2026" >> ~/world-cup-cron.log 2>&1
+
+# Wednesday 01 July 2026 - 3 matches
+0 11 01 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Wednesday 01 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Thursday 02 July 2026 - 3 matches
+0 10 02 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Thursday 02 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Friday 03 July 2026 - 3 matches
+0 13 03 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Friday 03 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Saturday 04 July 2026 - 3 matches
+30 11 04 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Saturday 04 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Sunday 05 July 2026 - 2 matches
+0 7 05 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Sunday 05 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Monday 06 July 2026 - 2 matches
+0 10 06 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Monday 06 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Tuesday 07 July 2026 - 2 matches
+0 10 07 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Tuesday 07 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Wednesday 08 July 2026 - 2 matches
+0 6 08 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Wednesday 08 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Friday 10 July 2026 - 1 matches
+0 6 10 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Friday 10 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Saturday 11 July 2026 - 1 matches
+0 5 11 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Saturday 11 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Sunday 12 July 2026 - 2 matches
+0 11 12 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Sunday 12 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Wednesday 15 July 2026 - 1 matches
+0 5 15 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Wednesday 15 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Thursday 16 July 2026 - 1 matches
+0 5 16 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Thursday 16 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Sunday 19 July 2026 - 1 matches
+0 7 19 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Sunday 19 July 2026" >> ~/world-cup-cron.log 2>&1
+
+# Monday 20 July 2026 - 1 matches
+0 5 20 7 * cd /Users/maozhan/Documents/VB-世界杯观赛指南 && bash scripts/poll-match-results.sh "Monday 20 July 2026" >> ~/world-cup-cron.log 2>&1
+

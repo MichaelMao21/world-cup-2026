@@ -1,0 +1,20 @@
+.DS_Store
+dist/
+node_modules/
+downloads/
+.claude/
+.frontend-slides/
+.github-pages/
+
+# Local logs and temporary files
+*.log
+*.tmp
+.env
+.env.*
+
+# Local screenshots / auth helpers
+lark-auth-send-message.png
+
+# OS/editor noise
+.idea/
+.vscode/

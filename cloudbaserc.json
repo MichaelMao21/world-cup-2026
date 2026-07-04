@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "worldcup2026-d7gfmdarw394a4109",
+  "functionRoot": "functions",
+  "functions": [
+    {
+      "name": "syncMatchResults",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 60,
+      "memorySize": 256,
+      "description": "Sync FIFA World Cup match results into CloudBase database",
+      "envVariables": {
+        "CLOUDBASE_ENV_ID": "worldcup2026-d7gfmdarw394a4109"
+      },
+      "triggers": [
+        {
+          "name": "every5Minutes",
+          "type": "timer",
+          "config": "0 */5 * * * * *"
+        }
+      ]
+    },
+    {
+      "name": "wechatShareConfig",
+      "runtime": "Nodejs20.19",
+      "handler": "index.main",
+      "timeout": 10,
+      "memorySize": 128,
+      "description": "Generate WeChat JS-SDK share signature",
+      "envVariables": {
+        "WECHAT_APP_ID": "wx394b4d5d5bd16947"
+      }
+    }
+  ]
+}

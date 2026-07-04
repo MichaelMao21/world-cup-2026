@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102b25"/>
+      <stop offset="0.56" stop-color="#0b6b52"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="26%" cy="14%" r="58%">
+      <stop offset="0" stop-color="#ffc549" stop-opacity="0.56"/>
+      <stop offset="1" stop-color="#ffc549" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="28" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1080" height="1920" fill="url(#bg)"/>
+  <rect width="1080" height="1920" fill="url(#glow)"/>
+  <circle cx="918" cy="172" r="210" fill="#1cc99a" opacity="0.14"/>
+  <circle cx="82" cy="1680" r="260" fill="#ffc549" opacity="0.1"/>
+
+  <text x="78" y="110" fill="#d7fff2" font-size="34" font-weight="700">世界杯观赛指南</text>
+  <text x="78" y="164" fill="#ffc549" font-size="26" font-weight="700">2026 · 预测PK</text>
+
+  <g filter="url(#shadow)">
+    <rect x="70" y="245" width="940" height="1290" rx="42" fill="#ffffff" opacity="0.1"/>
+    <rect x="70" y="245" width="940" height="1290" rx="42" fill="none" stroke="#ffffff" stroke-opacity="0.18"/>
+  </g>
+
+  <circle cx="170" cy="365" r="56" fill="#ffc549"/>
+  <text x="170" y="386" text-anchor="middle" fill="#143d32" font-size="46" font-weight="900">峰</text>
+  <text x="248" y="345" fill="#ffffff" font-size="34" font-weight="800">阿峰</text>
+  <text x="248" y="392" fill="#d7fff2" font-size="26">又一次命中关键预测</text>
+
+  <text x="78" y="540" fill="#ffffff" font-size="76" font-weight="900">太厉害了</text>
+  <text x="78" y="632" fill="#ffffff" font-size="76" font-weight="900">又神预言了 4 项</text>
+  <text x="78" y="704" fill="#d7fff2" font-size="30">猜中就生成你的世界杯高光海报</text>
+
+  <rect x="116" y="785" width="848" height="156" rx="30" fill="#0b2f28" opacity="0.72"/>
+  <text x="244" y="858" text-anchor="middle" fill="#ffffff" font-size="42" font-weight="900">🇵🇹 葡萄牙</text>
+  <text x="540" y="866" text-anchor="middle" fill="#ffc549" font-size="38" font-weight="900">VS</text>
+  <text x="836" y="858" text-anchor="middle" fill="#ffffff" font-size="42" font-weight="900">🇺🇿 乌兹别克斯坦</text>
+  <text x="540" y="910" text-anchor="middle" fill="#d7fff2" font-size="24">小组赛 K组 · Houston Stadium</text>
+
+  <g font-size="30" fill="#ffffff">
+    <rect x="116" y="1016" width="848" height="82" rx="22" fill="#ffffff" opacity="0.13"/>
+    <text x="158" y="1068" font-weight="900" fill="#ffc549">命中 A</text>
+    <text x="286" y="1068">上半场葡萄牙领先</text>
+    <rect x="116" y="1122" width="848" height="82" rx="22" fill="#ffffff" opacity="0.13"/>
+    <text x="158" y="1174" font-weight="900" fill="#ffc549">命中 B</text>
+    <text x="286" y="1174">上半场总进球 0-1 球</text>
+    <rect x="116" y="1228" width="848" height="82" rx="22" fill="#ffffff" opacity="0.13"/>
+    <text x="158" y="1280" font-weight="900" fill="#ffc549">命中 C</text>
+    <text x="286" y="1280">全场葡萄牙获胜</text>
+    <rect x="116" y="1334" width="848" height="82" rx="22" fill="#ffffff" opacity="0.13"/>
+    <text x="158" y="1386" font-weight="900" fill="#ffc549">命中 D</text>
+    <text x="286" y="1386">全场黄牌 3-5 张</text>
+  </g>
+
+  <text x="78" y="1630" fill="#ffc549" font-size="86" font-weight="900">125 分</text>
+  <text x="78" y="1684" fill="#ffffff" font-size="30">击败 5 位好友 · 超越 92% 预测者</text>
+  <text x="78" y="1736" fill="#d7fff2" font-size="30">下一场，敢来和我预测PK吗？</text>
+
+  <rect x="816" y="1596" width="158" height="158" rx="22" fill="#ffffff"/>
+  <text x="895" y="1662" text-anchor="middle" fill="#0b6b52" font-size="24" font-weight="900">扫码</text>
+  <text x="895" y="1702" text-anchor="middle" fill="#0b6b52" font-size="24" font-weight="900">来PK</text>
+  <text x="78" y="1832" fill="#ffffff" opacity="0.62" font-size="24">今晚预测一下？猜中就生成你的世界杯高光海报</text>
+</svg>

@@ -1,0 +1,5128 @@
+{
+  "sourceName": "FIFA official website",
+  "scrapedAt": "2026-06-29T14:44:16.376Z",
+  "note": "This file contains public factual candidates from FIFA official pages/API candidates. Review manually before publishing. If players is empty, FIFA did not expose squad data through the checked public sources.",
+  "sources": [
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285026",
+      "type": "api",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "type": "api",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "type": "api",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026",
+      "type": "page",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams",
+      "type": "page",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "type": "page",
+      "ok": true,
+      "status": 200
+    }
+  ],
+  "counts": {
+    "teams": 0,
+    "players": 0,
+    "matches": 564
+  },
+  "teams": [],
+  "players": [],
+  "matches": [
+    {
+      "id": "fifa-match-400128082",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128082",
+      "date": "2022-11-20T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "QAT",
+      "awayTeam": "ECU"
+    },
+    {
+      "id": "fifa-match-400235458",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235458",
+      "date": "2022-11-21T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "IRN"
+    },
+    {
+      "id": "fifa-match-400235449",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235449",
+      "date": "2022-11-21T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SEN",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-400235455",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235455",
+      "date": "2022-11-21T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "WAL"
+    },
+    {
+      "id": "fifa-match-400235461",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235461",
+      "date": "2022-11-22T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "KSA"
+    },
+    {
+      "id": "fifa-match-400235466",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235466",
+      "date": "2022-11-22T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "DEN",
+      "awayTeam": "TUN"
+    },
+    {
+      "id": "fifa-match-400235463",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235463",
+      "date": "2022-11-22T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-400235470",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235470",
+      "date": "2022-11-22T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "AUS"
+    },
+    {
+      "id": "fifa-match-400235481",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235481",
+      "date": "2022-11-23T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "CRO"
+    },
+    {
+      "id": "fifa-match-400235476",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235476",
+      "date": "2022-11-23T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "JPN"
+    },
+    {
+      "id": "fifa-match-400235472",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235472",
+      "date": "2022-11-23T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "CRC"
+    },
+    {
+      "id": "fifa-match-400235477",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235477",
+      "date": "2022-11-23T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "CAN"
+    },
+    {
+      "id": "fifa-match-400235488",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235488",
+      "date": "2022-11-24T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-400235491",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235491",
+      "date": "2022-11-24T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-400235493",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235493",
+      "date": "2022-11-24T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "GHA"
+    },
+    {
+      "id": "fifa-match-400235484",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235484",
+      "date": "2022-11-24T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SRB"
+    },
+    {
+      "id": "fifa-match-400235453",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235453",
+      "date": "2022-11-25T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "WAL",
+      "awayTeam": "IRN"
+    },
+    {
+      "id": "fifa-match-400235448",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235448",
+      "date": "2022-11-25T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "QAT",
+      "awayTeam": "SEN"
+    },
+    {
+      "id": "fifa-match-400235452",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235452",
+      "date": "2022-11-25T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "ECU"
+    },
+    {
+      "id": "fifa-match-400235457",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235457",
+      "date": "2022-11-25T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-400235469",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235469",
+      "date": "2022-11-26T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TUN",
+      "awayTeam": "AUS"
+    },
+    {
+      "id": "fifa-match-400235459",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235459",
+      "date": "2022-11-26T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "KSA"
+    },
+    {
+      "id": "fifa-match-400235467",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235467",
+      "date": "2022-11-26T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "DEN"
+    },
+    {
+      "id": "fifa-match-400235462",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235462",
+      "date": "2022-11-26T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-400235471",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235471",
+      "date": "2022-11-27T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "JPN",
+      "awayTeam": "CRC"
+    },
+    {
+      "id": "fifa-match-400235480",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235480",
+      "date": "2022-11-27T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-400235482",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235482",
+      "date": "2022-11-27T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRO",
+      "awayTeam": "CAN"
+    },
+    {
+      "id": "fifa-match-400235474",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235474",
+      "date": "2022-11-27T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "GER"
+    },
+    {
+      "id": "fifa-match-400235487",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235487",
+      "date": "2022-11-28T10:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "SRB"
+    },
+    {
+      "id": "fifa-match-400235489",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235489",
+      "date": "2022-11-28T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "GHA"
+    },
+    {
+      "id": "fifa-match-400235485",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235485",
+      "date": "2022-11-28T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-400235492",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235492",
+      "date": "2022-11-28T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-400235450",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235450",
+      "date": "2022-11-29T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "QAT"
+    },
+    {
+      "id": "fifa-match-400235451",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235451",
+      "date": "2022-11-29T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ECU",
+      "awayTeam": "SEN"
+    },
+    {
+      "id": "fifa-match-400235454",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235454",
+      "date": "2022-11-29T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "WAL",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-400235456",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235456",
+      "date": "2022-11-29T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRN",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-400235468",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235468",
+      "date": "2022-11-30T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUS",
+      "awayTeam": "DEN"
+    },
+    {
+      "id": "fifa-match-400235465",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235465",
+      "date": "2022-11-30T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TUN",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-400235464",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235464",
+      "date": "2022-11-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-400235460",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235460",
+      "date": "2022-11-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KSA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-400235478",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235478",
+      "date": "2022-12-01T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRO",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-400235479",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235479",
+      "date": "2022-12-01T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CAN",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-400235475",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235475",
+      "date": "2022-12-01T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "JPN",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-400235473",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235473",
+      "date": "2022-12-01T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRC",
+      "awayTeam": "GER"
+    },
+    {
+      "id": "fifa-match-400235494",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235494",
+      "date": "2022-12-02T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GHA",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-400235490",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235490",
+      "date": "2022-12-02T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "POR"
+    },
+    {
+      "id": "fifa-match-400235486",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235486",
+      "date": "2022-12-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SRB",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-400235483",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400235483",
+      "date": "2022-12-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-400128136",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128136",
+      "date": "2022-12-03T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-400128131",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128131",
+      "date": "2022-12-03T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "AUS"
+    },
+    {
+      "id": "fifa-match-400128135",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128135",
+      "date": "2022-12-04T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-400128134",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128134",
+      "date": "2022-12-04T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "SEN"
+    },
+    {
+      "id": "fifa-match-400128132",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128132",
+      "date": "2022-12-05T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "JPN",
+      "awayTeam": "CRO"
+    },
+    {
+      "id": "fifa-match-400128133",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128133",
+      "date": "2022-12-05T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-400128137",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128137",
+      "date": "2022-12-06T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-400128130",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128130",
+      "date": "2022-12-06T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-400128141",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128141",
+      "date": "2022-12-09T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRO",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-400128139",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128139",
+      "date": "2022-12-09T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-400128140",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128140",
+      "date": "2022-12-10T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "POR"
+    },
+    {
+      "id": "fifa-match-400128138",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128138",
+      "date": "2022-12-10T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-400128143",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128143",
+      "date": "2022-12-13T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "CRO"
+    },
+    {
+      "id": "fifa-match-400128142",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128142",
+      "date": "2022-12-14T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-400128144",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128144",
+      "date": "2022-12-17T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRO",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-400128145",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "rawId": "400128145",
+      "date": "2022-12-18T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1096",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1096",
+      "date": "1930-07-13T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1090",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1090",
+      "date": "1930-07-13T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1093",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1093",
+      "date": "1930-07-14T15:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1098",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1098",
+      "date": "1930-07-14T17:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ROU",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-1085",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1085",
+      "date": "1930-07-15T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1095",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1095",
+      "date": "1930-07-16T17:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1092",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1092",
+      "date": "1930-07-17T15:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "BOL"
+    },
+    {
+      "id": "fifa-match-1097",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1097",
+      "date": "1930-07-17T17:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-1099",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1099",
+      "date": "1930-07-18T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-1094",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1094",
+      "date": "1930-07-19T15:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1086",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1086",
+      "date": "1930-07-19T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1091",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1091",
+      "date": "1930-07-20T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "BOL"
+    },
+    {
+      "id": "fifa-match-1089",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1089",
+      "date": "1930-07-20T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PAR",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1100",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1100",
+      "date": "1930-07-21T17:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1084",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1084",
+      "date": "1930-07-22T17:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1088",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1088",
+      "date": "1930-07-26T17:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-1101",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1101",
+      "date": "1930-07-27T17:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1087",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1087",
+      "date": "1930-07-30T17:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1141",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1141",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1108",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1108",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1104",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1104",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1133",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1133",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-1111",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1111",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1102",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1102",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1135",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1135",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-1119",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1119",
+      "date": "1934-05-27T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "EGY"
+    },
+    {
+      "id": "fifa-match-1106",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1106",
+      "date": "1934-05-31T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1122",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1122",
+      "date": "1934-05-31T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1129",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1129",
+      "date": "1934-05-31T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1143",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1143",
+      "date": "1934-05-31T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1123",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1123",
+      "date": "1934-06-01T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1107",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1107",
+      "date": "1934-06-03T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1130",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1130",
+      "date": "1934-06-03T14:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "GER"
+    },
+    {
+      "id": "fifa-match-1105",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1105",
+      "date": "1934-06-07T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1134",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1134",
+      "date": "1934-06-10T15:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1165",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1165",
+      "date": "1938-06-04T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "GER"
+    },
+    {
+      "id": "fifa-match-1173",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1173",
+      "date": "1938-06-05T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "INH"
+    },
+    {
+      "id": "fifa-match-1146",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1146",
+      "date": "1938-06-05T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1179",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1179",
+      "date": "1938-06-05T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "NOR"
+    },
+    {
+      "id": "fifa-match-1156",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1156",
+      "date": "1938-06-05T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CUB",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1150",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1150",
+      "date": "1938-06-05T15:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-1172",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1172",
+      "date": "1938-06-05T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-1157",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1157",
+      "date": "1938-06-09T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CUB",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1166",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1166",
+      "date": "1938-06-09T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "GER"
+    },
+    {
+      "id": "fifa-match-1175",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1175",
+      "date": "1938-06-12T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1164",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1164",
+      "date": "1938-06-12T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1152",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1152",
+      "date": "1938-06-12T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1158",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1158",
+      "date": "1938-06-12T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "CUB"
+    },
+    {
+      "id": "fifa-match-1153",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1153",
+      "date": "1938-06-14T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1149",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1149",
+      "date": "1938-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1176",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1176",
+      "date": "1938-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1151",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1151",
+      "date": "1938-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1174",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1174",
+      "date": "1938-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1187",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1187",
+      "date": "1950-06-24T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1230",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1230",
+      "date": "1950-06-25T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1192",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1192",
+      "date": "1950-06-25T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1208",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1208",
+      "date": "1950-06-25T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-1219",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1219",
+      "date": "1950-06-25T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1225",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1225",
+      "date": "1950-06-28T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1188",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1188",
+      "date": "1950-06-28T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1202",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1202",
+      "date": "1950-06-29T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1193",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1193",
+      "date": "1950-06-29T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1228",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1228",
+      "date": "1950-06-29T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-1191",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1191",
+      "date": "1950-07-01T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1199",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1199",
+      "date": "1950-07-02T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1194",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1194",
+      "date": "1950-07-02T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-1185",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1185",
+      "date": "1950-07-02T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "BOL"
+    },
+    {
+      "id": "fifa-match-1218",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1218",
+      "date": "1950-07-02T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-1222",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1222",
+      "date": "1950-07-02T18:40:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1189",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1189",
+      "date": "1950-07-09T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1207",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1207",
+      "date": "1950-07-09T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1231",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1231",
+      "date": "1950-07-13T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1186",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1186",
+      "date": "1950-07-13T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1190",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1190",
+      "date": "1950-07-16T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1206",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1206",
+      "date": "1950-07-16T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1236",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1236",
+      "date": "1954-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1249",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1249",
+      "date": "1954-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1276",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1276",
+      "date": "1954-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1315",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1315",
+      "date": "1954-06-16T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1300",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1300",
+      "date": "1954-06-17T15:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1294",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1294",
+      "date": "1954-06-17T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-1283",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1283",
+      "date": "1954-06-17T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "TUR"
+    },
+    {
+      "id": "fifa-match-1240",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1240",
+      "date": "1954-06-17T16:10:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1313",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1313",
+      "date": "1954-06-19T14:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1252",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1252",
+      "date": "1954-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1238",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1238",
+      "date": "1954-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1275",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1275",
+      "date": "1954-06-19T15:10:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1277",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1277",
+      "date": "1954-06-20T14:50:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1304",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1304",
+      "date": "1954-06-20T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TUR",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-1243",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1243",
+      "date": "1954-06-20T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1263",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1263",
+      "date": "1954-06-20T15:10:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1284",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1284",
+      "date": "1954-06-23T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "TUR"
+    },
+    {
+      "id": "fifa-match-1301",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1301",
+      "date": "1954-06-23T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1237",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1237",
+      "date": "1954-06-26T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1264",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1264",
+      "date": "1954-06-26T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1285",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1285",
+      "date": "1954-06-27T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1248",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1248",
+      "date": "1954-06-27T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1233",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1233",
+      "date": "1954-06-30T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1295",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1295",
+      "date": "1954-06-30T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1239",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1239",
+      "date": "1954-07-03T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1278",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1278",
+      "date": "1954-07-04T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1415",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1415",
+      "date": "1958-06-08T12:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1386",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1386",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-1323",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1323",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1372",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1372",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1407",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1407",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "WAL"
+    },
+    {
+      "id": "fifa-match-1421",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1421",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NIR",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1434",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1434",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1326",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1326",
+      "date": "1958-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1388",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1388",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1332",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1332",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1339",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1339",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1391",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1391",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1324",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1324",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-1423",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1423",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PAR",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1418",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1418",
+      "date": "1958-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "WAL"
+    },
+    {
+      "id": "fifa-match-1406",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1406",
+      "date": "1958-06-12T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1438",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1438",
+      "date": "1958-06-15T12:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "WAL"
+    },
+    {
+      "id": "fifa-match-1426",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1426",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PAR",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1325",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1325",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1387",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1387",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1389",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1389",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-1403",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1403",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1344",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1344",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1327",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1327",
+      "date": "1958-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1408",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1408",
+      "date": "1958-06-17T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "WAL",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1373",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1373",
+      "date": "1958-06-17T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1422",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1422",
+      "date": "1958-06-17T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NIR",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1392",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1392",
+      "date": "1958-06-19T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1437",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1437",
+      "date": "1958-06-19T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1345",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1345",
+      "date": "1958-06-19T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "WAL"
+    },
+    {
+      "id": "fifa-match-1385",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1385",
+      "date": "1958-06-19T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-1340",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1340",
+      "date": "1958-06-24T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1390",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1390",
+      "date": "1958-06-24T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1382",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1382",
+      "date": "1958-06-28T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1343",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1343",
+      "date": "1958-06-29T13:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1473",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1473",
+      "date": "1962-05-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1479",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1479",
+      "date": "1962-05-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-1461",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1461",
+      "date": "1962-05-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1447",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1447",
+      "date": "1962-05-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1490",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1490",
+      "date": "1962-05-31T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1563",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1563",
+      "date": "1962-05-31T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1507",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1507",
+      "date": "1962-05-31T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1498",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1498",
+      "date": "1962-05-31T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1450",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1450",
+      "date": "1962-06-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1564",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1564",
+      "date": "1962-06-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1472",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1472",
+      "date": "1962-06-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1462",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1462",
+      "date": "1962-06-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1478",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1478",
+      "date": "1962-06-03T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-1510",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1510",
+      "date": "1962-06-03T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1470",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1470",
+      "date": "1962-06-03T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1497",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1497",
+      "date": "1962-06-03T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1471",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1471",
+      "date": "1962-06-06T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1460",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1460",
+      "date": "1962-06-06T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1562",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1562",
+      "date": "1962-06-06T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1451",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1451",
+      "date": "1962-06-06T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1480",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1480",
+      "date": "1962-06-07T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-1532",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1532",
+      "date": "1962-06-07T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1544",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1544",
+      "date": "1962-06-07T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1464",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1464",
+      "date": "1962-06-07T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1474",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1474",
+      "date": "1962-06-10T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1525",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1525",
+      "date": "1962-06-10T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1511",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1511",
+      "date": "1962-06-10T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1459",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1459",
+      "date": "1962-06-10T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1559",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1559",
+      "date": "1962-06-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1458",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1458",
+      "date": "1962-06-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1475",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1475",
+      "date": "1962-06-16T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1463",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1463",
+      "date": "1962-06-17T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1636",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1636",
+      "date": "1966-07-11T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1656",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1656",
+      "date": "1966-07-12T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1596",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1596",
+      "date": "1966-07-12T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1710",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1710",
+      "date": "1966-07-12T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "PRK"
+    },
+    {
+      "id": "fifa-match-1578",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1578",
+      "date": "1966-07-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1650",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1650",
+      "date": "1966-07-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1675",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1675",
+      "date": "1966-07-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1608",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1608",
+      "date": "1966-07-13T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1641",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1641",
+      "date": "1966-07-15T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1597",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1597",
+      "date": "1966-07-15T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1653",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1653",
+      "date": "1966-07-15T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1609",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1609",
+      "date": "1966-07-15T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PRK",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1579",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1579",
+      "date": "1966-07-16T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1682",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1682",
+      "date": "1966-07-16T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1602",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1602",
+      "date": "1966-07-16T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1634",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1634",
+      "date": "1966-07-16T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1689",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1689",
+      "date": "1966-07-19T15:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1582",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1582",
+      "date": "1966-07-19T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-1598",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1598",
+      "date": "1966-07-19T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-1679",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1679",
+      "date": "1966-07-19T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PRK",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1637",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1637",
+      "date": "1966-07-20T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-1610",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1610",
+      "date": "1966-07-20T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1632",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1632",
+      "date": "1966-07-20T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-1599",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1599",
+      "date": "1966-07-20T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1676",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1676",
+      "date": "1966-07-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1702",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1702",
+      "date": "1966-07-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "PRK"
+    },
+    {
+      "id": "fifa-match-1660",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1660",
+      "date": "1966-07-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1577",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1577",
+      "date": "1966-07-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1659",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1659",
+      "date": "1966-07-25T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1635",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1635",
+      "date": "1966-07-26T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "POR"
+    },
+    {
+      "id": "fifa-match-1709",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1709",
+      "date": "1966-07-28T18:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1633",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1633",
+      "date": "1966-07-30T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1902",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1902",
+      "date": "1970-05-31T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1881",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1881",
+      "date": "1970-06-02T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ISR"
+    },
+    {
+      "id": "fifa-match-1812",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1812",
+      "date": "1970-06-02T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1780",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1780",
+      "date": "1970-06-02T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PER",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1770",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1770",
+      "date": "1970-06-03T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1747",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1747",
+      "date": "1970-06-03T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-1883",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1883",
+      "date": "1970-06-03T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1839",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1839",
+      "date": "1970-06-03T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-1893",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1893",
+      "date": "1970-06-06T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PER",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-1919",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1919",
+      "date": "1970-06-06T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ROU",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1753",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1753",
+      "date": "1970-06-06T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1884",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1884",
+      "date": "1970-06-06T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1764",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1764",
+      "date": "1970-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1880",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1880",
+      "date": "1970-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "ISR"
+    },
+    {
+      "id": "fifa-match-1820",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1820",
+      "date": "1970-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-1774",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1774",
+      "date": "1970-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-1823",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1823",
+      "date": "1970-06-10T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-1922",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1922",
+      "date": "1970-06-10T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1840",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1840",
+      "date": "1970-06-10T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-1769",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1769",
+      "date": "1970-06-10T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-1752",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1752",
+      "date": "1970-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-1779",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1779",
+      "date": "1970-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BUL",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-1877",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1877",
+      "date": "1970-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ISR"
+    },
+    {
+      "id": "fifa-match-1813",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1813",
+      "date": "1970-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-1925",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1925",
+      "date": "1970-06-14T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-1768",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1768",
+      "date": "1970-06-14T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-1811",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1811",
+      "date": "1970-06-14T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-1882",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1882",
+      "date": "1970-06-14T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-1771",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1771",
+      "date": "1970-06-17T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1838",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1838",
+      "date": "1970-06-17T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1843",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1843",
+      "date": "1970-06-20T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1765",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1765",
+      "date": "1970-06-21T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-1986",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1986",
+      "date": "1974-06-13T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-2003",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2003",
+      "date": "1974-06-14T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-1955",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1955",
+      "date": "1974-06-14T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GDR",
+      "awayTeam": "AUS"
+    },
+    {
+      "id": "fifa-match-2176",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2176",
+      "date": "1974-06-14T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ZAI",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-1995",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1995",
+      "date": "1974-06-15T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-2098",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2098",
+      "date": "1974-06-15T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-2083",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2083",
+      "date": "1974-06-15T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "HAI"
+    },
+    {
+      "id": "fifa-match-1952",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1952",
+      "date": "1974-06-15T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-1954",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1954",
+      "date": "1974-06-18T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUS",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-2004",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2004",
+      "date": "1974-06-18T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "GDR"
+    },
+    {
+      "id": "fifa-match-1985",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1985",
+      "date": "1974-06-18T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2186",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2186",
+      "date": "1974-06-18T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "ZAI"
+    },
+    {
+      "id": "fifa-match-2097",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2097",
+      "date": "1974-06-19T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-1996",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1996",
+      "date": "1974-06-19T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BUL",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1949",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1949",
+      "date": "1974-06-19T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-2085",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2085",
+      "date": "1974-06-19T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HAI",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-1953",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1953",
+      "date": "1974-06-22T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUS",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-2175",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2175",
+      "date": "1974-06-22T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1987",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1987",
+      "date": "1974-06-22T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ZAI",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2062",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2062",
+      "date": "1974-06-22T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GDR",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1990",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1990",
+      "date": "1974-06-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BUL",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-2129",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2129",
+      "date": "1974-06-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-2181",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2181",
+      "date": "1974-06-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-1947",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1947",
+      "date": "1974-06-23T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "HAI"
+    },
+    {
+      "id": "fifa-match-2066",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2066",
+      "date": "1974-06-26T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1982",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1982",
+      "date": "1974-06-26T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "GDR"
+    },
+    {
+      "id": "fifa-match-1948",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1948",
+      "date": "1974-06-26T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-2167",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2167",
+      "date": "1974-06-26T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-2170",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2170",
+      "date": "1974-06-30T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-2067",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2067",
+      "date": "1974-06-30T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GDR",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-1945",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1945",
+      "date": "1974-06-30T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2065",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2065",
+      "date": "1974-06-30T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-2064",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2064",
+      "date": "1974-07-03T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-1946",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1946",
+      "date": "1974-07-03T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "GDR"
+    },
+    {
+      "id": "fifa-match-1983",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1983",
+      "date": "1974-07-03T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2182",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2182",
+      "date": "1974-07-03T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-1984",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1984",
+      "date": "1974-07-06T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-2063",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2063",
+      "date": "1974-07-07T14:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-2351",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2351",
+      "date": "1978-06-01T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-2347",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2347",
+      "date": "1978-06-02T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-2433",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2433",
+      "date": "1978-06-02T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TUN",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-2199",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2199",
+      "date": "1978-06-02T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-2253",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2253",
+      "date": "1978-06-03T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2216",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2216",
+      "date": "1978-06-03T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-2388",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2388",
+      "date": "1978-06-03T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "IRN"
+    },
+    {
+      "id": "fifa-match-2451",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2451",
+      "date": "1978-06-03T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PER",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-2396",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2396",
+      "date": "1978-06-06T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-2454",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2454",
+      "date": "1978-06-06T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "TUN"
+    },
+    {
+      "id": "fifa-match-2350",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2350",
+      "date": "1978-06-06T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-2197",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2197",
+      "date": "1978-06-06T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-2246",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2246",
+      "date": "1978-06-07T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-2224",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2224",
+      "date": "1978-06-07T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-2408",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2408",
+      "date": "1978-06-07T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "IRN"
+    },
+    {
+      "id": "fifa-match-2394",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2394",
+      "date": "1978-06-07T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-2344",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2344",
+      "date": "1978-06-10T18:10:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-2352",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2352",
+      "date": "1978-06-10T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "TUN"
+    },
+    {
+      "id": "fifa-match-2431",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2431",
+      "date": "1978-06-10T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-2200",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2200",
+      "date": "1978-06-10T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-2215",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2215",
+      "date": "1978-06-11T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-2337",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2337",
+      "date": "1978-06-11T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-2395",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2395",
+      "date": "1978-06-11T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-2405",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2405",
+      "date": "1978-06-11T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PER",
+      "awayTeam": "IRN"
+    },
+    {
+      "id": "fifa-match-2220",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2220",
+      "date": "1978-06-14T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-2349",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2349",
+      "date": "1978-06-14T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-2251",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2251",
+      "date": "1978-06-14T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-2202",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2202",
+      "date": "1978-06-14T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-2450",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2450",
+      "date": "1978-06-18T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-2348",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2348",
+      "date": "1978-06-18T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-2221",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2221",
+      "date": "1978-06-18T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-2196",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2196",
+      "date": "1978-06-18T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-2391",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2391",
+      "date": "1978-06-21T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-2217",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2217",
+      "date": "1978-06-21T16:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-2252",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2252",
+      "date": "1978-06-21T19:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-2201",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2201",
+      "date": "1978-06-21T22:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-2247",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2247",
+      "date": "1978-06-24T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-2198",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "2198",
+      "date": "1978-06-25T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-749",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "749",
+      "date": "1982-06-13T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-995",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "995",
+      "date": "1982-06-14T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-791",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "791",
+      "date": "1982-06-14T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-833",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "833",
+      "date": "1982-06-15T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PER",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-896",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "896",
+      "date": "1982-06-15T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-1051",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1051",
+      "date": "1982-06-15T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "NZL"
+    },
+    {
+      "id": "fifa-match-878",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "878",
+      "date": "1982-06-16T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-741",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "741",
+      "date": "1982-06-16T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ALG"
+    },
+    {
+      "id": "fifa-match-901",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "901",
+      "date": "1982-06-16T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "HON"
+    },
+    {
+      "id": "fifa-match-764",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "764",
+      "date": "1982-06-17T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CHI",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-1012",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1012",
+      "date": "1982-06-17T15:45:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "KUW"
+    },
+    {
+      "id": "fifa-match-1044",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1044",
+      "date": "1982-06-17T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-994",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "994",
+      "date": "1982-06-18T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-752",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "752",
+      "date": "1982-06-18T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-790",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "790",
+      "date": "1982-06-18T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-834",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "834",
+      "date": "1982-06-19T17:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-1054",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1054",
+      "date": "1982-06-19T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "NZL"
+    },
+    {
+      "id": "fifa-match-774",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "774",
+      "date": "1982-06-19T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-813",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "813",
+      "date": "1982-06-20T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-889",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "889",
+      "date": "1982-06-20T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-903",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "903",
+      "date": "1982-06-20T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-919",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "919",
+      "date": "1982-06-21T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "KUW"
+    },
+    {
+      "id": "fifa-match-739",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "739",
+      "date": "1982-06-21T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ALG",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-959",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "959",
+      "date": "1982-06-21T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HON",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-1055",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1055",
+      "date": "1982-06-22T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "PER"
+    },
+    {
+      "id": "fifa-match-779",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "779",
+      "date": "1982-06-22T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-1071",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1071",
+      "date": "1982-06-22T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-828",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "828",
+      "date": "1982-06-23T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-789",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "789",
+      "date": "1982-06-23T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "NZL"
+    },
+    {
+      "id": "fifa-match-751",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "751",
+      "date": "1982-06-23T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "SLV"
+    },
+    {
+      "id": "fifa-match-922",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "922",
+      "date": "1982-06-24T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-740",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "740",
+      "date": "1982-06-24T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ALG",
+      "awayTeam": "CHI"
+    },
+    {
+      "id": "fifa-match-962",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "962",
+      "date": "1982-06-24T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HON",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-882",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "882",
+      "date": "1982-06-25T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "KUW"
+    },
+    {
+      "id": "fifa-match-770",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "770",
+      "date": "1982-06-25T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-902",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "902",
+      "date": "1982-06-25T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NIR",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-767",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "767",
+      "date": "1982-06-28T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-782",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "782",
+      "date": "1982-06-28T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-753",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "753",
+      "date": "1982-06-29T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-879",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "879",
+      "date": "1982-06-29T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-771",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "771",
+      "date": "1982-07-01T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-783",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "783",
+      "date": "1982-07-01T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-750",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "750",
+      "date": "1982-07-02T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-900",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "900",
+      "date": "1982-07-02T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-920",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "920",
+      "date": "1982-07-04T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-1058",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "1058",
+      "date": "1982-07-04T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-788",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "788",
+      "date": "1982-07-05T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-877",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "877",
+      "date": "1982-07-05T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-996",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "996",
+      "date": "1982-07-08T15:15:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-914",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "914",
+      "date": "1982-07-08T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-921",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "921",
+      "date": "1982-07-10T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-923",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "923",
+      "date": "1982-07-11T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-459",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "459",
+      "date": "1986-05-31T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BUL",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-439",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "439",
+      "date": "1986-06-01T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-468",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "468",
+      "date": "1986-06-01T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CAN",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-610",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "610",
+      "date": "1986-06-02T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "HUN"
+    },
+    {
+      "id": "fifa-match-395",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "395",
+      "date": "1986-06-02T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-674",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "674",
+      "date": "1986-06-02T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-379",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "379",
+      "date": "1986-06-03T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ALG",
+      "awayTeam": "NIR"
+    },
+    {
+      "id": "fifa-match-428",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "428",
+      "date": "1986-06-03T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-538",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "538",
+      "date": "1986-06-03T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-628",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "628",
+      "date": "1986-06-04T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PAR",
+      "awayTeam": "IRQ"
+    },
+    {
+      "id": "fifa-match-585",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "585",
+      "date": "1986-06-04T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-517",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "517",
+      "date": "1986-06-04T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "DEN"
+    },
+    {
+      "id": "fifa-match-571",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "571",
+      "date": "1986-06-05T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-394",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "394",
+      "date": "1986-06-05T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-460",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "460",
+      "date": "1986-06-05T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-475",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "475",
+      "date": "1986-06-06T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "CAN"
+    },
+    {
+      "id": "fifa-match-377",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "377",
+      "date": "1986-06-06T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ALG"
+    },
+    {
+      "id": "fifa-match-533",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "533",
+      "date": "1986-06-06T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-680",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "680",
+      "date": "1986-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-551",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "551",
+      "date": "1986-06-07T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NIR",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-701",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "701",
+      "date": "1986-06-07T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POL",
+      "awayTeam": "POR"
+    },
+    {
+      "id": "fifa-match-427",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "427",
+      "date": "1986-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRQ",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-580",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "580",
+      "date": "1986-06-08T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-522",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "522",
+      "date": "1986-06-08T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "DEN",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-567",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "567",
+      "date": "1986-06-09T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "HUN",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-476",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "476",
+      "date": "1986-06-09T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "CAN"
+    },
+    {
+      "id": "fifa-match-389",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "389",
+      "date": "1986-06-10T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-643",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "643",
+      "date": "1986-06-10T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "ITA"
+    },
+    {
+      "id": "fifa-match-627",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "627",
+      "date": "1986-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRQ",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-429",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "429",
+      "date": "1986-06-11T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "PAR",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-675",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "675",
+      "date": "1986-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "POR",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-537",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "537",
+      "date": "1986-06-11T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-378",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "378",
+      "date": "1986-06-12T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ALG",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-441",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "441",
+      "date": "1986-06-12T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NIR",
+      "awayTeam": "BRA"
+    },
+    {
+      "id": "fifa-match-512",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "512",
+      "date": "1986-06-13T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "DEN",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-712",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "712",
+      "date": "1986-06-13T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SCO",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-463",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "463",
+      "date": "1986-06-15T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-432",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "432",
+      "date": "1986-06-15T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-444",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "444",
+      "date": "1986-06-16T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "POL"
+    },
+    {
+      "id": "fifa-match-398",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "398",
+      "date": "1986-06-16T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-568",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "568",
+      "date": "1986-06-17T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-574",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "574",
+      "date": "1986-06-17T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-536",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "536",
+      "date": "1986-06-18T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "PAR"
+    },
+    {
+      "id": "fifa-match-511",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "511",
+      "date": "1986-06-18T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "DEN",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-440",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "440",
+      "date": "1986-06-21T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "FRA"
+    },
+    {
+      "id": "fifa-match-575",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "575",
+      "date": "1986-06-21T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-392",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "392",
+      "date": "1986-06-22T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-421",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "421",
+      "date": "1986-06-22T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-564",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "564",
+      "date": "1986-06-25T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-388",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "388",
+      "date": "1986-06-25T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-422",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "422",
+      "date": "1986-06-28T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRA",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-393",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "393",
+      "date": "1986-06-29T17:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "FRG"
+    },
+    {
+      "id": "fifa-match-26",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "26",
+      "date": "1990-06-08T16:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-119",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "119",
+      "date": "1990-06-09T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "UAE",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-342",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "342",
+      "date": "1990-06-09T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URS",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-42",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "42",
+      "date": "1990-06-09T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "AUT"
+    },
+    {
+      "id": "fifa-match-355",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "355",
+      "date": "1990-06-10T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-201",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "201",
+      "date": "1990-06-10T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-75",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "75",
+      "date": "1990-06-10T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-127",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "127",
+      "date": "1990-06-11T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CRC",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-161",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "161",
+      "date": "1990-06-11T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "IRL"
+    },
+    {
+      "id": "fifa-match-57",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "57",
+      "date": "1990-06-12T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-151",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "151",
+      "date": "1990-06-12T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "EGY"
+    },
+    {
+      "id": "fifa-match-180",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "180",
+      "date": "1990-06-13T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "URU",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-30",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "30",
+      "date": "1990-06-13T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-120",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "120",
+      "date": "1990-06-14T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-108",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "108",
+      "date": "1990-06-14T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-265",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "265",
+      "date": "1990-06-14T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-43",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "43",
+      "date": "1990-06-15T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-198",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "198",
+      "date": "1990-06-15T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "UAE"
+    },
+    {
+      "id": "fifa-match-73",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "73",
+      "date": "1990-06-16T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "CRC"
+    },
+    {
+      "id": "fifa-match-348",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "348",
+      "date": "1990-06-16T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-160",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "160",
+      "date": "1990-06-16T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-152",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "152",
+      "date": "1990-06-17T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRL",
+      "awayTeam": "EGY"
+    },
+    {
+      "id": "fifa-match-66",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "66",
+      "date": "1990-06-17T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-175",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "175",
+      "date": "1990-06-17T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-111",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "111",
+      "date": "1990-06-18T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "URS"
+    },
+    {
+      "id": "fifa-match-29",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "29",
+      "date": "1990-06-18T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-114",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "114",
+      "date": "1990-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-364",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "364",
+      "date": "1990-06-19T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "UAE"
+    },
+    {
+      "id": "fifa-match-48",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "48",
+      "date": "1990-06-19T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "AUT",
+      "awayTeam": "USA"
+    },
+    {
+      "id": "fifa-match-263",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "263",
+      "date": "1990-06-19T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-128",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "128",
+      "date": "1990-06-20T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "CRC"
+    },
+    {
+      "id": "fifa-match-74",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "74",
+      "date": "1990-06-20T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SCO"
+    },
+    {
+      "id": "fifa-match-56",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "56",
+      "date": "1990-06-21T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-290",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "290",
+      "date": "1990-06-21T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-228",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "228",
+      "date": "1990-06-21T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRL",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-150",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "150",
+      "date": "1990-06-21T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "EGY"
+    },
+    {
+      "id": "fifa-match-102",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "102",
+      "date": "1990-06-23T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-129",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "129",
+      "date": "1990-06-23T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "TCH",
+      "awayTeam": "CRC"
+    },
+    {
+      "id": "fifa-match-25",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "25",
+      "date": "1990-06-24T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-196",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "196",
+      "date": "1990-06-24T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-248",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "248",
+      "date": "1990-06-25T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRL",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-264",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "264",
+      "date": "1990-06-25T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "URU"
+    },
+    {
+      "id": "fifa-match-181",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "181",
+      "date": "1990-06-26T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "YUG"
+    },
+    {
+      "id": "fifa-match-55",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "55",
+      "date": "1990-06-26T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "BEL"
+    },
+    {
+      "id": "fifa-match-31",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "31",
+      "date": "1990-06-30T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "YUG",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-243",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "243",
+      "date": "1990-06-30T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "IRL"
+    },
+    {
+      "id": "fifa-match-197",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "197",
+      "date": "1990-07-01T15:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "TCH"
+    },
+    {
+      "id": "fifa-match-103",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "103",
+      "date": "1990-07-01T19:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ENG",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-28",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "28",
+      "date": "1990-07-03T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-159",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "159",
+      "date": "1990-07-04T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-162",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "162",
+      "date": "1990-07-07T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "ENG"
+    },
+    {
+      "id": "fifa-match-27",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "27",
+      "date": "1990-07-08T18:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "FRG",
+      "awayTeam": "ARG"
+    },
+    {
+      "id": "fifa-match-3049",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3049",
+      "date": "1994-06-17T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "BOL"
+    },
+    {
+      "id": "fifa-match-3050",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3050",
+      "date": "1994-06-18T00:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ESP",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-3051",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3051",
+      "date": "1994-06-18T15:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-3052",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3052",
+      "date": "1994-06-18T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "IRL"
+    },
+    {
+      "id": "fifa-match-3053",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3053",
+      "date": "1994-06-19T02:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "COL",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-3054",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3054",
+      "date": "1994-06-19T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-3055",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3055",
+      "date": "1994-06-19T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NOR",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-3056",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3056",
+      "date": "1994-06-20T02:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "CMR",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-3057",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3057",
+      "date": "1994-06-20T23:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "RUS"
+    },
+    {
+      "id": "fifa-match-3058",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3058",
+      "date": "1994-06-20T23:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NED",
+      "awayTeam": "KSA"
+    },
+    {
+      "id": "fifa-match-3059",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3059",
+      "date": "1994-06-21T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "GRE"
+    },
+    {
+      "id": "fifa-match-3060",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3060",
+      "date": "1994-06-21T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-3061",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3061",
+      "date": "1994-06-22T00:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "NGA",
+      "awayTeam": "BUL"
+    },
+    {
+      "id": "fifa-match-3062",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3062",
+      "date": "1994-06-22T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ROU",
+      "awayTeam": "SUI"
+    },
+    {
+      "id": "fifa-match-3063",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3063",
+      "date": "1994-06-23T02:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-3064",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3064",
+      "date": "1994-06-23T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "NOR"
+    },
+    {
+      "id": "fifa-match-3065",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3065",
+      "date": "1994-06-23T23:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KOR",
+      "awayTeam": "BOL"
+    },
+    {
+      "id": "fifa-match-3066",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3066",
+      "date": "1994-06-24T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MEX",
+      "awayTeam": "IRL"
+    },
+    {
+      "id": "fifa-match-3067",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3067",
+      "date": "1994-06-24T23:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-3068",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3068",
+      "date": "1994-06-24T23:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SWE",
+      "awayTeam": "RUS"
+    },
+    {
+      "id": "fifa-match-3070",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3070",
+      "date": "1994-06-25T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "KSA",
+      "awayTeam": "MAR"
+    },
+    {
+      "id": "fifa-match-3069",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3069",
+      "date": "1994-06-25T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-3071",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3071",
+      "date": "1994-06-25T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "NGA"
+    },
+    {
+      "id": "fifa-match-3072",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3072",
+      "date": "1994-06-26T17:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BUL",
+      "awayTeam": "GRE"
+    },
+    {
+      "id": "fifa-match-3073",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3073",
+      "date": "1994-06-26T23:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "USA",
+      "awayTeam": "ROU"
+    },
+    {
+      "id": "fifa-match-3074",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3074",
+      "date": "1994-06-26T23:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "SUI",
+      "awayTeam": "COL"
+    },
+    {
+      "id": "fifa-match-3076",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3076",
+      "date": "1994-06-27T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GER",
+      "awayTeam": "KOR"
+    },
+    {
+      "id": "fifa-match-3075",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3075",
+      "date": "1994-06-27T21:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BOL",
+      "awayTeam": "ESP"
+    },
+    {
+      "id": "fifa-match-3078",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3078",
+      "date": "1994-06-28T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ITA",
+      "awayTeam": "MEX"
+    },
+    {
+      "id": "fifa-match-3077",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3077",
+      "date": "1994-06-28T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "IRL",
+      "awayTeam": "NOR"
+    },
+    {
+      "id": "fifa-match-3080",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3080",
+      "date": "1994-06-28T20:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BRA",
+      "awayTeam": "SWE"
+    },
+    {
+      "id": "fifa-match-3079",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3079",
+      "date": "1994-06-28T23:00:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "RUS",
+      "awayTeam": "CMR"
+    },
+    {
+      "id": "fifa-match-3082",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3082",
+      "date": "1994-06-29T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "BEL",
+      "awayTeam": "KSA"
+    },
+    {
+      "id": "fifa-match-3081",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3081",
+      "date": "1994-06-29T16:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "MAR",
+      "awayTeam": "NED"
+    },
+    {
+      "id": "fifa-match-3083",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3083",
+      "date": "1994-06-30T23:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "GRE",
+      "awayTeam": "NGA"
+    },
+    {
+      "id": "fifa-match-3084",
+      "sourceUrl": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "rawId": "3084",
+      "date": "1994-07-01T00:30:00Z",
+      "venue": "[object Object]",
+      "homeTeam": "ARG",
+      "awayTeam": "BUL"
+    }
+  ]
+}

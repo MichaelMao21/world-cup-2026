@@ -1,0 +1,57 @@
+{
+  "sourceName": "FIFA official website",
+  "scrapedAt": "2026-06-18T07:56:23.856Z",
+  "note": "This file contains public factual candidates from FIFA official pages/API candidates. Review manually before publishing. If players is empty, FIFA did not expose squad data through the checked public sources.",
+  "sources": [
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285026",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    }
+  ],
+  "counts": {
+    "teams": 0,
+    "players": 0,
+    "matches": 0
+  },
+  "teams": [],
+  "players": [],
+  "matches": []
+}

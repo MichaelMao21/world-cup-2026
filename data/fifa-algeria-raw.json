@@ -1,0 +1,359 @@
+{
+  "sourceName": "FIFA official website",
+  "scrapedAt": "2026-06-18T08:45:27.889Z",
+  "note": "This file contains public factual candidates from FIFA official pages/API candidates. Review manually before publishing. If players is empty, FIFA did not expose squad data through the checked public sources.",
+  "sources": [
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=285026",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17&idSeason=255711",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&idCompetition=17",
+      "type": "api",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "./downloads/fifa-teams-Algeria.html",
+      "type": "local-html",
+      "ok": true,
+      "status": 200
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures",
+      "type": "page",
+      "ok": false,
+      "status": 0,
+      "error": "fetch failed"
+    }
+  ],
+  "counts": {
+    "teams": 1,
+    "players": 26,
+    "matches": 0
+  },
+  "teams": [
+    {
+      "id": "fifa-team-alg",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Algeria",
+      "type": "team",
+      "code": "ALG",
+      "flagUrl": "https://api.fifa.com/api/v3/picture/flags-sq-4/ALG"
+    }
+  ],
+  "players": [
+    {
+      "id": "fifa-player-520070",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Melvin MASTIL",
+      "type": "player",
+      "position": "Goalkeeper",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "520070",
+      "imageUrl": "https://digitalhub.fifa.com/transform/6d85724d-c5a6-400d-acb9-df73451a4bf4/MASTIL-Melvin_520070?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-477817",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Oussama BENBOT",
+      "type": "player",
+      "position": "Goalkeeper",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "477817",
+      "imageUrl": "https://digitalhub.fifa.com/transform/884914ab-5fde-4b43-a31a-99b35849afc8/BENBOT-Oussama_477817?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-389879",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Luca ZIDANE",
+      "type": "player",
+      "position": "Goalkeeper",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "389879",
+      "imageUrl": "https://digitalhub.fifa.com/transform/9a389290-d443-4b83-8e3a-70e481bca3f1/ZIDANE-Luca_389879?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-376285",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Aissa MANDI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "376285",
+      "imageUrl": "https://digitalhub.fifa.com/transform/dc4250ac-0a37-44da-9ae0-c858225ad8a1/MANDI-Aissa_376285?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-512127",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Achref ABADA",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "512127",
+      "imageUrl": "https://digitalhub.fifa.com/transform/8b3d3f92-a378-40d7-92d2-85eed4a732d3/ABADA-Achraf_512127?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-433600",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Mohamed Amine TOUGAI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "433600",
+      "imageUrl": "https://digitalhub.fifa.com/transform/08ab7f46-1067-4c5a-9a23-64bda657aca0/TOUGAI-Mohamed-Amine_433600?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-480983",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Zineddine BELAID",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "480983",
+      "imageUrl": "https://digitalhub.fifa.com/transform/f638bd61-6020-4634-bb13-4c19e3b209de/BELAID-Zineddine_480983?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-482869",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Jaouen HADJAM",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "482869",
+      "imageUrl": "https://digitalhub.fifa.com/transform/c24e6b93-736c-41a7-be57-2e165509ce5c/HADJAM-Jaouen_482869?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-431858",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Rayan AIT-NOURI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "431858",
+      "imageUrl": "https://digitalhub.fifa.com/transform/7d7c26f5-81ee-4c6b-97b5-a8c6f67f0772/ZIZO_431858?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-511009",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Rafik BELGHALI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "511009",
+      "imageUrl": "https://digitalhub.fifa.com/transform/0007b754-4911-4f39-8c81-df2c156f7aa5/BELGHALI-Rafik_511009?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-395113",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Ramy BENSEBAINI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "395113",
+      "imageUrl": "https://digitalhub.fifa.com/transform/329752fa-e310-4124-8fb2-be7cc478b929/BENSEBAINI-Ramy_395113?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-511010",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Samir CHERGUI",
+      "type": "player",
+      "position": "Defender",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "511010",
+      "imageUrl": "https://digitalhub.fifa.com/transform/5a1d62d5-a732-4036-b925-d011389a66fb/CHERGUI-Samir_511010?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-433679",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Ramiz ZERROUKI",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "433679",
+      "imageUrl": "https://digitalhub.fifa.com/transform/48a3b28e-cee7-4c5b-87b9-6344b3977983/ZERROUKI-Ramiz_433679?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-430698",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Houssem Aouar",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "430698",
+      "imageUrl": "https://digitalhub.fifa.com/transform/ac743888-d671-4971-9df9-594b591f2425/AOUAR-Houssem_430698?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-477795",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Fares CHAIBI",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "477795",
+      "imageUrl": "https://digitalhub.fifa.com/transform/81f29a61-d5a0-466a-86dd-d52b61f29462/CHAIBI-Fares_477795?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-441350",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Hicham BOUDAOUI",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "441350",
+      "imageUrl": "https://digitalhub.fifa.com/transform/76a28e94-3869-40e2-a82e-9fb973181eb6/BOUDAOUI-Hicham_441350?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-379939",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Nabil Bentaleb",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "379939",
+      "imageUrl": "https://digitalhub.fifa.com/transform/02fbf423-afa1-4863-8ddc-af2136fb5685/BENTALEB-Nabil_379939?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-494291",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Ibrahim MAZA",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "494291",
+      "imageUrl": "https://digitalhub.fifa.com/transform/d1a9f2e9-3dda-4bdb-b2a1-f026bb97d9ce/MAZA-Ibrahim_494291?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-433631",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Yassine TITRAOUI",
+      "type": "player",
+      "position": "Midfielder",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "433631",
+      "imageUrl": "https://digitalhub.fifa.com/transform/d5bf01cd-ba36-4a99-80c8-9287c6df0069/TITRAOUI-Yassine_433631?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-379942",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Riyad Mahrez",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "379942",
+      "imageUrl": "https://digitalhub.fifa.com/transform/172fb59c-24f2-4bc0-82a2-cdc869badf53/MAHREZ-Riyad_379942?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-405877",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Amine GOUIRI",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "405877",
+      "imageUrl": "https://digitalhub.fifa.com/transform/4818d176-036a-4494-b53e-ada08bba749c/GOUIRI-Amine_405877?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-482874",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Anis HADJ MOUSSA",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "482874",
+      "imageUrl": "https://digitalhub.fifa.com/transform/7446a4bb-0884-461c-8fd7-7ce4c93a0a46/HADJ-MOUSSA-Anis_482874?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-520071",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Nadhir BENBOUALI",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "520071",
+      "imageUrl": "https://digitalhub.fifa.com/transform/9e9811da-2a8a-48cd-9088-1a45b6f90e0a/BENBOUALI-Nadhir_520071?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-477790",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Mohamed AMOURA",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "477790",
+      "imageUrl": "https://digitalhub.fifa.com/transform/5aa32614-1ae5-49be-aed3-f9636a556385/AMOURA-Mohamed_477790?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-512132",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Adil BOULBINA",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "512132",
+      "imageUrl": "https://digitalhub.fifa.com/transform/167d2400-d78c-4931-8a84-7b27284bd386/BOULBINA-Adil_512132?&io=transform:fill"
+    },
+    {
+      "id": "fifa-player-520072",
+      "sourceUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/algeria/squad",
+      "name": "Fares GHEDJEMIS",
+      "type": "player",
+      "position": "Forward",
+      "teamId": "fifa-team-alg",
+      "teamName": "Algeria",
+      "fifaPlayerId": "520072",
+      "imageUrl": "https://digitalhub.fifa.com/transform/39118134-164a-4baa-9884-de4f4821a0b7/GHEDJEMIS-Fares_520072?&io=transform:fill"
+    }
+  ],
+  "matches": []
+}
