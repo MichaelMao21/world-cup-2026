@@ -101,6 +101,27 @@
     async createRoom(payload) {
       const data = readDemoData();
       const now = new Date().toISOString();
+      if (!payload.forceNew) {
+        const existingRoom = data.rooms.find((room) => room.creator_id === this.userId && String(room.match_id || "") === String(payload.matchId || ""));
+        if (existingRoom) {
+          const existingPrediction = data.predictions.find((item) => item.room_id === existingRoom.id && item.user_id === this.userId);
+          const record = {
+            room_id: existingRoom.id,
+            user_id: this.userId,
+            match_id: payload.matchId,
+            match_label: payload.matchLabel,
+            answers: payload.answers,
+            points: 0,
+            hits: 0,
+            submitted_at: now,
+          };
+          if (existingPrediction) Object.assign(existingPrediction, record);
+          else data.predictions.push(record);
+          this.syncDemoMatchPredictions(data, payload.matchId, payload.matchLabel, payload.answers, now);
+          writeDemoData(data);
+          return this.getRoom(existingRoom.id);
+        }
+      }
       const roomId = Math.random().toString(36).slice(2, 8).toUpperCase();
       const room = {
         id: roomId,

@@ -43,6 +43,27 @@ await secondGuest.ensureProfile("小李");
 const codeRoom = await secondGuest.joinRoom(created.room.code);
 if (codeRoom.room.id !== created.room.id) throw new Error("Shared room code did not resolve to original room");
 
+const reusedRoom = await creator.createRoom({
+  matchId: "test-match",
+  matchLabel: "荷兰 vs 瑞典",
+  answers: { result: "荷兰胜", fullGoals: "2-3球" },
+});
+if (reusedRoom.room.id !== created.room.id) throw new Error("Same-match room creation should reuse the existing room unless forceNew is set");
+
+const newGroupRoom = await creator.createRoom({
+  matchId: "test-match",
+  matchLabel: "荷兰 vs 瑞典",
+  answers: { result: "瑞典胜" },
+  forceNew: true,
+});
+if (newGroupRoom.room.id === created.room.id) throw new Error("forceNew should create a separate PK room for a different friend circle");
+
+localStorage.removeItem("world-cup-prediction-user-v1");
+const newGroupGuest = window.PredictionService.create({});
+await newGroupGuest.ensureProfile("新组局好友");
+const joinedNewGroup = await newGroupGuest.joinRoom(newGroupRoom.room.id);
+if (joinedNewGroup.room.id !== newGroupRoom.room.id) throw new Error("Shared new-group link should resolve to the new PK room");
+
 values.clear();
 const nicknameOwner = window.PredictionService.create({});
 await nicknameOwner.ensureProfile("剑桥");
