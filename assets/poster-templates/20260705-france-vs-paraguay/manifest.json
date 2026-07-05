@@ -1,0 +1,92 @@
+{
+  "matchId": "20260705-france-vs-paraguay",
+  "matchLabel": "法国 VS 巴拉圭",
+  "stage": "16强",
+  "venue": "Philadelphia Stadium",
+  "matchTime": "2026-07-05",
+  "result": "France wins 1-0",
+  "winner": "France",
+  "keyMoment": "Mbappé penalty 19th World Cup goal, France to quarterfinals",
+  "qrEmbedded": true,
+  "qrSource": "user-uploaded pkgamecup landing QR",
+  "qrNote": "Real QR pre-embedded at ~78% vertical, horizontally centered. DO NOT overlay additional QR.",
+  "layoutZones": {
+    "zone1_top": "top 20% — brand and match header (fixed)",
+    "zone2_center": "center 48% — DYNAMIC: prediction items, nickname, score",
+    "zone3_lower": "lower 12% — DYNAMIC: headline text",
+    "zone4_bottom": "bottom 20% — QR code (pre-embedded, do not replace)"
+  },
+  "templates": [
+    {
+      "id": "template-1",
+      "file": "template-1.png",
+      "style": "diffuse-aurora",
+      "size": "941x1672",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "zone3 lower 12%",
+        "correctItems": "zone2 center card rows",
+        "score": "zone2 bottom badge",
+        "nickname": "zone2 card top",
+        "qr": "pre-embedded zone4 bottom 20%"
+      }
+    },
+    {
+      "id": "template-2",
+      "file": "template-2.png",
+      "style": "pop-art-halftone",
+      "size": "941x1672",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "zone3 lower 12%",
+        "correctItems": "zone2 center card rows",
+        "score": "zone2 bottom badge",
+        "nickname": "zone2 card top",
+        "qr": "pre-embedded zone4 bottom 20%"
+      }
+    },
+    {
+      "id": "template-3",
+      "file": "template-3.png",
+      "style": "memphis-duotone",
+      "size": "1024x1536",
+      "promptFile": "prompt.md",
+      "recommendedTextZones": {
+        "headline": "zone3 lower 12%",
+        "correctItems": "zone2 center card rows",
+        "score": "zone2 bottom badge",
+        "nickname": "zone2 card top",
+        "qr": "pre-embedded zone4 bottom 20%"
+      }
+    }
+  ],
+  "references": [
+    {
+      "file": "reference-1.png",
+      "note": "Mbappé celebrating 19th WC goal — main reference (2000x1333)"
+    },
+    {
+      "file": "reference-2.png",
+      "note": "AP News Mbappé action shot"
+    },
+    {
+      "file": "reference-3.png",
+      "note": "AP News celebration wide shot"
+    }
+  ],
+  "overlayFields": {
+    "nickname": "string",
+    "matchLabel": "string",
+    "correctCount": "integer",
+    "correctItems": "string[]",
+    "points": "integer",
+    "beatText": "string",
+    "cta": "string"
+  },
+  "headlineLogic": {
+    "1": "看准了，{nickname}命中了 1 项",
+    "2-3": "太准了，{nickname}预测中了 {correctCount} 项",
+    "4+": "大神级预言，{nickname}命中 {correctCount} 项",
+    "all": "封神了，{nickname}全场命中"
+  }
+}
