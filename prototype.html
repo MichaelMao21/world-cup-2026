@@ -1399,6 +1399,26 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .pk-inline-prediction-form {
+      margin-top: 12px;
+    }
+
+    .pk-inline-prediction-form .prediction-question {
+      margin: 12px 0;
+      padding: 14px;
+      border-radius: 20px;
+      box-shadow: none;
+    }
+
+    .pk-inline-prediction-form .prediction-question h3 {
+      font-size: 16px;
+    }
+
+    .pk-inline-prediction-form .pk-inline-submit {
+      width: 100%;
+      margin-top: 14px;
+    }
+
     .prediction-option {
       min-height: 48px;
       padding: 10px 8px;
@@ -1557,9 +1577,17 @@
         <h3>比赛场地</h3>
         <p class="sub" id="match-detail-venue"></p>
       </article>
-      <article class="card">
-        <h3>主要看点</h3>
+      <article class="card" id="match-preview-card" hidden>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0" id="match-preview-headline">赛前前瞻</h3>
+          <span style="font-size:11px;color:var(--sub);background:var(--surface2);padding:2px 7px;border-radius:10px">AI 生成</span>
+        </div>
+        <p class="sub" id="match-preview-text" style="line-height:1.7;margin-bottom:12px"></p>
         <div class="watchpoint-list" id="match-detail-watchpoints"></div>
+      </article>
+      <article class="card" id="match-watchpoints-fallback-card">
+        <h3>主要看点</h3>
+        <div class="watchpoint-list" id="match-detail-watchpoints-fallback"></div>
       </article>
       <article class="card social-entry">
         <div>
@@ -1644,7 +1672,6 @@
       <button style="width:100%" onclick="sharePkRoom(this)">邀请好友加入PK</button>
       <article class="card" id="pk-my-prediction-card"><h3>我的预测</h3><div id="pk-my-prediction-content"><p class="sub">尚未提交</p></div></article>
       <article class="card"><div class="section-title"><h3>好友预测</h3><span class="tag" id="pk-predictions-count">0人已预测</span></div><p class="sub">好友点分享链接进入后，会直接加入这个PK房。预测提交后，大家可以互相看到已锁定选项。</p><div class="pk-prediction-list" id="pk-room-predictions"></div></article>
-      <button class="secondary" id="pk-room-submit-button" style="width:100%" onclick="editRoomPrediction()" hidden>提交我的预测</button>
       <div class="actions"><button id="halftime-report-btn" onclick="openHalftimeReport()" hidden>查看半场战报</button><button class="secondary" id="final-settlement-button" onclick="openFinalSettlement()">终场结算</button></div>
     </section>
 
@@ -2059,7 +2086,7 @@
 
     function renderMatchActions(match, options = {}) {
       const detailLabel = options.detailLabel || "查看详情 →";
-      const canPredict = match && match.status !== "completed";
+      const canPredict = match && matchLiveStatus(match) === "scheduled";
       const predictionButton = canPredict
         ? `<button onclick="startPredictionPk('${match.id}')">预测这场PK</button>`
         : "";
@@ -2117,7 +2144,7 @@
             </div>
             <p class="meta">${escapeHtml(displayStage(heroMatch))} · ${escapeHtml(heroMatch.venue || "")} · ${escapeHtml(heroMatch.time || "")}</p>
             ${tagsHtml}
-            ${heroMatch.status !== "completed" ? `<button style="width:100%;margin-top:14px;background:var(--accent);color:#17202a" onclick="startPredictionPk('${heroMatch.id}')">预测这场PK</button>` : ""}
+            ${matchLiveStatus(heroMatch) === "scheduled" ? `<button style="width:100%;margin-top:14px;background:var(--accent);color:#17202a" onclick="startPredictionPk('${heroMatch.id}')">预测这场PK</button>` : ""}
           </div>`;
         } else {
           heroContainer.innerHTML = `<div class="hero"><p class="eyebrow">赛程告一段落</p><p class="sub">下一轮比赛即将到来，敬请期待。</p></div>`;
@@ -2361,8 +2388,8 @@
       }).join("");
     }
 
-    /* ── Player stats data (source: FIFA / Fox Sports 2026-07-03) ── */
-    const PLAYER_STATS = {
+    /* ── Player stats fallback. Live data comes from PROTOTYPE_DATA.playerStats. ── */
+    const PLAYER_STATS_FALLBACK = {
       goldenBoot: [
         { name: "Kylian Mbappé",     team: "France",      gp:4, goals:6, assists:2, shots:21 },
         { name: "Lionel Messi",      team: "Argentina",   gp:3, goals:6, assists:0, shots:14 },
@@ -2458,6 +2485,7 @@
         { name: "Elijah Just",        team: "New Zealand", gp:3, yc:1, rc:0 },
       ],
     };
+    const PLAYER_STATS = window.PROTOTYPE_DATA?.playerStats || PLAYER_STATS_FALLBACK;
 
     const STATS_CAT_META = {
       "golden-boot": { title: "金靴奖排名", subA: "进球", subB: "场次" },
@@ -2488,7 +2516,7 @@
             </div>
             <div class="pstat-block">
               <span class="pstat-main">${p.goals}<span class="pstat-unit">球</span></span>
-              <span class="pstat-sub">${p.assists}助攻 · ${p.shots}射</span>
+              <span class="pstat-sub">${statOrDash(p.assists)}助攻 · ${statOrDash(p.shots)}射</span>
             </div>
           </div>`);
       } else if (cat === "attacking") {
@@ -2500,8 +2528,8 @@
               <span class="player-team">${displayTeamWithFlag(p.team)} · ${p.gp}场</span>
             </div>
             <div class="pstat-block">
-              <span class="pstat-main">${p.shots}<span class="pstat-unit">射</span></span>
-              <span class="pstat-sub">${p.sog}正射 · ${p.goals}进球</span>
+              <span class="pstat-main">${statOrDash(p.shots)}<span class="pstat-unit">射</span></span>
+              <span class="pstat-sub">${statOrDash(p.sog)}正射 · ${statOrDash(p.goals)}进球</span>
             </div>
           </div>`);
       } else if (cat === "distribution") {
@@ -2514,7 +2542,7 @@
             </div>
             <div class="pstat-block">
               <span class="pstat-main">${p.assists}<span class="pstat-unit">助攻</span></span>
-              <span class="pstat-sub">${p.chances}次机会创造</span>
+              <span class="pstat-sub">${statOrDash(p.chances)}次机会创造</span>
             </div>
           </div>`);
         const dribbles = PLAYER_STATS.dribbles.map((p, i) => `
@@ -2581,6 +2609,10 @@
       lb.innerHTML = `<div class="player-rank-list">${rows.join("")}</div>`;
     }
 
+    function statOrDash(value) {
+      return value === null || value === undefined || value === "" ? "--" : value;
+    }
+
     window.switchStatsCat = function(cat, btn) {
       document.querySelectorAll("#stats-cat-tabs .chip").forEach(b => b.classList.remove("active"));
       if (btn) btn.classList.add("active");
@@ -2636,11 +2668,12 @@
       document.getElementById("match-detail-venue").textContent = (match.venue || "待定") + (match.city ? " · " + match.city : "");
 
       renderMatchWatchpoints(match);
+      renderMatchPreview(match);
       renderMatchTeamButtons(match);
 
       const predictionBtn = document.getElementById("match-prediction-button");
       if (predictionBtn) {
-        predictionBtn.hidden = match.status === "completed";
+        predictionBtn.hidden = matchLiveStatus(match) !== "scheduled";
         predictionBtn.onclick = () => { startPredictionPk(match.id); };
       }
 
@@ -2662,7 +2695,8 @@
     }
 
     function renderMatchWatchpoints(match) {
-      const el = document.getElementById("match-detail-watchpoints");
+      // Used only as fallback (no AI preview) — renders to fallback card
+      const el = document.getElementById("match-detail-watchpoints-fallback");
       if (!el) return;
       const home = displayTeamName(match.homeTeam);
       const away = displayTeamName(match.awayTeam);
@@ -2680,6 +2714,29 @@
         `伤停信息：当前页面暂未接入官方伤停源，若赛前公布重要缺阵，会在后续数据同步中更新。`,
       ];
       el.innerHTML = points.map((point) => `<div class="watchpoint-item">${escapeHtml(point)}</div>`).join("");
+    }
+
+    function renderMatchPreview(match) {
+      const data = window.PROTOTYPE_DATA || {};
+      const preview = (data.matchPreviews || {})[match.id];
+      const previewCard = document.getElementById("match-preview-card");
+      const fallbackCard = document.getElementById("match-watchpoints-fallback-card");
+      if (!previewCard || !fallbackCard) return;
+
+      if (preview) {
+        // AI preview available — show preview card, hide fallback
+        document.getElementById("match-preview-headline").textContent = preview.headline || "赛前前瞻";
+        document.getElementById("match-preview-text").textContent = preview.preview || "";
+        const pointsEl = document.getElementById("match-detail-watchpoints");
+        if (pointsEl && Array.isArray(preview.keyPoints)) {
+          pointsEl.innerHTML = preview.keyPoints.map(p => `<div class="watchpoint-item">${escapeHtml(p)}</div>`).join("");
+        }
+        previewCard.hidden = false;
+        fallbackCard.hidden = true;
+      } else {
+        previewCard.hidden = true;
+        fallbackCard.hidden = false;
+      }
     }
 
     function renderMatchTeamButtons(match) {
@@ -3242,7 +3299,7 @@
     async function shareLink({ title, text, url }, btn) {
       const shareUrl = url || window.location.href;
       if (isWeChatBrowser()) {
-        openSharePosterModal();
+        openSharePosterModal(shareUrl);
         return;
       }
       if (navigator.share) {
@@ -3307,10 +3364,38 @@
       return !!window.wx?.config;
     }
 
+    let _wechatSdkReady = false;
+    let _wechatShareSetupStarted = false;
+    let _currentWechatShareData = null;
+
+    function buildWechatShareData(link, matchText = "") {
+      return {
+        title: "今晚预测一下？猜中就生成你的世界杯高光海报",
+        desc: matchText ? `${matchText}，预测胜负、比分、谁先进球。` : "预测胜负、比分、谁先进球，和朋友一起冲世界杯预测榜。",
+        link: link || window.location.href,
+        imgUrl: "https://www.pkgamecup.cn/assets/share-thumb.png",
+      };
+    }
+
+    function applyWechatShareCard() {
+      if (!isWeChatBrowser() || !window.wx || !_wechatSdkReady || !_currentWechatShareData) return false;
+      window.wx.updateAppMessageShareData?.(_currentWechatShareData);
+      window.wx.updateTimelineShareData?.({ ..._currentWechatShareData, title: _currentWechatShareData.title });
+      window.wx.onMenuShareAppMessage?.(_currentWechatShareData);
+      window.wx.onMenuShareTimeline?.({ ..._currentWechatShareData, title: _currentWechatShareData.title });
+      trackEvent("wechat_share_card_ready", { url: _currentWechatShareData.link });
+      return true;
+    }
+
     async function setupWechatShareCard() {
       if (!isWeChatBrowser()) return;
       const config = window.APP_CONFIG || {};
       if (!config.cloudbaseEnvId || !window.cloudbase?.init) return;
+      if (_wechatShareSetupStarted) {
+        applyWechatShareCard();
+        return;
+      }
+      _wechatShareSetupStarted = true;
       try {
         await loadWechatJsSdk();
         const app = window.cloudbase.init({ env: config.cloudbaseEnvId });
@@ -3321,14 +3406,10 @@
         const signature = response?.result || response;
         if (!signature?.enabled) {
           console.warn("WeChat share card not enabled:", signature?.reason || "unknown");
+          _wechatShareSetupStarted = false;
           return;
         }
-        const shareData = {
-          title: "今晚预测一下？猜中就生成你的世界杯高光海报",
-          desc: "预测胜负、比分、谁先进球，和朋友一起冲世界杯预测榜。",
-          link: window.location.href,
-          imgUrl: "https://www.pkgamecup.cn/assets/share-thumb.png",
-        };
+        if (!_currentWechatShareData) _currentWechatShareData = buildWechatShareData(window.location.href);
         window.wx.config({
           debug: false,
           appId: signature.appId,
@@ -3338,17 +3419,15 @@
           jsApiList: ["updateAppMessageShareData", "updateTimelineShareData", "onMenuShareAppMessage", "onMenuShareTimeline"],
         });
         window.wx.ready(() => {
-          window.wx.updateAppMessageShareData?.(shareData);
-          window.wx.updateTimelineShareData?.({ ...shareData, title: shareData.title });
-          window.wx.onMenuShareAppMessage?.(shareData);
-          window.wx.onMenuShareTimeline?.({ ...shareData, title: shareData.title });
-          trackEvent("wechat_share_card_ready", { url: shareData.link });
+          _wechatSdkReady = true;
+          applyWechatShareCard();
         });
         window.wx.error?.((error) => {
           console.warn("WeChat JS-SDK config failed:", error);
         });
       } catch (error) {
         console.warn("Setup WeChat share failed:", error);
+        _wechatShareSetupStarted = false;
       }
     }
 
@@ -3356,8 +3435,10 @@
     const _SHARE_URL = 'https://www.pkgamecup.cn/';
     const WECHAT_OAUTH_STATE_KEY = "world-cup-wechat-oauth-state";
     const WECHAT_OAUTH_STARTED_KEY = "world-cup-wechat-oauth-started";
+    let _posterShareUrl = _SHARE_URL;
 
-    window.openSharePosterModal = function openSharePosterModal() {
+    window.openSharePosterModal = function openSharePosterModal(shareUrl) {
+      _posterShareUrl = shareUrl || window.location.href || _SHARE_URL;
       const modal = document.getElementById('share-poster-modal');
       if (!modal) return;
       modal.style.display = 'flex';
@@ -3367,7 +3448,7 @@
       if (hint) hint.textContent = '生成中…';
       if (img) img.src = '';
       if (canvas) {
-        _drawSharePoster(canvas)
+        _drawSharePoster(canvas, _posterShareUrl)
           .then(() => {
             if (img) img.src = canvas.toDataURL('image/png');
             if (hint) hint.textContent = '↑ 长按图片 → 保存到相册';
@@ -3383,12 +3464,13 @@
     };
 
     window.copyShareLink = function copyShareLink() {
-      navigator.clipboard?.writeText(_SHARE_URL)
+      navigator.clipboard?.writeText(_posterShareUrl || window.location.href)
         .then(() => showToast('链接已复制'))
         .catch(() => showToast('链接复制失败'));
     };
 
-    async function _drawSharePoster(canvas) {
+    async function _drawSharePoster(canvas, shareUrl) {
+      shareUrl = shareUrl || _SHARE_URL;
       const W = 750, H = 1100;
       canvas.width = W;
       canvas.height = H;
@@ -3470,7 +3552,7 @@
       const qrX = W / 2 - qrSize / 2;
       try {
         const qr = await _spLoadImg(
-          `https://api.qrserver.com/v1/create-qr-code/?size=460x460&color=143d32&data=${encodeURIComponent(_SHARE_URL)}`
+          `https://api.qrserver.com/v1/create-qr-code/?size=460x460&color=143d32&data=${encodeURIComponent(shareUrl)}`
         );
         ctx.fillStyle = '#ffffff';
         _spRR(ctx, qrX - 14, y - 14, qrSize + 28, qrSize + 28, 14); ctx.fill();
@@ -3481,7 +3563,7 @@
         ctx.fillStyle = 'rgba(255,255,255,0.55)';
         ctx.font = '20px -apple-system, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(_SHARE_URL.replace('https://', '').substring(0, 40), W / 2, y + qrSize / 2);
+        ctx.fillText(shareUrl.replace('https://', '').substring(0, 40), W / 2, y + qrSize / 2);
       }
       y += qrSize + 32;
 
@@ -3803,12 +3885,7 @@
       if (upcoming.length) syncPredictionMatch();
     };
 
-    window.syncPredictionMatch = function syncPredictionMatch() {
-      const select = document.getElementById("challenge-match");
-      if (!select) return;
-      const matchId = select.value;
-      const data = window.PROTOTYPE_DATA || { matches: [] };
-      const match = (data.matches || []).find((m) => m.id === matchId);
+    function configurePredictionControls(match, options = {}) {
       if (!match) return;
       currentPredictionMatchId = match.id;
       const home = escapeHtml(displayTeamName(match.homeTeam));
@@ -3825,9 +3902,19 @@
       if (halfResult) halfResult.innerHTML = halfResultOptions;
       if (fullResult) fullResult.innerHTML = resultOptions;
       if (halfFirstGoal) halfFirstGoal.innerHTML = firstGoalOptions;
-      const draft = readLocalPredictionDraft(match.id);
+      const draft = options.useDraft === false ? null : readLocalPredictionDraft(match.id);
       if (draft?.answers) applyPredictionAnswers(draft.answers);
+      if (options.answers) applyPredictionAnswers(options.answers);
       renderPredictionCreateView(match);
+    }
+
+    window.syncPredictionMatch = function syncPredictionMatch() {
+      const select = document.getElementById("challenge-match");
+      if (!select) return;
+      const matchId = select.value;
+      const data = window.PROTOTYPE_DATA || { matches: [] };
+      const match = (data.matches || []).find((m) => m.id === matchId);
+      configurePredictionControls(match);
     };
 
     function applyPredictionAnswers(answers = {}) {
@@ -3987,15 +4074,33 @@
       ].filter(([, value]) => value);
     }
 
+    function renderRoomPredictionEditor(room) {
+      const match = getPredictionMatch(room.matchId || currentPredictionMatchId);
+      if (!match) return `<p class="sub">正在读取比赛预测项，请稍后重试。</p>`;
+      configurePredictionControls(match, { useDraft: true });
+      const home = displayTeamName(match.homeTeam);
+      const away = displayTeamName(match.awayTeam);
+      return `
+        <p class="sub">请选择你的预测。提交后，你就能看到好友已经锁定的预测选项。</p>
+        <div class="pk-inline-prediction-form">
+          ${renderPredictionQuestion("上半场结束时，谁领先？", "half-result", [home + "领先", "平局", away + "领先"])}
+          ${renderPredictionQuestion("上半场谁先进球？", "half-first-goal", [home, away, "无进球"])}
+          ${renderPredictionQuestion("上半场总进球区间", "half-goals", ["0-1球", "2-3球", "4球及以上"])}
+          ${renderPredictionQuestion("全场胜负怎么走？", "prediction-result", match.stage && match.stage !== "First Stage" ? [home + "胜", away + "胜"] : [home + "胜", "平局", away + "胜"])}
+          ${renderPredictionQuestion("全场总进球区间", "full-goals", ["0-1球", "2-3球", "4球及以上"])}
+          ${renderPredictionQuestion("全场是否出现红牌？", "match-red-card", ["没有", "有"])}
+          ${renderPredictionQuestion("全场黄牌数量", "match-yellow-cards", ["0-2张", "3-5张", "6张及以上"])}
+          <button class="pk-inline-submit" onclick="submitRoomPrediction(this)">提交我的预测</button>
+        </div>
+      `;
+    }
+
     function renderMyPredictionPanel(room) {
       const content = document.getElementById("pk-my-prediction-content");
       if (!content) return;
       const prediction = room.myPrediction;
       if (!prediction) {
-        content.innerHTML = `
-          <p class="sub">你还没有提交这场比赛的预测。提交后才能解锁查看好友的具体预测选项。</p>
-          <button class="primary" style="width:100%;margin-top:12px" onclick="editRoomPrediction()">立即提交我的预测</button>
-        `;
+        content.innerHTML = renderRoomPredictionEditor(room);
         return;
       }
       const rows = predictionAnswerRows(prediction.answers || {});
@@ -4342,65 +4447,131 @@
         .replace(/\{correctCount\}/g, String(hits || 0));
     }
 
-    function drawTemplatePosterText(ctx, payload) {
+    function posterTemplatePlacement(template) {
+      const id = template?.id || "";
+      const style = template?.style || "";
+      if (id === "template-2" || style === "pop-art-halftone") {
+        return {
+          dataCard: { x: 0.07, y: 0.36, w: 0.86, h: 0.28 },
+          qrBox: { x: 0.185, y: 0.858, w: 0.145, h: 0.145 },
+          maskBox: { x: 0.35, y: 0.748, w: 0.34, h: 0.22 },
+        };
+      }
+      if (id === "template-1" || style === "memphis-duotone") {
+        return {
+          dataCard: { x: 0.055, y: 0.34, w: 0.54, h: 0.27 },
+          qrBox: { x: 0.345, y: 0.785, w: 0.165, h: 0.165 },
+          maskBox: { x: 0.325, y: 0.775, w: 0.21, h: 0.19 },
+        };
+      }
+      return {
+        dataCard: { x: 0.08, y: 0.31, w: 0.62, h: 0.34 },
+        qrBox: { x: 0.405, y: 0.745, w: 0.19, h: 0.19 },
+        maskBox: { x: 0.382, y: 0.725, w: 0.236, h: 0.23 },
+      };
+    }
+
+    function posterRect(box, W, H) {
+      return {
+        x: box.x * W,
+        y: box.y * H,
+        w: box.w * W,
+        h: box.h * H,
+      };
+    }
+
+    async function drawTemplatePosterQr(ctx, placement) {
+      const W = ctx.canvas.width;
+      const H = ctx.canvas.height;
+      const mask = posterRect(placement.maskBox, W, H);
+      const radius = Math.max(18, Math.min(mask.w, mask.h) * 0.08);
+      ctx.save();
+      drawRoundedRect(ctx, mask.x, mask.y, mask.w, mask.h, radius);
+      ctx.fillStyle = "rgba(4,8,18,.92)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,226,138,.72)";
+      ctx.lineWidth = Math.max(2, W * 0.002);
+      ctx.stroke();
+
+      const qr = posterRect(placement.qrBox, W, H);
+      const pad = Math.max(8, qr.w * 0.08);
+      drawRoundedRect(ctx, qr.x - pad, qr.y - pad, qr.w + pad * 2, qr.h + pad * 2, Math.max(12, pad));
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+      try {
+        const qrImg = await loadCanvasImage("assets/qr/pkgamecup-landing-qr.png");
+        ctx.drawImage(qrImg, qr.x, qr.y, qr.w, qr.h);
+      } catch (error) {
+        ctx.fillStyle = "#07121f";
+        ctx.font = `900 ${Math.round(qr.w * 0.11)}px Arial, PingFang SC, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        canvasWrapText(ctx, "扫码进入", qr.x + qr.w / 2, qr.y + qr.h / 2 - qr.w * 0.07, qr.w * 0.82, qr.w * 0.14, 2);
+      }
+      ctx.fillStyle = "rgba(255,255,255,.92)";
+      ctx.font = `900 ${Math.round(Math.max(18, W * 0.024))}px Arial, PingFang SC, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const ctaX = mask.x + mask.w * 0.66;
+      const ctaY = mask.y + mask.h * 0.48;
+      canvasWrapText(ctx, "扫码加入预测PK", ctaX, ctaY, mask.w * 0.48, Math.max(22, W * 0.03), 2);
+      ctx.restore();
+    }
+
+    async function drawTemplatePosterText(ctx, payload, template) {
       const W = ctx.canvas.width;
       const H = ctx.canvas.height;
       const scale = W / 900;
-      ctx.save();
-      ctx.shadowColor = "rgba(0,0,0,.52)";
-      ctx.shadowBlur = 18 * scale;
-      ctx.fillStyle = "#fff";
-      ctx.font = `900 ${Math.round(66 * scale)}px Arial, PingFang SC, sans-serif`;
-      canvasWrapText(ctx, payload.headline, W * 0.075, H * 0.115, W * 0.85, 78 * scale, 3);
-      ctx.restore();
+      const placement = posterTemplatePlacement(template);
+      const card = posterRect(placement.dataCard, W, H);
+      const cardX = card.x;
+      const cardY = card.y;
+      const cardW = card.w;
+      const cardH = card.h;
 
-      const cardX = W * 0.075;
-      const cardY = H * 0.305;
-      const cardW = W * 0.85;
-      const cardH = H * 0.335;
-      drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 34 * scale);
-      ctx.fillStyle = "rgba(3,12,24,.72)";
+      drawRoundedRect(ctx, cardX, cardY, cardW, cardH, Math.max(24, 34 * scale));
+      ctx.fillStyle = "rgba(3,12,24,.86)";
       ctx.fill();
       ctx.strokeStyle = "rgba(255,226,138,.72)";
       ctx.lineWidth = Math.max(2, 3 * scale);
       ctx.stroke();
 
       ctx.fillStyle = "#ffe28a";
-      ctx.font = `900 ${Math.round(28 * scale)}px Arial, PingFang SC, sans-serif`;
-      ctx.fillText(`${payload.matchLabel}｜${payload.resultText}`, cardX + 34 * scale, cardY + 52 * scale);
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.font = `900 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
+      canvasWrapText(ctx, `${payload.matchLabel}｜${payload.resultText}`, cardX + 34 * scale, cardY + 48 * scale, cardW - 68 * scale, 28 * scale, 1);
 
       ctx.fillStyle = "#00f5d2";
-      ctx.font = `900 ${Math.round(34 * scale)}px Arial, PingFang SC, sans-serif`;
-      ctx.fillText(`本场命中 ${payload.hits || 0} 项`, cardX + 34 * scale, cardY + 106 * scale);
+      ctx.font = `900 ${Math.round(32 * scale)}px Arial, PingFang SC, sans-serif`;
+      canvasWrapText(ctx, `本场命中 ${payload.hits || 0} 项`, cardX + 34 * scale, cardY + 94 * scale, cardW * 0.52, 36 * scale, 1);
+
+      ctx.fillStyle = "#07121f";
+      drawRoundedRect(ctx, cardX + cardW - 210 * scale, cardY + 62 * scale, 170 * scale, 54 * scale, 22 * scale);
+      ctx.fillStyle = "rgba(255,226,138,.95)";
+      ctx.fill();
+      ctx.fillStyle = "#07121f";
+      ctx.font = `900 ${Math.round(30 * scale)}px Arial, PingFang SC, sans-serif`;
+      ctx.textAlign = "center";
+      ctx.fillText(`${payload.points || 0}分`, cardX + cardW - 125 * scale, cardY + 99 * scale);
+      ctx.textAlign = "left";
 
       const items = payload.hitLabels?.length ? payload.hitLabels : ["这场暂未命中，下一场继续挑战"];
-      const rowH = 58 * scale;
+      const rowH = Math.min(58 * scale, (cardH - 142 * scale) / Math.min(items.length, 4) - 8 * scale);
       items.slice(0, 4).forEach((item, index) => {
-        const y = cardY + 135 * scale + index * (rowH + 12 * scale);
+        const y = cardY + 130 * scale + index * (rowH + 10 * scale);
         drawRoundedRect(ctx, cardX + 34 * scale, y, cardW - 68 * scale, rowH, 22 * scale);
-        ctx.fillStyle = payload.hitLabels?.length ? "rgba(0,245,210,.18)" : "rgba(255,255,255,.12)";
+        ctx.fillStyle = payload.hitLabels?.length ? "rgba(0,245,210,.24)" : "rgba(255,255,255,.12)";
         ctx.fill();
         ctx.fillStyle = payload.hitLabels?.length ? "#dfff47" : "rgba(255,255,255,.72)";
         ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
-        ctx.fillText(payload.hitLabels?.length ? "✓" : "·", cardX + 58 * scale, y + 38 * scale);
+        ctx.fillText(payload.hitLabels?.length ? "✓" : "·", cardX + 58 * scale, y + rowH * 0.64);
         ctx.fillStyle = "#fff";
         ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
-        canvasWrapText(ctx, item, cardX + 100 * scale, y + 38 * scale, cardW - 160 * scale, 28 * scale, 1);
+        canvasWrapText(ctx, item, cardX + 100 * scale, y + rowH * 0.64, cardW - 160 * scale, 28 * scale, 1);
       });
 
-      drawRoundedRect(ctx, W * 0.09, H * 0.665, W * 0.36, H * 0.078, 24 * scale);
-      ctx.fillStyle = "rgba(255,226,138,.92)";
-      ctx.fill();
-      ctx.fillStyle = "#07121f";
-      ctx.font = `900 ${Math.round(42 * scale)}px Arial, PingFang SC, sans-serif`;
-      ctx.fillText(`${payload.points || 0} 分`, W * 0.135, H * 0.715);
-
-      ctx.fillStyle = "#fff";
-      ctx.font = `900 ${Math.round(32 * scale)}px Arial, PingFang SC, sans-serif`;
-      ctx.fillText(payload.rankText || "预测战报", W * 0.5, H * 0.695);
-      ctx.fillStyle = "rgba(255,255,255,.82)";
-      ctx.font = `800 ${Math.round(24 * scale)}px Arial, PingFang SC, sans-serif`;
-      canvasWrapText(ctx, payload.cta || "下一场，敢来和我预测PK吗？", W * 0.5, H * 0.73, W * 0.42, 30 * scale, 2);
+      await drawTemplatePosterQr(ctx, placement);
     }
 
     async function tryDrawTemplateProphecyPoster(canvas, payload) {
@@ -4416,11 +4587,11 @@
       const ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       const totalChecks = payload.details?.filter((item) => item.status !== "pending").length || payload.hitLabels?.length || 0;
-      drawTemplatePosterText(ctx, {
+      await drawTemplatePosterText(ctx, {
         ...payload,
         headline: posterHeadline(templateSet, payload.nickname, payload.hits, totalChecks),
         matchLabel: templateSet.matchLabel || `${displayTeamName(payload.match.homeTeam)} VS ${displayTeamName(payload.match.awayTeam)}`,
-      });
+      }, template);
       return true;
     }
 
@@ -4893,7 +5064,26 @@
         const url = new URL(window.location);
         url.searchParams.set("room", room.joinCode);
         window.history.replaceState({}, "", url);
+        const matchText = document.getElementById("pk-room-match")?.textContent?.trim() || "";
+        syncWechatShareLink(url.toString(), matchText);
       }
+    }
+
+    function syncWechatShareLink(link, matchText = "") {
+      _currentWechatShareData = buildWechatShareData(link, matchText);
+      if (applyWechatShareCard()) return;
+      if (isWeChatBrowser()) void setupWechatShareCard();
+    }
+
+    async function waitForWechatShareCardReady(timeoutMs = 1800) {
+      if (!isWeChatBrowser()) return;
+      if (applyWechatShareCard()) return;
+      void setupWechatShareCard();
+      const started = Date.now();
+      while (!_wechatSdkReady && Date.now() - started < timeoutMs) {
+        await new Promise((resolve) => setTimeout(resolve, 120));
+      }
+      applyWechatShareCard();
     }
 
     window.renderPredictionRoom = function renderPredictionRoom(room) {
@@ -4919,8 +5109,6 @@
       renderMyPredictionPanel(room);
       renderRoomPredictions(room);
 
-      const submitBtn = document.getElementById("pk-room-submit-button");
-      if (submitBtn) submitBtn.hidden = !!room.myPrediction;
       const finalBtn = document.getElementById("final-settlement-button");
       if (finalBtn) {
         const canSettle = matchCompleted(match);
@@ -4934,10 +5122,17 @@
       }
     };
 
+    window.submitRoomPrediction = function submitRoomPrediction(btn) {
+      submittingToExistingRoom = true;
+      return savePredictionResult(btn);
+    };
+
     window.sharePkRoom = async function sharePkRoom(btn) {
       const roomUrl = window.location.href;
       const matchText = document.getElementById("pk-room-match")?.textContent?.trim() || "这场世界杯比赛";
+      syncWechatShareLink(roomUrl, matchText);
       trackEvent("pk_room_share_clicked", { roomId: currentPredictionRoomId, url: roomUrl });
+      await waitForWechatShareCardReady();
       await shareLink({
         title: "今晚预测一下？",
         text: `${matchText}，猜中就生成你的世界杯高光海报。`,
@@ -4966,6 +5161,7 @@
           matchId: currentRoom.matchId,
           matchLabel,
           answers,
+          forceNew: true,
         }));
         currentPredictionRoomId = room.id;
         updateRoomUrl(room);

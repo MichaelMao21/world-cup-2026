@@ -8,12 +8,16 @@ await mkdir(resolve(output, "data"), { recursive: true });
 await mkdir(resolve(output, "js"), { recursive: true });
 await mkdir(resolve(output, "assets"), { recursive: true });
 
-const html = await readFile(resolve("prototype.html"), "utf8");
+const buildVersion = new Date().toISOString().replace(/[-:T.Z]/g, "").slice(0, 12);
+const html = (await readFile(resolve("prototype.html"), "utf8"))
+  .replace(/\.\/data\/prototype-data\.js\?v=[^"]+/g, `./data/prototype-data.js?v=${buildVersion}`);
 await writeFile(resolve(output, "index.html"), html, "utf8");
 await cp(resolve("data/prototype-data.js"), resolve(output, "data/prototype-data.js"));
+await cp(resolve("data/player-stats.json"), resolve(output, "data/player-stats.json")).catch(() => {});
 await cp(resolve("js/prediction-service.js"), resolve(output, "js/prediction-service.js"));
 await cp(resolve("assets/share-card.png"), resolve(output, "assets/share-card.png"));
 await cp(resolve("assets/share-thumb.png"), resolve(output, "assets/share-thumb.png"));
+await cp(resolve("assets/qr"), resolve(output, "assets/qr"), { recursive: true });
 await cp(resolve("assets/poster-templates"), resolve(output, "assets/poster-templates"), { recursive: true });
 
 const rootFiles = await readdir(".");

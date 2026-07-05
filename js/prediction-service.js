@@ -353,43 +353,43 @@
       await this.authenticate();
       const now = new Date().toISOString();
 
-      // Reuse existing room if the user already has one for this match.
-      try {
-        const existingResult = await this.db
-          .collection("prediction_rooms")
-          .where({ creator_id: this.userId, match_id: payload.matchId })
-          .limit(1)
-          .get();
-        const existingRoom = (existingResult.data || [])[0];
-        if (existingRoom) {
-          const existingRoomId = existingRoom._id || existingRoom.id;
-          // Update the prediction in that room with the latest answers.
-          const predResult = await this.db
-            .collection("predictions")
-            .where({ room_id: existingRoomId, user_id: this.userId })
+      if (!payload.forceNew) {
+        try {
+          const existingResult = await this.db
+            .collection("prediction_rooms")
+            .where({ creator_id: this.userId, match_id: payload.matchId })
             .limit(1)
             .get();
-          const predRecord = {
-            room_id: existingRoomId,
-            user_id: this.userId,
-            match_id: payload.matchId,
-            match_label: payload.matchLabel,
-            answers: payload.answers,
-            points: 0,
-            hits: 0,
-            is_winner: false,
-            submitted_at: now,
-          };
-          const existingPred = (predResult.data || [])[0];
-          if (existingPred?._id) {
-            await this.db.collection("predictions").doc(existingPred._id).set(predRecord);
-          } else {
-            await this.db.collection("predictions").add(predRecord);
+          const existingRoom = (existingResult.data || [])[0];
+          if (existingRoom) {
+            const existingRoomId = existingRoom._id || existingRoom.id;
+            const predResult = await this.db
+              .collection("predictions")
+              .where({ room_id: existingRoomId, user_id: this.userId })
+              .limit(1)
+              .get();
+            const predRecord = {
+              room_id: existingRoomId,
+              user_id: this.userId,
+              match_id: payload.matchId,
+              match_label: payload.matchLabel,
+              answers: payload.answers,
+              points: 0,
+              hits: 0,
+              is_winner: false,
+              submitted_at: now,
+            };
+            const existingPred = (predResult.data || [])[0];
+            if (existingPred?._id) {
+              await this.db.collection("predictions").doc(existingPred._id).set(predRecord);
+            } else {
+              await this.db.collection("predictions").add(predRecord);
+            }
+            return this.getRoom(existingRoomId);
           }
-          return this.getRoom(existingRoomId);
+        } catch {
+          // Fall through to create a new room.
         }
-      } catch {
-        // Fall through to create a new room.
       }
 
       const roomPayload = {
