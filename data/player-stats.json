@@ -1,0 +1,1610 @@
+{
+  "source": "ESPN FIFA World Cup statistics",
+  "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/statistics",
+  "importedAt": "2026-07-06T10:22:06.913Z",
+  "sourceTimestamp": "2026-07-06T10:21:09Z",
+  "season": {
+    "year": 2026,
+    "displayName": "2026 FIFA World Cup",
+    "type": 13800,
+    "name": "Round of 16"
+  },
+  "coverage": {
+    "goldenBoot": "synced",
+    "distribution": "synced assists",
+    "attacking": "synced match leaders",
+    "dribbles": "not available from current source",
+    "passes": "synced match leaders",
+    "goalkeeping": "synced match leaders",
+    "discipline": "synced match events"
+  },
+  "audit": {
+    "scorerSource": "ESPN statistics leaders plus ESPN match summary goal events",
+    "sourceGoldenBoot": [
+      {
+        "name": "Kylian Mbappé",
+        "team": "France",
+        "gp": 5,
+        "goals": 7,
+        "assists": 2,
+        "shots": null
+      },
+      {
+        "name": "Erling Haaland",
+        "team": "Norway",
+        "gp": 4,
+        "goals": 7,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Lionel Messi",
+        "team": "Argentina",
+        "gp": 4,
+        "goals": 7,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Harry Kane",
+        "team": "England",
+        "gp": 5,
+        "goals": 6,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Vinícius Júnior",
+        "team": "Brazil",
+        "gp": 5,
+        "goals": 4,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Julián Quiñones",
+        "team": "Mexico",
+        "gp": 5,
+        "goals": 4,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Jude Bellingham",
+        "team": "England",
+        "gp": 5,
+        "goals": 4,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Ousmane Dembélé",
+        "team": "France",
+        "gp": 5,
+        "goals": 4,
+        "assists": 2,
+        "shots": null
+      },
+      {
+        "name": "Ismaïla Sarr",
+        "team": "Senegal",
+        "gp": 4,
+        "goals": 4,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Mikel Oyarzabal",
+        "team": "Spain",
+        "gp": 4,
+        "goals": 4,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Jonathan David",
+        "team": "Canada",
+        "gp": 5,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Ismael Saibari",
+        "team": "Morocco",
+        "gp": 5,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Matheus Cunha",
+        "team": "Brazil",
+        "gp": 5,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Cody Gakpo",
+        "team": "Netherlands",
+        "gp": 4,
+        "goals": 3,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Yoane Wissa",
+        "team": "Congo DR",
+        "gp": 4,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Kai Havertz",
+        "team": "Germany",
+        "gp": 4,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "team": "Portugal",
+        "gp": 4,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Raúl Jiménez",
+        "team": "Mexico",
+        "gp": 4,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Brian Brobbey",
+        "team": "Netherlands",
+        "gp": 4,
+        "goals": 3,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Johan Manzambi",
+        "team": "Switzerland",
+        "gp": 4,
+        "goals": 3,
+        "assists": 2,
+        "shots": null
+      }
+    ],
+    "eventGoldenBoot": [
+      {
+        "name": "Kylian Mbappé",
+        "team": "France",
+        "gp": 4,
+        "goals": 7
+      },
+      {
+        "name": "Erling Haaland",
+        "team": "Norway",
+        "gp": 3,
+        "goals": 6
+      },
+      {
+        "name": "Lionel Messi",
+        "team": "Argentina",
+        "gp": 3,
+        "goals": 6
+      },
+      {
+        "name": "Harry Kane",
+        "team": "England",
+        "gp": 4,
+        "goals": 6
+      },
+      {
+        "name": "Vinícius Júnior",
+        "team": "Brazil",
+        "gp": 3,
+        "goals": 4
+      },
+      {
+        "name": "Jude Bellingham",
+        "team": "England",
+        "gp": 3,
+        "goals": 4
+      },
+      {
+        "name": "Mikel Oyarzabal",
+        "team": "Spain",
+        "gp": 2,
+        "goals": 4
+      },
+      {
+        "name": "Ousmane Dembélé",
+        "team": "France",
+        "gp": 2,
+        "goals": 4
+      },
+      {
+        "name": "Ismaïla Sarr",
+        "team": "Senegal",
+        "gp": 3,
+        "goals": 4
+      },
+      {
+        "name": "Julián Quiñones",
+        "team": "Mexico",
+        "gp": 3,
+        "goals": 3
+      },
+      {
+        "name": "Raúl Jiménez",
+        "team": "Mexico",
+        "gp": 3,
+        "goals": 3
+      },
+      {
+        "name": "Folarin Balogun",
+        "team": "United States",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Ismael Saibari",
+        "team": "Morocco",
+        "gp": 3,
+        "goals": 3
+      },
+      {
+        "name": "Kai Havertz",
+        "team": "Germany",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Yoane Wissa",
+        "team": "Congo DR",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Johan Manzambi",
+        "team": "Switzerland",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Jonathan David",
+        "team": "Canada",
+        "gp": 1,
+        "goals": 3
+      },
+      {
+        "name": "Matheus Cunha",
+        "team": "Brazil",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Brian Brobbey",
+        "team": "Netherlands",
+        "gp": 2,
+        "goals": 3
+      },
+      {
+        "name": "Cody Gakpo",
+        "team": "Netherlands",
+        "gp": 2,
+        "goals": 3
+      }
+    ],
+    "scorerCorrections": [
+      {
+        "name": "Giovanni Reyna",
+        "team": "United States",
+        "sourceGoals": 0,
+        "eventGoals": 1,
+        "finalGoals": 1
+      }
+    ]
+  },
+  "goldenBoot": [
+    {
+      "name": "Kylian Mbappé",
+      "team": "France",
+      "gp": 5,
+      "goals": 7,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Erling Haaland",
+      "team": "Norway",
+      "gp": 4,
+      "goals": 7,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Lionel Messi",
+      "team": "Argentina",
+      "gp": 4,
+      "goals": 7,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Harry Kane",
+      "team": "England",
+      "gp": 5,
+      "goals": 6,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Ousmane Dembélé",
+      "team": "France",
+      "gp": 5,
+      "goals": 4,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Ismaïla Sarr",
+      "team": "Senegal",
+      "gp": 4,
+      "goals": 4,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Jude Bellingham",
+      "team": "England",
+      "gp": 5,
+      "goals": 4,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Julián Quiñones",
+      "team": "Mexico",
+      "gp": 5,
+      "goals": 4,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Mikel Oyarzabal",
+      "team": "Spain",
+      "gp": 4,
+      "goals": 4,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Vinícius Júnior",
+      "team": "Brazil",
+      "gp": 5,
+      "goals": 4,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Deniz Undav",
+      "team": "Germany",
+      "gp": 4,
+      "goals": 3,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Johan Manzambi",
+      "team": "Switzerland",
+      "gp": 4,
+      "goals": 3,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Cody Gakpo",
+      "team": "Netherlands",
+      "gp": 4,
+      "goals": 3,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Brian Brobbey",
+      "team": "Netherlands",
+      "gp": 4,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Cristiano Ronaldo",
+      "team": "Portugal",
+      "gp": 4,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Elijah Just",
+      "team": "New Zealand",
+      "gp": 3,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Folarin Balogun",
+      "team": "United States",
+      "gp": 3,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Ismael Saibari",
+      "team": "Morocco",
+      "gp": 5,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Jonathan David",
+      "team": "Canada",
+      "gp": 5,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Kai Havertz",
+      "team": "Germany",
+      "gp": 4,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Matheus Cunha",
+      "team": "Brazil",
+      "gp": 5,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Raúl Jiménez",
+      "team": "Mexico",
+      "gp": 4,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Yoane Wissa",
+      "team": "Congo DR",
+      "gp": 4,
+      "goals": 3,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Breel Embolo",
+      "team": "Switzerland",
+      "gp": 4,
+      "goals": 2,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Crysencio Summerville",
+      "team": "Netherlands",
+      "gp": 4,
+      "goals": 2,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Ayase Ueda",
+      "team": "Japan",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Bradley Barcola",
+      "team": "France",
+      "gp": 5,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Leandro Trossard",
+      "team": "Belgium",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Maxi Araújo",
+      "team": "Uruguay",
+      "gp": 3,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Nicolas Pépé",
+      "team": "Ivory Coast",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Pape Gueye",
+      "team": "Senegal",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Ramin Rezaeian",
+      "team": "Iran",
+      "gp": 3,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Riyad Mahrez",
+      "team": "Algeria",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Romelu Lukaku",
+      "team": "Belgium",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Rubén Vargas",
+      "team": "Switzerland",
+      "gp": 4,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Soufiane Rahimi",
+      "team": "Morocco",
+      "gp": 5,
+      "goals": 2,
+      "assists": 1,
+      "shots": null
+    },
+    {
+      "name": "Amad Diallo",
+      "team": "Ivory Coast",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Anthony Elanga",
+      "team": "Sweden",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Azzedine Ounahi",
+      "team": "Morocco",
+      "gp": 5,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Cyle Larin",
+      "team": "Canada",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Daichi Kamada",
+      "team": "Japan",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Daniel Muñoz",
+      "team": "Colombia",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Emam Ashour",
+      "team": "Egypt",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Ermin Mahmic",
+      "team": "Bosnia-Herzegovina",
+      "gp": 3,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Habib Diarra",
+      "team": "Senegal",
+      "gp": 3,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Marko Arnautovic",
+      "team": "Austria",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Yasin Ayari",
+      "team": "Sweden",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Youri Tielemans",
+      "team": "Belgium",
+      "gp": 4,
+      "goals": 2,
+      "assists": 0,
+      "shots": null
+    },
+    {
+      "name": "Achraf Hakimi",
+      "team": "Morocco",
+      "gp": 5,
+      "goals": 1,
+      "assists": 2,
+      "shots": null
+    },
+    {
+      "name": "Giovanni Reyna",
+      "team": "United States",
+      "gp": 1,
+      "goals": 1,
+      "assists": 0,
+      "shots": null
+    }
+  ],
+  "attacking": [
+    {
+      "name": "Lionel Messi",
+      "team": "Argentina",
+      "gp": 3,
+      "shots": 22,
+      "sog": 14,
+      "goals": 6
+    },
+    {
+      "name": "Kylian Mbappé",
+      "team": "France",
+      "gp": 3,
+      "shots": 17,
+      "sog": 11,
+      "goals": 7
+    },
+    {
+      "name": "Erling Haaland",
+      "team": "Norway",
+      "gp": 3,
+      "shots": 14,
+      "sog": 10,
+      "goals": 6
+    },
+    {
+      "name": "Jonathan David",
+      "team": "Canada",
+      "gp": 3,
+      "shots": 14,
+      "sog": 7,
+      "goals": 3
+    },
+    {
+      "name": "Raúl Jiménez",
+      "team": "Mexico",
+      "gp": 3,
+      "shots": 14,
+      "sog": 5,
+      "goals": 3
+    },
+    {
+      "name": "Ismaïla Sarr",
+      "team": "Senegal",
+      "gp": 3,
+      "shots": 14,
+      "sog": 4,
+      "goals": 4
+    },
+    {
+      "name": "Vinícius Júnior",
+      "team": "Brazil",
+      "gp": 3,
+      "shots": 13,
+      "sog": 8,
+      "goals": 4
+    },
+    {
+      "name": "Cristiano Ronaldo",
+      "team": "Portugal",
+      "gp": 3,
+      "shots": 13,
+      "sog": 6,
+      "goals": 2
+    },
+    {
+      "name": "Harry Kane",
+      "team": "England",
+      "gp": 2,
+      "shots": 12,
+      "sog": 6,
+      "goals": 6
+    },
+    {
+      "name": "Mikel Oyarzabal",
+      "team": "Spain",
+      "gp": 2,
+      "shots": 11,
+      "sog": 5,
+      "goals": 4
+    },
+    {
+      "name": "Viktor Gyökeres",
+      "team": "Sweden",
+      "gp": 2,
+      "shots": 10,
+      "sog": 5,
+      "goals": 1
+    },
+    {
+      "name": "Achraf Hakimi",
+      "team": "Morocco",
+      "gp": 3,
+      "shots": 10,
+      "sog": 4,
+      "goals": 1
+    },
+    {
+      "name": "Dan Ndoye",
+      "team": "Switzerland",
+      "gp": 2,
+      "shots": 10,
+      "sog": 4,
+      "goals": 1
+    },
+    {
+      "name": "Ibrahim Maza",
+      "team": "Algeria",
+      "gp": 3,
+      "shots": 10,
+      "sog": 3,
+      "goals": 0
+    },
+    {
+      "name": "Julián Quiñones",
+      "team": "Mexico",
+      "gp": 2,
+      "shots": 9,
+      "sog": 3,
+      "goals": 3
+    },
+    {
+      "name": "Gustavo Puerta",
+      "team": "Colombia",
+      "gp": 2,
+      "shots": 9,
+      "sog": 3,
+      "goals": 0
+    },
+    {
+      "name": "Scott McTominay",
+      "team": "Scotland",
+      "gp": 3,
+      "shots": 8,
+      "sog": 3,
+      "goals": 0
+    },
+    {
+      "name": "Arda Güler",
+      "team": "Türkiye",
+      "gp": 1,
+      "shots": 8,
+      "sog": 3,
+      "goals": 1
+    },
+    {
+      "name": "Cody Gakpo",
+      "team": "Netherlands",
+      "gp": 2,
+      "shots": 7,
+      "sog": 5,
+      "goals": 3
+    },
+    {
+      "name": "Enner Valencia",
+      "team": "Ecuador",
+      "gp": 1,
+      "shots": 7,
+      "sog": 5,
+      "goals": 0
+    }
+  ],
+  "distribution": [
+    {
+      "name": "Michael Olise",
+      "team": "France",
+      "gp": 5,
+      "assists": 5,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Bruno Guimarães",
+      "team": "Brazil",
+      "gp": 5,
+      "assists": 4,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Brahim Díaz",
+      "team": "Morocco",
+      "gp": 5,
+      "assists": 4,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Roberto Alvarado",
+      "team": "Mexico",
+      "gp": 5,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Bukayo Saka",
+      "team": "England",
+      "gp": 5,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Andreas Schjelderup",
+      "team": "Norway",
+      "gp": 5,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Florian Wirtz",
+      "team": "Germany",
+      "gp": 4,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Alexander Isak",
+      "team": "Sweden",
+      "gp": 4,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Martin Ødegaard",
+      "team": "Norway",
+      "gp": 4,
+      "assists": 3,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Achraf Hakimi",
+      "team": "Morocco",
+      "gp": 5,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Kylian Mbappé",
+      "team": "France",
+      "gp": 5,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Julio Enciso",
+      "team": "Paraguay",
+      "gp": 5,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Ousmane Dembélé",
+      "team": "France",
+      "gp": 5,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Patrick Berg",
+      "team": "Norway",
+      "gp": 5,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Denzel Dumfries",
+      "team": "Netherlands",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Marc Cucurella",
+      "team": "Spain",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Viktor Gyökeres",
+      "team": "Sweden",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Joshua Kimmich",
+      "team": "Germany",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Ryan Gravenberch",
+      "team": "Netherlands",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Breel Embolo",
+      "team": "Switzerland",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Mohamed Salah",
+      "team": "Egypt",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Anthony Gordon",
+      "team": "England",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Crysencio Summerville",
+      "team": "Netherlands",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Johan Manzambi",
+      "team": "Switzerland",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Deniz Undav",
+      "team": "Germany",
+      "gp": 4,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Hannibal Mejbri",
+      "team": "Tunisia",
+      "gp": 3,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Chris Wood",
+      "team": "New Zealand",
+      "gp": 3,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Nathan Saliba",
+      "team": "Canada",
+      "gp": 3,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Houssem Aouar",
+      "team": "Algeria",
+      "gp": 3,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Iliman Ndiaye",
+      "team": "Senegal",
+      "gp": 3,
+      "assists": 2,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Gabriel Magalhães",
+      "team": "Brazil",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Harry Kane",
+      "team": "England",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Vinícius Júnior",
+      "team": "Brazil",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Julián Quiñones",
+      "team": "Mexico",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Elliot Anderson",
+      "team": "England",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Jude Bellingham",
+      "team": "England",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Bradley Barcola",
+      "team": "France",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Soufiane Rahimi",
+      "team": "Morocco",
+      "gp": 5,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Moussa Niakhaté",
+      "team": "Senegal",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Virgil van Dijk",
+      "team": "Netherlands",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Mohamed Hany",
+      "team": "Egypt",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Matías Galarza",
+      "team": "Paraguay",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Cody Gakpo",
+      "team": "Netherlands",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Ismaïla Sarr",
+      "team": "Senegal",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Sadio Mané",
+      "team": "Senegal",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Leandro Trossard",
+      "team": "Belgium",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Pedro Vite",
+      "team": "Ecuador",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Josip Stanisic",
+      "team": "Croatia",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Adrien Rabiot",
+      "team": "France",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    },
+    {
+      "name": "Chancel Mbemba",
+      "team": "Congo DR",
+      "gp": 4,
+      "assists": 1,
+      "chances": null,
+      "label": "助攻"
+    }
+  ],
+  "dribbles": [],
+  "passes": [
+    {
+      "name": "Rodri",
+      "team": "Spain",
+      "gp": 4,
+      "passes": 413,
+      "label": "传球"
+    },
+    {
+      "name": "Gabriel Magalhães",
+      "team": "Brazil",
+      "gp": 3,
+      "passes": 305,
+      "label": "传球"
+    },
+    {
+      "name": "Vitinha",
+      "team": "Portugal",
+      "gp": 3,
+      "passes": 270,
+      "label": "传球"
+    },
+    {
+      "name": "Marc Guéhi",
+      "team": "England",
+      "gp": 3,
+      "passes": 233,
+      "label": "传球"
+    },
+    {
+      "name": "Virgil van Dijk",
+      "team": "Netherlands",
+      "gp": 3,
+      "passes": 232,
+      "label": "传球"
+    },
+    {
+      "name": "Manuel Akanji",
+      "team": "Switzerland",
+      "gp": 3,
+      "passes": 219,
+      "label": "传球"
+    },
+    {
+      "name": "Mathías Olivera",
+      "team": "Uruguay",
+      "gp": 3,
+      "passes": 211,
+      "label": "传球"
+    },
+    {
+      "name": "Ramy Bensebaini",
+      "team": "Algeria",
+      "gp": 2,
+      "passes": 203,
+      "label": "传球"
+    },
+    {
+      "name": "Lisandro Martínez",
+      "team": "Argentina",
+      "gp": 2,
+      "passes": 185,
+      "label": "传球"
+    },
+    {
+      "name": "Aïssa Mandi",
+      "team": "Algeria",
+      "gp": 2,
+      "passes": 179,
+      "label": "传球"
+    },
+    {
+      "name": "Marawan Attia",
+      "team": "Egypt",
+      "gp": 2,
+      "passes": 178,
+      "label": "传球"
+    },
+    {
+      "name": "Brandon Mechele",
+      "team": "Belgium",
+      "gp": 2,
+      "passes": 177,
+      "label": "传球"
+    }
+  ],
+  "goalkeeping": [
+    {
+      "name": "Orlando Gill",
+      "team": "Paraguay",
+      "gp": 5,
+      "saves": 23,
+      "ga": 6,
+      "cs": 2
+    },
+    {
+      "name": "Eloy Room",
+      "team": "Curaçao",
+      "gp": 2,
+      "saves": 19,
+      "ga": 7,
+      "cs": 1
+    },
+    {
+      "name": "Vozinha",
+      "team": "Cape Verde",
+      "gp": 3,
+      "saves": 18,
+      "ga": 3,
+      "cs": 2
+    },
+    {
+      "name": "Mohammed Al-Owais",
+      "team": "Saudi Arabia",
+      "gp": 3,
+      "saves": 16,
+      "ga": 5,
+      "cs": 1
+    },
+    {
+      "name": "Bart Verbruggen",
+      "team": "Netherlands",
+      "gp": 4,
+      "saves": 16,
+      "ga": 5,
+      "cs": 0
+    },
+    {
+      "name": "Alisson Becker",
+      "team": "Brazil",
+      "gp": 5,
+      "saves": 14,
+      "ga": 4,
+      "cs": 2
+    },
+    {
+      "name": "Patrick Beach",
+      "team": "Australia",
+      "gp": 4,
+      "saves": 14,
+      "ga": 3,
+      "cs": 2
+    },
+    {
+      "name": "Diogo Costa",
+      "team": "Portugal",
+      "gp": 4,
+      "saves": 14,
+      "ga": 2,
+      "cs": 2
+    },
+    {
+      "name": "Lionel Mpasi",
+      "team": "Congo DR",
+      "gp": 3,
+      "saves": 14,
+      "ga": 4,
+      "cs": 0
+    },
+    {
+      "name": "Gregor Kobel",
+      "team": "Switzerland",
+      "gp": 4,
+      "saves": 13,
+      "ga": 3,
+      "cs": 1
+    },
+    {
+      "name": "Alexander Schlager",
+      "team": "Austria",
+      "gp": 4,
+      "saves": 13,
+      "ga": 8,
+      "cs": 0
+    },
+    {
+      "name": "Mahmoud Abunada",
+      "team": "Qatar",
+      "gp": 3,
+      "saves": 12,
+      "ga": 10,
+      "cs": 0
+    }
+  ],
+  "discipline": [
+    {
+      "name": "Miguel Almirón",
+      "team": "Paraguay",
+      "gp": 2,
+      "yc": 1,
+      "rc": 1
+    },
+    {
+      "name": "Folarin Balogun",
+      "team": "United States",
+      "gp": 2,
+      "yc": 1,
+      "rc": 1
+    },
+    {
+      "name": "Piero Hincapié",
+      "team": "Ecuador",
+      "gp": 2,
+      "yc": 1,
+      "rc": 1
+    },
+    {
+      "name": "Jarell Quansah",
+      "team": "England",
+      "gp": 2,
+      "yc": 1,
+      "rc": 1
+    },
+    {
+      "name": "Sphephelo Sithole",
+      "team": "South Africa",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Themba Zwane",
+      "team": "South Africa",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "César Montes",
+      "team": "Mexico",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Tarik Muharemovic",
+      "team": "Bosnia-Herzegovina",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Homam Ahmed",
+      "team": "Qatar",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Assim Madibo",
+      "team": "Qatar",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Rebin Sulaka",
+      "team": "Iraq",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Agustín Canobbio",
+      "team": "Uruguay",
+      "gp": 1,
+      "yc": 0,
+      "rc": 1
+    },
+    {
+      "name": "Teboho Mokoena",
+      "team": "South Africa",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Luc de Fougerolles",
+      "team": "Canada",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Diego Gómez",
+      "team": "Paraguay",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Casemiro",
+      "team": "Brazil",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Sidny Lopes Cabral",
+      "team": "Cape Verde",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Caleb Yirenkyi",
+      "team": "Ghana",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Abdukodir Khusanov",
+      "team": "Uzbekistan",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    },
+    {
+      "name": "Ahmed Fathy",
+      "team": "Qatar",
+      "gp": 2,
+      "yc": 2,
+      "rc": 0
+    }
+  ]
+}

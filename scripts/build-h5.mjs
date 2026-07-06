@@ -18,6 +18,7 @@ await cp(resolve("js/prediction-service.js"), resolve(output, "js/prediction-ser
 await cp(resolve("assets/share-card.png"), resolve(output, "assets/share-card.png"));
 await cp(resolve("assets/share-thumb.png"), resolve(output, "assets/share-thumb.png"));
 await cp(resolve("assets/qr"), resolve(output, "assets/qr"), { recursive: true });
+await cp(resolve("assets/match-posters"), resolve(output, "assets/match-posters"), { recursive: true }).catch(() => {});
 await cp(resolve("assets/poster-templates"), resolve(output, "assets/poster-templates"), { recursive: true });
 
 const rootFiles = await readdir(".");

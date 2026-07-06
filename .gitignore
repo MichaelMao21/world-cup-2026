@@ -11,6 +11,11 @@ downloads/
 *.tmp
 .env
 .env.*
+.loop/CONFIG.local.json
+.loop/STATE.md
+.loop/scheduler-state.json
+.loop/logs/
+.loop/reports/
 
 # Local screenshots / auth helpers
 lark-auth-send-message.png

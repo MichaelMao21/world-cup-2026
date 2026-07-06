@@ -10,6 +10,16 @@
     "build:prototype-data": "node scripts/build-prototype-data.mjs",
     "scrape:fifa": "node scripts/scrape-fifa.mjs",
     "scrape:zhibo8": "node scripts/scrape-zhibo8.mjs",
-    "update": "node scripts/update-all.mjs"
+    "update": "node scripts/update-all.mjs",
+    "sync:results": "node scripts/sync-espn-match-results.mjs",
+    "sync:player-stats": "node scripts/sync-player-stats.mjs",
+    "validate:data": "node scripts/validate-data.mjs",
+    "test:data-assets": "node scripts/test-match-data-assets.mjs",
+    "loop:daily": "node scripts/loop-daily.mjs",
+    "loop:scheduler": "node scripts/loop-scheduler.mjs",
+    "loop:install": "node scripts/install-loop-launchd.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0"
   }
 }

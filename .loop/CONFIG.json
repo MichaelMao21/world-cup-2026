@@ -1,0 +1,54 @@
+{
+  "loopName": "world-cup-guide-l2",
+  "level": "L2",
+  "schedule": {
+    "enabled": true,
+    "hour": 9,
+    "minute": 30,
+    "timezone": "Asia/Shanghai",
+    "matchTriggerWindowMinutes": 20,
+    "catchUpIntervalMinutes": 30,
+    "catchUpLookbackMinutes": 360,
+    "halfTimeOffsetMinutes": 60,
+    "fullTimeOffsetMinutes": 120,
+    "eventDriven": true
+  },
+  "safety": {
+    "autoFix": true,
+    "autoPublish": true,
+    "autoUpdateData": true,
+    "autoFixScope": [
+      "match-results",
+      "match-events",
+      "player-stats",
+      "team-stats",
+      "prototype-data",
+      "h5-build",
+      "cloudbase-publish",
+      "launchd-scheduler"
+    ],
+    "blockedAutoFixScope": [
+      "prediction-scoring-rules",
+      "core-business-logic",
+      "database-permissions",
+      "login-or-payment",
+      "large-ui-redesign"
+    ]
+  },
+  "checks": {
+    "data": true,
+    "matchDataAssets": true,
+    "h5Contracts": true,
+    "predictionFlow": true,
+    "localBuild": true
+  },
+  "lark": {
+    "enabled": false,
+    "identity": "user",
+    "recipientType": "user",
+    "recipientId": "",
+    "sendOnSuccess": true,
+    "sendOnWarning": true,
+    "sendOnFailure": true
+  }
+}

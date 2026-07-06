@@ -120,6 +120,16 @@ async function enrichFromEspn(espnId) {
     result.redCards    = totalRed;
   }
 
+  // Penalty winner (if match went to shootout)
+  const statusDesc = comp.status?.type?.description || "";
+  if (/penalt/i.test(statusDesc)) {
+    const homePens = Number(homeComp?.linescores?.find((_, i, arr) => i === arr.length - 1)?.displayValue ?? NaN);
+    const awayPens = Number(awayComp?.linescores?.find((_, i, arr) => i === arr.length - 1)?.displayValue ?? NaN);
+    if (!Number.isNaN(homePens) && !Number.isNaN(awayPens)) {
+      result.penaltyWinner = homePens > awayPens ? "home" : "away";
+    }
+  }
+
   // First half first-goal team from keyEvents
   // Find the earliest goal event in period 1
   const keyEvents = summary.keyEvents || [];

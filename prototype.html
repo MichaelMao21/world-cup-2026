@@ -2086,12 +2086,13 @@
 
     function renderMatchActions(match, options = {}) {
       const detailLabel = options.detailLabel || "查看详情 →";
+      const detailAction = options.detailAction || `openMatch('${match.id}')`;
       const canPredict = match && matchLiveStatus(match) === "scheduled";
       const predictionButton = canPredict
         ? `<button onclick="startPredictionPk('${match.id}')">预测这场PK</button>`
         : "";
       return `<div class="match-actions${canPredict ? "" : " single"}">
-        <button class="ghost" onclick="openMatch('${match.id}')">${detailLabel}</button>
+        <button class="ghost" onclick="${detailAction}">${detailLabel}</button>
         ${predictionButton}
       </div>`;
     }
@@ -2192,7 +2193,7 @@
                   <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
                 </div>
                 <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
-                ${renderMatchActions(m)}
+                ${renderMatchActions(m, { detailLabel: "生成神预言海报", detailAction: `generateMatchProphecyPoster('${m.id}', this)` })}
               </article>`).join("");
           }
         }
@@ -2224,7 +2225,7 @@
                   <span class="team">${displayTeamWithFlag(m.awayTeam)}</span>
                 </div>
                 <p class="meta">${escapeHtml(displayStage(m))} · ${escapeHtml(m.venue || "")}</p>
-                ${renderMatchActions(m)}
+                ${renderMatchActions(m, { detailLabel: "生成神预言海报", detailAction: `generateMatchProphecyPoster('${m.id}', this)` })}
               </article>`).join("");
           } else {
             resultsDiv.innerHTML = "";
@@ -3436,6 +3437,24 @@
     const WECHAT_OAUTH_STATE_KEY = "world-cup-wechat-oauth-state";
     const WECHAT_OAUTH_STARTED_KEY = "world-cup-wechat-oauth-started";
     let _posterShareUrl = _SHARE_URL;
+    const MATCH_SHARE_POSTERS = {
+      "fifa-match-400021532": {
+        src: "assets/match-posters/brazil-vs-norway-share-poster.png",
+        qrBox: { x: 0.75, y: 0.755, size: 0.205 },
+      },
+      "fifa-match-400021531": {
+        src: "assets/match-posters/england-vs-mexico-share-poster.png",
+        qrBox: { x: 0.75, y: 0.755, size: 0.205 },
+      },
+      "fifa-match-400021529": {
+        src: "assets/match-posters/portugal-vs-spain-share-poster.png",
+        qrBox: { x: 0.75, y: 0.755, size: 0.205 },
+      },
+      "fifa-match-400021534": {
+        src: "assets/match-posters/usa-vs-belgium-share-poster.png",
+        qrBox: { x: 0.75, y: 0.755, size: 0.205 },
+      },
+    };
 
     window.openSharePosterModal = function openSharePosterModal(shareUrl) {
       _posterShareUrl = shareUrl || window.location.href || _SHARE_URL;
@@ -3448,7 +3467,7 @@
       if (hint) hint.textContent = '生成中…';
       if (img) img.src = '';
       if (canvas) {
-        _drawSharePoster(canvas, _posterShareUrl)
+        _drawSharePosterForCurrentContext(canvas, _posterShareUrl)
           .then(() => {
             if (img) img.src = canvas.toDataURL('image/png');
             if (hint) hint.textContent = '↑ 长按图片 → 保存到相册';
@@ -3456,6 +3475,56 @@
           .catch(() => { if (hint) hint.textContent = '生成失败，请点"复制链接"分享'; });
       }
     };
+
+    async function _drawSharePosterForCurrentContext(canvas, shareUrl) {
+      const didDrawSpecificPoster = await drawMatchSpecificSharePoster(canvas, shareUrl);
+      if (didDrawSpecificPoster) return;
+      await _drawSharePoster(canvas, shareUrl);
+    }
+
+    async function drawMatchSpecificSharePoster(canvas, shareUrl) {
+      shareUrl = shareUrl || _SHARE_URL;
+      const match = getPredictionMatch(currentPredictionMatchId);
+      const template = MATCH_SHARE_POSTERS[String(match?.id || currentPredictionMatchId || "")];
+      if (!template) return false;
+
+      let baseImage;
+      try {
+        baseImage = await _spLoadImg(template.src);
+      } catch (error) {
+        console.warn("Load match share poster failed:", error);
+        return false;
+      }
+
+      const W = baseImage.naturalWidth || baseImage.width;
+      const H = baseImage.naturalHeight || baseImage.height;
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(baseImage, 0, 0, W, H);
+
+      const qrSize = Math.round(W * template.qrBox.size);
+      const qrX = Math.round(W * template.qrBox.x);
+      const qrY = Math.round(H * template.qrBox.y);
+      const pad = Math.round(qrSize * 0.06);
+      ctx.fillStyle = "#fff";
+      _spRR(ctx, qrX - pad, qrY - pad, qrSize + pad * 2, qrSize + pad * 2, Math.max(12, pad));
+      ctx.fill();
+
+      try {
+        const qr = await _spLoadImg(
+          `https://api.qrserver.com/v1/create-qr-code/?size=560x560&color=101010&bgcolor=ffffff&data=${encodeURIComponent(shareUrl)}`
+        );
+        ctx.drawImage(qr, qrX, qrY, qrSize, qrSize);
+      } catch (error) {
+        ctx.fillStyle = "#111827";
+        ctx.font = `900 ${Math.round(qrSize * 0.1)}px -apple-system, PingFang SC, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        canvasWrapText(ctx, "扫码进入PK房", qrX + qrSize / 2, qrY + qrSize / 2, qrSize * 0.82, qrSize * 0.14, 2);
+      }
+      return true;
+    }
 
     window.closeSharePosterModal = function closeSharePosterModal(e) {
       if (e && e.target !== e.currentTarget) return;
@@ -4574,11 +4643,301 @@
       await drawTemplatePosterQr(ctx, placement);
     }
 
+    function compactPosterHitLabel(label) {
+      return String(label || "")
+        .replace(/^全场胜负：/, "胜负：")
+        .replace(/^全场进球：/, "进球：")
+        .replace(/^半场领先：/, "半场：")
+        .replace(/^半场首球：/, "首球：")
+        .replace(/^半场进球：/, "半场进球：")
+        .replace(/^红牌：/, "红牌：")
+        .replace(/^黄牌：/, "黄牌：");
+    }
+
+    function drawPosterTick(ctx, x, y, scale) {
+      ctx.save();
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = "#111827";
+      ctx.lineWidth = 7 * scale;
+      ctx.beginPath();
+      ctx.moveTo(x, y + 11 * scale);
+      ctx.lineTo(x + 9 * scale, y + 21 * scale);
+      ctx.lineTo(x + 28 * scale, y - 6 * scale);
+      ctx.stroke();
+      ctx.strokeStyle = "#facc15";
+      ctx.lineWidth = 4 * scale;
+      ctx.beginPath();
+      ctx.moveTo(x, y + 11 * scale);
+      ctx.lineTo(x + 9 * scale, y + 21 * scale);
+      ctx.lineTo(x + 28 * scale, y - 6 * scale);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    const posterComicFontStack = `"STHeiti", "Hiragino Sans GB", "PingFang SC", "Microsoft YaHei", Impact, "Arial Black", sans-serif`;
+
+    function drawPosterComicText(ctx, text, x, y, scale, options = {}) {
+      const {
+        size = 24,
+        fill = "#103a8a",
+        innerStroke = "#ffffff",
+        outerStroke = "#111827",
+        maxWidth = null,
+        outerWidth = 7,
+        innerWidth = 3,
+        shadow = true
+      } = options;
+      const drawArgs = Number.isFinite(maxWidth)
+        ? [String(text), x, y, maxWidth]
+        : [String(text), x, y];
+
+      ctx.save();
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      ctx.lineJoin = "round";
+      ctx.miterLimit = 2;
+      ctx.font = `900 ${Math.round(size * scale)}px ${posterComicFontStack}`;
+      if (shadow) {
+        ctx.shadowColor = "rgba(0,0,0,.24)";
+        ctx.shadowBlur = 1.5 * scale;
+        ctx.shadowOffsetX = 1.6 * scale;
+        ctx.shadowOffsetY = 1.8 * scale;
+      }
+      ctx.strokeStyle = outerStroke;
+      ctx.lineWidth = outerWidth * scale;
+      ctx.strokeText(...drawArgs);
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.strokeStyle = innerStroke;
+      ctx.lineWidth = innerWidth * scale;
+      ctx.strokeText(...drawArgs);
+      ctx.fillStyle = fill;
+      ctx.fillText(...drawArgs);
+      ctx.restore();
+    }
+
+    async function drawNorwayResultPosterQr(ctx) {
+      const W = ctx.canvas.width;
+      const scale = W / 1024;
+      const coverX = 78 * scale;
+      const coverY = 1254 * scale;
+      const coverSize = 238 * scale;
+      const pad = 18 * scale;
+      const qrOffsetY = 18 * scale;
+
+      ctx.save();
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(coverX, coverY, coverSize, coverSize);
+      ctx.strokeStyle = "#111827";
+      ctx.lineWidth = Math.max(4, 5 * scale);
+      ctx.strokeRect(coverX, coverY, coverSize, coverSize);
+
+      try {
+        const qrImg = await loadCanvasImage(
+          `https://api.qrserver.com/v1/create-qr-code/?size=560x560&color=101010&bgcolor=ffffff&data=${encodeURIComponent(_SHARE_URL)}`
+        );
+        ctx.drawImage(qrImg, coverX + pad, coverY + pad + qrOffsetY, coverSize - pad * 2, coverSize - pad * 2 - qrOffsetY);
+      } catch (error) {
+        try {
+          const qrImg = await loadCanvasImage("assets/qr/pkgamecup-landing-qr.png");
+          ctx.drawImage(qrImg, coverX + pad, coverY + pad + qrOffsetY, coverSize - pad * 2, coverSize - pad * 2 - qrOffsetY);
+        } catch (fallbackError) {
+          ctx.fillStyle = "#111827";
+          ctx.font = `900 ${Math.round(24 * scale)}px "STHeiti", "Hiragino Sans GB", "PingFang SC", "Arial Black", sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          canvasWrapText(ctx, "扫码进入主页", coverX + coverSize / 2, coverY + coverSize / 2, coverSize * 0.72, 30 * scale, 2);
+        }
+      }
+      ctx.restore();
+    }
+
+    async function drawNorwayResultPosterText(ctx, payload) {
+      const W = ctx.canvas.width;
+      const scale = W / 1024;
+      const allItems = (payload.hitLabels || []).filter(Boolean);
+      const items = allItems.slice(0, 6);
+      const boardX = 104 * scale;
+      const headerY = 724 * scale;
+      const rowMarkX = 118 * scale;
+      const rowTextX = 160 * scale;
+      const rowW = 342 * scale;
+      const rowStartY = 798 * scale;
+      const rowGap = (items.length > 5 ? 42 : 48) * scale;
+
+      ctx.save();
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      const hitText = `本场命中 ${payload.hits || items.length} 项`;
+      drawPosterComicText(ctx, hitText, boardX, headerY, scale, {
+        size: 32,
+        fill: "#facc15",
+        innerStroke: "#ffffff",
+        outerStroke: "#111827",
+        outerWidth: 8,
+        innerWidth: 3.5,
+        maxWidth: 360 * scale
+      });
+
+      items.forEach((item, index) => {
+        const y = rowStartY + index * rowGap;
+        drawPosterTick(ctx, rowMarkX, y - 16 * scale, scale);
+        const text = compactPosterHitLabel(item);
+        drawPosterComicText(ctx, text, rowTextX, y, scale, {
+          size: items.length > 5 ? 22 : 24,
+          fill: "#0b3b91",
+          innerStroke: "#ffffff",
+          outerStroke: "#111827",
+          outerWidth: 5.5,
+          innerWidth: 2.4,
+          maxWidth: rowW
+        });
+      });
+
+      if (allItems.length > items.length) {
+        const y = rowStartY + items.length * rowGap;
+        const moreText = `还有 ${allItems.length - items.length} 项命中`;
+        drawPosterComicText(ctx, moreText, rowTextX, y, scale, {
+          size: 19,
+          fill: "#0b3b91",
+          innerStroke: "#ffffff",
+          outerStroke: "#111827",
+          outerWidth: 5,
+          innerWidth: 2.2,
+          maxWidth: rowW
+        });
+      }
+
+      ctx.restore();
+      await drawNorwayResultPosterQr(ctx);
+    }
+
+    async function drawEnglandResultPosterQr(ctx) {
+      const W = ctx.canvas.width;
+      const scale = W / 1024;
+      const coverX = 88 * scale;
+      const coverY = 1248 * scale;
+      const coverW = 236 * scale;
+      const coverH = 236 * scale;
+      const pad = 16 * scale;
+
+      ctx.save();
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(coverX, coverY, coverW, coverH);
+      ctx.strokeStyle = "#111827";
+      ctx.lineWidth = Math.max(4, 5 * scale);
+      ctx.strokeRect(coverX, coverY, coverW, coverH);
+
+      try {
+        const qrImg = await loadCanvasImage(
+          `https://api.qrserver.com/v1/create-qr-code/?size=560x560&color=101010&bgcolor=ffffff&data=${encodeURIComponent(_SHARE_URL)}`
+        );
+        ctx.drawImage(qrImg, coverX + pad, coverY + pad, coverW - pad * 2, coverH - pad * 2);
+      } catch (error) {
+        try {
+          const qrImg = await loadCanvasImage("assets/qr/pkgamecup-landing-qr.png");
+          ctx.drawImage(qrImg, coverX + pad, coverY + pad, coverW - pad * 2, coverH - pad * 2);
+        } catch (fallbackError) {
+          ctx.fillStyle = "#111827";
+          ctx.font = `900 ${Math.round(24 * scale)}px "Arial Black", "PingFang SC", sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          canvasWrapText(ctx, "扫码进入主页", coverX + coverW / 2, coverY + coverH / 2, coverW * 0.72, 30 * scale, 2);
+        }
+      }
+      ctx.restore();
+    }
+
+    async function drawEnglandResultPosterText(ctx, payload) {
+      const W = ctx.canvas.width;
+      const scale = W / 1024;
+      const allItems = (payload.hitLabels || []).filter(Boolean);
+      const items = allItems.slice(0, 6);
+      const boardX = 92 * scale;
+      const headerY = 704 * scale;
+      const rowMarkX = 112 * scale;
+      const rowTextX = 154 * scale;
+      const rowW = 274 * scale;
+      const rowStartY = 786 * scale;
+      const rowGap = (items.length > 5 ? 40 : 47) * scale;
+
+      ctx.save();
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+      const hitText = `本场命中 ${payload.hits || items.length} 项`;
+      drawPosterComicText(ctx, hitText, boardX, headerY, scale, {
+        size: 31,
+        fill: "#facc15",
+        innerStroke: "#ffffff",
+        outerStroke: "#111827",
+        outerWidth: 8,
+        innerWidth: 3.5,
+        maxWidth: 340 * scale
+      });
+
+      items.forEach((item, index) => {
+        const y = rowStartY + index * rowGap;
+        drawPosterTick(ctx, rowMarkX, y - 16 * scale, scale);
+        const text = compactPosterHitLabel(item);
+        drawPosterComicText(ctx, text, rowTextX, y, scale, {
+          size: items.length > 5 ? 19 : 21,
+          fill: "#0b3b91",
+          innerStroke: "#ffffff",
+          outerStroke: "#111827",
+          outerWidth: 5,
+          innerWidth: 2.2,
+          maxWidth: rowW
+        });
+      });
+
+      if (allItems.length > items.length) {
+        const y = rowStartY + items.length * rowGap;
+        const moreText = `还有 ${allItems.length - items.length} 项命中`;
+        drawPosterComicText(ctx, moreText, rowTextX, y, scale, {
+          size: 18,
+          fill: "#0b3b91",
+          innerStroke: "#ffffff",
+          outerStroke: "#111827",
+          outerWidth: 5,
+          innerWidth: 2.1,
+          maxWidth: rowW
+        });
+      }
+
+      ctx.restore();
+      await drawEnglandResultPosterQr(ctx);
+    }
+
+    function resultPosterStyle(templateSet) {
+      return templateSet?.templates?.[0]?.style || "";
+    }
+
+    async function drawResultPosterQr(ctx, style) {
+      if (style === "england-result-popart") {
+        await drawEnglandResultPosterQr(ctx);
+        return;
+      }
+      if (style === "norway-result-popart") {
+        await drawNorwayResultPosterQr(ctx);
+      }
+    }
+
     async function tryDrawTemplateProphecyPoster(canvas, payload) {
       const index = await loadPosterTemplateIndex();
       const templateSet = findPosterTemplateSet(index, payload.match);
       const templates = templateSet?.templates || [];
       if (!templateSet || !templates.length) return false;
+      if ((payload.hits || 0) <= 0 && templateSet.zeroHitTemplate) {
+        const image = await loadCanvasImage(`assets/poster-templates/${templateSet.dir}/${templateSet.zeroHitTemplate}`);
+        canvas.width = image.naturalWidth || image.width;
+        canvas.height = image.naturalHeight || image.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        await drawResultPosterQr(ctx, resultPosterStyle(templateSet));
+        return true;
+      }
       const template = templates[Math.floor(Math.random() * templates.length)];
       const imagePath = `assets/poster-templates/${templateSet.dir}/${template.file}`;
       const image = await loadCanvasImage(imagePath);
@@ -4587,11 +4946,18 @@
       const ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       const totalChecks = payload.details?.filter((item) => item.status !== "pending").length || payload.hitLabels?.length || 0;
-      await drawTemplatePosterText(ctx, {
+      const posterPayload = {
         ...payload,
         headline: posterHeadline(templateSet, payload.nickname, payload.hits, totalChecks),
         matchLabel: templateSet.matchLabel || `${displayTeamName(payload.match.homeTeam)} VS ${displayTeamName(payload.match.awayTeam)}`,
-      }, template);
+      };
+      if (template.style === "norway-result-popart") {
+        await drawNorwayResultPosterText(ctx, posterPayload, template);
+      } else if (template.style === "england-result-popart") {
+        await drawEnglandResultPosterText(ctx, posterPayload, template);
+      } else {
+        await drawTemplatePosterText(ctx, posterPayload, template);
+      }
       return true;
     }
 
@@ -4875,8 +5241,17 @@
       }
     };
 
-    window.generatePredictionHistoryPoster = async function generatePredictionHistoryPoster(index, btn) {
-      const item = myPredictionHistoryCache[index];
+    function showGeneratedPosterCanvas(canvas, btn) {
+      const image = document.getElementById("poster-preview-image");
+      const preview = document.getElementById("poster-preview");
+      if (image && preview) {
+        image.src = canvas.toDataURL("image/png");
+        preview.hidden = false;
+      }
+      if (btn) btn.textContent = "已生成神预言海报";
+    }
+
+    async function generatePredictionPosterFromItem(item, btn) {
       const match = getPredictionMatch(item?.matchId);
       if (!item || !matchCompleted(match)) {
         showToast("比赛结束后才能生成神预言海报");
@@ -4892,95 +5267,54 @@
         details: score.details || [],
         points: score.points || 0,
         resultText: `${match.homeScore} - ${match.awayScore}`,
-        rankText: item.source === "room" ? "PK房预测" : "个人预测",
+        rankText: item.source === "room" ? "PK房预测" : item.source === "match-result" ? "赛后战报" : "个人预测",
         cta: "下一场，敢来和我预测PK吗？",
       })) {
-        const image = document.getElementById("poster-preview-image");
-        const preview = document.getElementById("poster-preview");
-        if (image && preview) {
-          image.src = canvas.toDataURL("image/png");
-          preview.hidden = false;
-        }
-        if (btn) btn.textContent = "已生成神预言海报";
+        showGeneratedPosterCanvas(canvas, btn);
         return;
       }
-      canvas.width = 900;
-      canvas.height = 1600;
-      const ctx = canvas.getContext("2d");
-      const bg = ctx.createLinearGradient(0, 0, 900, 1600);
-      bg.addColorStop(0, "#041315");
-      bg.addColorStop(.45, "#07263a");
-      bg.addColorStop(1, "#260014");
-      ctx.fillStyle = bg;
-      ctx.fillRect(0, 0, 900, 1600);
-      ctx.fillStyle = "rgba(0,245,210,.14)";
-      for (let x = 0; x < 900; x += 80) ctx.fillRect(x, 0, 1, 1600);
-      for (let y = 0; y < 1600; y += 80) ctx.fillRect(0, y, 900, 1);
-      ctx.fillStyle = "rgba(255,45,139,.18)";
-      ctx.beginPath();
-      ctx.arc(760, 1060, 360, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.fillStyle = "#00f5d2";
-      ctx.font = "800 34px Arial, PingFang SC, sans-serif";
-      ctx.fillText("世界杯观赛指南", 70, 105);
-      ctx.fillStyle = "rgba(255,255,255,.68)";
-      ctx.font = "700 24px Arial, PingFang SC, sans-serif";
-      ctx.fillText("2026 · 我的预测战报", 600, 105);
-      ctx.fillStyle = "#dfff47";
-      ctx.font = "900 92px Arial, PingFang SC, sans-serif";
-      canvasWrapText(ctx, `太厉害了，${item.nickname || "我"}又神预言了 ${score.hits || 0} 项`, 70, 250, 760, 108, 3);
-      drawRoundedRect(ctx, 70, 520, 760, 156, 34);
-      ctx.fillStyle = "rgba(255,255,255,.08)";
-      ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,.18)";
-      ctx.stroke();
-      ctx.fillStyle = "#fff";
-      ctx.font = "900 40px Arial, PingFang SC, sans-serif";
-      ctx.fillText(displayTeamName(match.homeTeam), 120, 605);
-      ctx.fillStyle = "#00f5d2";
-      ctx.font = "900 48px Arial, PingFang SC, sans-serif";
-      ctx.fillText("VS", 430, 605);
-      ctx.fillStyle = "#fff";
-      ctx.font = "900 40px Arial, PingFang SC, sans-serif";
-      ctx.fillText(displayTeamName(match.awayTeam), 530, 605);
-      ctx.fillStyle = "rgba(255,255,255,.72)";
-      ctx.font = "700 26px Arial, PingFang SC, sans-serif";
-      ctx.fillText(`${match.homeScore} - ${match.awayScore}｜${finalWinnerLabel(match)}｜${finalGoalsBucket(match)}`, 120, 650);
-      ctx.fillStyle = "#fff";
-      ctx.font = "900 38px Arial, PingFang SC, sans-serif";
-      ctx.fillText("本场预测命中", 90, 770);
-      const hits = (score.hitLabels || []).length ? score.hitLabels : ["暂无命中项，下一场再战"];
-      hits.slice(0, 4).forEach((hit, hitIndex) => {
-        drawPosterBadge(ctx, hit, 90, 815 + hitIndex * 100, 720);
-        ctx.fillStyle = "#00f5d2";
-        ctx.font = "900 34px Arial, PingFang SC, sans-serif";
-        ctx.fillText("✓", 748, 862 + hitIndex * 100);
+      _openPredictionSuccessPoster({
+        matchName: `${displayTeamName(match.homeTeam)} ${match.homeScore} - ${match.awayScore} ${displayTeamName(match.awayTeam)}`,
+        pointsText: `+${score.points || 0} 分`,
+        descText: (score.hitLabels || []).length ? score.hitLabels.join("｜") : "暂无命中项｜下一场继续挑战",
       });
-      drawRoundedRect(ctx, 70, 1250, 760, 190, 36);
-      ctx.fillStyle = "rgba(255,255,255,.10)";
-      ctx.fill();
-      ctx.fillStyle = "#ffe28a";
-      ctx.font = "900 92px Arial, PingFang SC, sans-serif";
-      ctx.fillText(`${score.points || 0}`, 115, 1360);
-      ctx.font = "900 34px Arial, PingFang SC, sans-serif";
-      ctx.fillText("分", 290, 1358);
-      ctx.fillStyle = "#fff";
-      ctx.font = "800 32px Arial, PingFang SC, sans-serif";
-      ctx.fillText(item.source === "room" ? "PK房预测" : "个人预测", 470, 1325);
-      ctx.fillText(`命中 ${score.hits || 0} 项`, 470, 1380);
-      ctx.fillStyle = "#00f5d2";
-      ctx.font = "900 44px Arial, PingFang SC, sans-serif";
-      ctx.fillText("下一场，敢来和我预测PK吗？", 70, 1510);
-      ctx.fillStyle = "rgba(255,255,255,.78)";
-      ctx.font = "700 24px Arial, PingFang SC, sans-serif";
-      ctx.fillText("长按保存图片，发朋友圈邀请好友参战", 70, 1550);
-      const image = document.getElementById("poster-preview-image");
-      const preview = document.getElementById("poster-preview");
-      if (image && preview) {
-        image.src = canvas.toDataURL("image/png");
-        preview.hidden = false;
-      }
       if (btn) btn.textContent = "已生成神预言海报";
+    }
+
+    window.generateMatchProphecyPoster = async function generateMatchProphecyPoster(matchId, btn) {
+      const match = getPredictionMatch(matchId);
+      if (!matchCompleted(match)) {
+        showToast("比赛结束后才能生成神预言海报");
+        return;
+      }
+      const originalText = btn?.textContent || "";
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "生成中...";
+      }
+      try {
+        const items = await getMyPredictionHistory();
+        myPredictionHistoryCache = items;
+        const item = items.find((historyItem) => String(historyItem.matchId || "") === String(match.id || ""));
+        await generatePredictionPosterFromItem(item || {
+          source: "match-result",
+          matchId: match.id,
+          nickname: "我",
+          prediction: { answers: {} },
+          savedAt: new Date().toISOString(),
+        }, btn);
+      } catch (error) {
+        console.error("Generate match prophecy poster failed:", error);
+        showToast("海报生成失败，请重试");
+        if (btn) btn.textContent = originalText || "生成神预言海报";
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    };
+
+    window.generatePredictionHistoryPoster = async function generatePredictionHistoryPoster(index, btn) {
+      const item = myPredictionHistoryCache[index];
+      await generatePredictionPosterFromItem(item, btn);
     };
 
     window.savePredictionResult = async function savePredictionResult(btn) {

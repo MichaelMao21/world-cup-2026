@@ -6,6 +6,8 @@ const outputPath = resolve("data/prototype-data.js");
 const fifaData = JSON.parse(await readFile(inputPath, "utf8"));
 const matchData = JSON.parse(await readFile(resolve("data/fifa-matches.json"), "utf8"));
 const insightData = JSON.parse(await readFile(resolve("data/fifa-insights.json"), "utf8"));
+const playerStats = await readOptionalJson(resolve("data/player-stats.json"), null);
+const previewData = await readOptionalJson(resolve("data/match-previews.json"), {});
 const standings = buildStandings(matchData.matches || [], insightData.standings || []);
 
 const payload = {
@@ -15,8 +17,11 @@ const payload = {
   matches: matchData.matches,
   venues: matchData.venues,
   standings,
+  teamStats: insightData.teamStats || { rows: [] },
   powerRankings: insightData.powerRankings,
   tournamentStats: insightData.tournamentStats,
+  playerStats,
+  matchPreviews: previewData.previews || {},
 };
 
 await writeFile(
@@ -103,6 +108,14 @@ function buildStandings(matches, fallbackStandings) {
       }));
     return { group, rows };
   });
+}
+
+async function readOptionalJson(path, fallback) {
+  try {
+    return JSON.parse(await readFile(path, "utf8"));
+  } catch {
+    return fallback;
+  }
 }
 
 function getTeamRow(table, team) {

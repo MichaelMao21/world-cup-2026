@@ -20,6 +20,7 @@ let draws = 0;
 let cleanSheets = 0;
 let biggestWin = null;
 const teamGoals = {};
+const teamRows = {};
 
 for (const m of allCompleted) {
   const hg = m.homeScore ?? 0;
@@ -30,6 +31,24 @@ for (const m of allCompleted) {
 
   teamGoals[m.homeTeam] = (teamGoals[m.homeTeam] || 0) + hg;
   teamGoals[m.awayTeam] = (teamGoals[m.awayTeam] || 0) + ag;
+  const home = getTeamRow(teamRows, m.homeTeam);
+  const away = getTeamRow(teamRows, m.awayTeam);
+  home.played += 1;
+  away.played += 1;
+  home.goalsFor += hg;
+  home.goalsAgainst += ag;
+  away.goalsFor += ag;
+  away.goalsAgainst += hg;
+  if (hg > ag) {
+    home.won += 1;
+    away.lost += 1;
+  } else if (hg < ag) {
+    away.won += 1;
+    home.lost += 1;
+  } else {
+    home.drawn += 1;
+    away.drawn += 1;
+  }
 
   const margin = Math.abs(hg - ag);
   if (!biggestWin || margin > biggestWin.margin) {
@@ -50,6 +69,18 @@ const tournamentStats = {
   cleanSheets,
   topScoringTeam: topScoring,
   biggestWin,
+};
+
+const teamStats = {
+  source: "calculated from fifa-matches.json",
+  rows: Object.values(teamRows)
+    .map((team) => ({
+      ...team,
+      goalDifference: team.goalsFor - team.goalsAgainst,
+      points: team.won * 3 + team.drawn,
+      cleanSheets: team.cleanSheets || 0
+    }))
+    .sort((a, b) => b.goalsFor - a.goalsFor || b.goalDifference - a.goalDifference || a.team.localeCompare(b.team))
 };
 
 // ── Group Standings ──
@@ -107,6 +138,7 @@ const insights = {
   source: "calculated from fifa-matches.json",
   generatedAt: new Date().toISOString(),
   tournamentStats,
+  teamStats,
   standings,
   powerRankings,
 };
@@ -114,3 +146,18 @@ const insights = {
 await writeFile(INSIGHTS, JSON.stringify(insights, null, 2), "utf8");
 console.log(`Insights recalculated: ${standings.length} groups, ${allCompleted.length} completed (${completed.length} group stage + ${allCompleted.length - completed.length} knockout), ${totalGoals} goals`);
 console.log(`Standings: ${standings.map((g) => g.group + "(" + g.rows.length + " teams)").join(", ")}`);
+
+function getTeamRow(rows, team) {
+  if (!rows[team]) {
+    rows[team] = {
+      team,
+      played: 0,
+      won: 0,
+      drawn: 0,
+      lost: 0,
+      goalsFor: 0,
+      goalsAgainst: 0
+    };
+  }
+  return rows[team];
+}
