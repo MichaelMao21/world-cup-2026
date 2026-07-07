@@ -1499,10 +1499,10 @@
         <p style="margin:0 0 4px;font-size:11px;opacity:0.7;">分享给一起看球的朋友</p>
         <p style="margin:0 0 8px;font-size:22px;font-weight:900;">今晚预测一下？</p>
         <p style="margin:0 0 16px;font-size:15px;opacity:0.9;font-weight:700;">猜中就生成你的世界杯高光海报</p>
-        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=80" alt="世界杯预测PK" width="280" height="150" style="border-radius:10px;object-fit:cover;display:block;width:100%;max-width:280px;margin:0 auto 12px;" loading="lazy">
-        <p style="margin:0;font-size:11px;opacity:0.7;">点击链接进入预测PK</p>
+        <img src="assets/poster-templates/new-home-bottom-promo.jpg" alt="世界杯淘汰赛预测挑战" width="1024" height="1536" style="border-radius:10px;object-fit:cover;display:block;width:100%;max-width:280px;margin:0 auto 12px;" loading="lazy">
+        <p style="margin:0;font-size:11px;opacity:0.7;">点击邀请好友，PK预测谁更准</p>
         <p style="margin:6px 0 8px;font-size:10px;opacity:0.5;word-break:break-all;">www.pkgamecup.cn</p>
-        <button onclick="openSharePosterModal()" style="width:100%;background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;">📤 生成分享海报</button>
+        <button onclick="shareHomeToWechat()" style="width:100%;background:rgba(255,255,255,0.18);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:8px;padding:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;">📤 邀请好友PK预测</button>
       </div>
     </section>
 
@@ -2147,6 +2147,7 @@
             ${tagsHtml}
             ${matchLiveStatus(heroMatch) === "scheduled" ? `<button style="width:100%;margin-top:14px;background:var(--accent);color:#17202a" onclick="startPredictionPk('${heroMatch.id}')">预测这场PK</button>` : ""}
           </div>`;
+          currentPredictionMatchId = heroMatch.id;
         } else {
           heroContainer.innerHTML = `<div class="hero"><p class="eyebrow">赛程告一段落</p><p class="sub">下一轮比赛即将到来，敬请期待。</p></div>`;
         }
@@ -3324,6 +3325,36 @@
         setTimeout(() => { btn.textContent = orig; }, 1600);
       }
     }
+
+    window.shareHomeToWechat = async function shareHomeToWechat() {
+      const homeUrl = "https://www.pkgamecup.cn/";
+      const matchText = "今晚预测一下？猜中就生成你的世界杯高光海报";
+      syncWechatShareLink(homeUrl, matchText);
+      trackEvent("home_share_clicked", { source: "bottom_cta" });
+      await waitForWechatShareCardReady();
+      if (isWeChatBrowser()) {
+        showShareGuide();
+        return;
+      }
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "今晚预测一下？猜中就生成你的世界杯高光海报",
+            text: "预测胜负、比分、谁先进球，和朋友一起冲世界杯预测榜。",
+            url: homeUrl,
+          });
+          return;
+        } catch (e) {
+          if (e?.name === "AbortError") return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(homeUrl);
+        showToast("链接已复制，去微信粘贴给好友");
+      } catch (e) {
+        showToast("请复制浏览器地址栏链接发给好友");
+      }
+    };
 
     function showToast(msg) {
       const toast = document.getElementById("app-toast");
