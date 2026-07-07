@@ -3454,6 +3454,16 @@
         src: "assets/match-posters/usa-vs-belgium-share-poster.png",
         qrBox: { x: 0.75, y: 0.755, size: 0.205 },
       },
+      "fifa-match-400021528": {
+        src: "assets/match-posters/argentina-vs-egypt-share-poster.png",
+        qrBox: { x: 0.073, y: 0.853, size: 0.156 },
+        pad: 0,
+      },
+      "fifa-match-400021535": {
+        src: "assets/match-posters/colombia-vs-switzerland-share-poster.png",
+        qrBox: { x: 0.107, y: 0.833, size: 0.176 },
+        pad: 0,
+      },
     };
 
     window.openSharePosterModal = function openSharePosterModal(shareUrl) {
@@ -3506,7 +3516,7 @@
       const qrSize = Math.round(W * template.qrBox.size);
       const qrX = Math.round(W * template.qrBox.x);
       const qrY = Math.round(H * template.qrBox.y);
-      const pad = Math.round(qrSize * 0.06);
+      const pad = Math.round(qrSize * (template.pad !== undefined ? template.pad : 0.06));
       ctx.fillStyle = "#fff";
       _spRR(ctx, qrX - pad, qrY - pad, qrSize + pad * 2, qrSize + pad * 2, Math.max(12, pad));
       ctx.fill();
@@ -4064,6 +4074,93 @@
       const selected = (data.matches || []).find((m) => m.id === selectedId);
       if (selected) return selected;
       return (data.matches || []).find((m) => m.status === "scheduled") || (data.matches || [])[0] || null;
+    }
+
+    function findPredictionMatchById(matchId) {
+      const id = String(matchId || "").trim();
+      if (!id) return null;
+      const data = window.PROTOTYPE_DATA || { matches: [] };
+      return (data.matches || []).find((match) =>
+        String(match.id || "") === id ||
+        String(match.fifaMatchId || "") === id ||
+        String(match.id || "").endsWith(id)
+      ) || null;
+    }
+
+    function normalizeMatchSearchText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replace(/[\s·•\-_:：|｜/\\.,，。()（）[\]【】"'“”‘’]+/g, "");
+    }
+
+    function matchTeamAliasGroups(match) {
+      return [
+        [match?.homeTeam, displayTeamName(match?.homeTeam)],
+        [match?.awayTeam, displayTeamName(match?.awayTeam)],
+      ].map((group) => Array.from(new Set(group.map(normalizeMatchSearchText).filter(Boolean))));
+    }
+
+    function textContainsTeamAlias(text, aliases) {
+      return aliases.some((alias) => alias && text.includes(alias));
+    }
+
+    function predictionItemText(item = {}) {
+      const prediction = item.prediction || {};
+      const room = item.room || {};
+      return [
+        item.matchId,
+        item.matchLabel,
+        item.match_label,
+        prediction.match_id,
+        prediction.matchLabel,
+        prediction.match_label,
+        room.matchId,
+        room.match_id,
+        room.matchLabel,
+        room.match_label,
+        room.name,
+      ].filter(Boolean).join(" ");
+    }
+
+    function matchContainsPredictionItem(match, item) {
+      if (!match || !item) return false;
+      const itemMatchId = item.matchId || item.prediction?.match_id || item.room?.matchId || item.room?.match_id || "";
+      const direct = findPredictionMatchById(itemMatchId);
+      if (direct && String(direct.id || "") === String(match.id || "")) return true;
+      if (String(itemMatchId || "") === String(match.id || "")) return true;
+      const text = normalizeMatchSearchText(predictionItemText(item));
+      if (!text) return false;
+      const [homeAliases, awayAliases] = matchTeamAliasGroups(match);
+      return textContainsTeamAlias(text, homeAliases) && textContainsTeamAlias(text, awayAliases);
+    }
+
+    function resolvePredictionItemMatch(item) {
+      const direct = findPredictionMatchById(item?.matchId || item?.prediction?.match_id || item?.room?.matchId || item?.room?.match_id);
+      if (direct) return direct;
+      const data = window.PROTOTYPE_DATA || { matches: [] };
+      const text = normalizeMatchSearchText(predictionItemText(item));
+      if (!text) return null;
+      return (data.matches || []).find((match) => {
+        const [homeAliases, awayAliases] = matchTeamAliasGroups(match);
+        return textContainsTeamAlias(text, homeAliases) && textContainsTeamAlias(text, awayAliases);
+      }) || null;
+    }
+
+    function predictionAnswerCount(item) {
+      return Object.values(item?.prediction?.answers || {}).filter(Boolean).length;
+    }
+
+    function predictionHistoryItemRank(item, match) {
+      const exact = String(item?.matchId || "") === String(match?.id || "") ? 1 : 0;
+      const sourceRank = item?.source === "room" ? 4 : item?.source === "personal" ? 3 : item?.source === "match-result" ? 2 : item?.source === "draft" ? 1 : 0;
+      const saved = Date.parse(item?.savedAt || item?.prediction?.submitted_at || "") || 0;
+      return predictionAnswerCount(item) * 1000000 + exact * 100000 + sourceRank * 10000 + saved / 1000000000;
+    }
+
+    function selectBestPredictionHistoryItemForMatch(items, match) {
+      return (items || [])
+        .filter((item) => matchContainsPredictionItem(match, item))
+        .sort((a, b) => predictionHistoryItemRank(b, match) - predictionHistoryItemRank(a, match))[0] || null;
     }
 
     window.startPredictionPk = function startPredictionPk(matchId) {
@@ -5154,14 +5251,21 @@
         }
       }
       const localItems = [...getLocalStoredPredictionHistory(), ...getLocalPredictionDrafts()];
-      // Sort newest-first, then deduplicate by matchId — one card per match
+      // Sort newest-first, then deduplicate by resolved match — one card per match.
       const allItems = [...remoteItems, ...localItems].sort((a, b) =>
         String(b.savedAt || "").localeCompare(String(a.savedAt || ""))
       );
       const byMatchId = new Map();
       allItems.forEach((item) => {
-        if (item.matchId && !byMatchId.has(item.matchId)) {
-          byMatchId.set(item.matchId, item);
+        const resolvedMatch = resolvePredictionItemMatch(item);
+        const key = resolvedMatch?.id || item.matchId;
+        if (!key) return;
+        const current = byMatchId.get(key);
+        if (!current || predictionHistoryItemRank(item, resolvedMatch) > predictionHistoryItemRank(current, resolvedMatch)) {
+          byMatchId.set(key, {
+            ...item,
+            matchId: resolvedMatch?.id || item.matchId,
+          });
         }
       });
       return Array.from(byMatchId.values()).sort((a, b) =>
@@ -5170,7 +5274,7 @@
     }
 
     function predictionHistoryCard(item, index) {
-      const match = getPredictionMatch(item.matchId);
+      const match = resolvePredictionItemMatch(item) || getPredictionMatch(item.matchId);
       const prediction = item.prediction || {};
       const details = predictionScoreDetails(prediction.answers || {}, match);
       const completed = matchCompleted(match);
@@ -5252,7 +5356,7 @@
     }
 
     async function generatePredictionPosterFromItem(item, btn) {
-      const match = getPredictionMatch(item?.matchId);
+      const match = resolvePredictionItemMatch(item) || getPredictionMatch(item?.matchId);
       if (!item || !matchCompleted(match)) {
         showToast("比赛结束后才能生成神预言海报");
         return;
@@ -5295,7 +5399,7 @@
       try {
         const items = await getMyPredictionHistory();
         myPredictionHistoryCache = items;
-        const item = items.find((historyItem) => String(historyItem.matchId || "") === String(match.id || ""));
+        const item = selectBestPredictionHistoryItemForMatch(items, match);
         await generatePredictionPosterFromItem(item || {
           source: "match-result",
           matchId: match.id,
@@ -5750,6 +5854,11 @@
       }
       if (id === "results") {
         renderMatchData();
+      }
+      if (id === "home") {
+        const homeUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, "", homeUrl);
+        syncWechatShareLink(homeUrl, "");
       }
       trackEvent("view_opened", { view: id, fromTab });
     }

@@ -1,5 +1,5 @@
 window.PROTOTYPE_DATA = {
-  "generatedAt": "2026-07-06T10:22:06.994Z",
+  "generatedAt": "2026-07-07T10:15:44.459Z",
   "teams": [
     {
       "id": "fifa-team-alg",
@@ -16008,15 +16008,20 @@ window.PROTOTYPE_DATA = {
       "sourceUrl": "https://www.fifa.com/en/match-centre/match/17/285023/289288/400021529",
       "dateText": "Tuesday 07 July 2026",
       "time": "03:00",
-      "status": "scheduled",
+      "status": "completed",
       "homeTeam": "Portugal",
       "awayTeam": "Spain",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "stage": "Round of 16",
       "group": "",
       "venue": "Dallas Stadium",
-      "city": "Dallas"
+      "city": "Dallas",
+      "homeHalfScore": 0,
+      "awayHalfScore": 0,
+      "yellowCards": 3,
+      "redCards": 0,
+      "halfFirstGoalTeam": "none"
     },
     {
       "id": "fifa-match-400021534",
@@ -16024,15 +16029,20 @@ window.PROTOTYPE_DATA = {
       "sourceUrl": "https://www.fifa.com/en/match-centre/match/17/285023/289288/400021534",
       "dateText": "Tuesday 07 July 2026",
       "time": "08:00",
-      "status": "scheduled",
+      "status": "completed",
       "homeTeam": "USA",
       "awayTeam": "Belgium",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 4,
       "stage": "Round of 16",
       "group": "",
       "venue": "Seattle Stadium",
-      "city": "Seattle"
+      "city": "Seattle",
+      "homeHalfScore": 1,
+      "awayHalfScore": 2,
+      "yellowCards": 2,
+      "redCards": 0,
+      "halfFirstGoalTeam": "away"
     },
     {
       "id": "fifa-match-400021528",
@@ -16073,8 +16083,8 @@ window.PROTOTYPE_DATA = {
       "dateText": "Friday 10 July 2026",
       "time": "04:00",
       "status": "scheduled",
-      "homeTeam": "W89",
-      "awayTeam": "W90",
+      "homeTeam": "France",
+      "awayTeam": "Morocco",
       "homeScore": null,
       "awayScore": null,
       "stage": "Quarter-final",
@@ -16089,8 +16099,8 @@ window.PROTOTYPE_DATA = {
       "dateText": "Saturday 11 July 2026",
       "time": "03:00",
       "status": "scheduled",
-      "homeTeam": "W93",
-      "awayTeam": "W94",
+      "homeTeam": "Spain",
+      "awayTeam": "Belgium",
       "homeScore": null,
       "awayScore": null,
       "stage": "Quarter-final",
@@ -16105,8 +16115,8 @@ window.PROTOTYPE_DATA = {
       "dateText": "Sunday 12 July 2026",
       "time": "05:00",
       "status": "scheduled",
-      "homeTeam": "W91",
-      "awayTeam": "W92",
+      "homeTeam": "Norway",
+      "awayTeam": "England",
       "homeScore": null,
       "awayScore": null,
       "stage": "Quarter-final",
@@ -17131,6 +17141,18 @@ window.PROTOTYPE_DATA = {
         "cleanSheets": 0
       },
       {
+        "team": "Belgium",
+        "played": 5,
+        "won": 3,
+        "drawn": 2,
+        "lost": 0,
+        "goalsFor": 13,
+        "goalsAgainst": 5,
+        "goalDifference": 8,
+        "points": 11,
+        "cleanSheets": 0
+      },
+      {
         "team": "Norway",
         "played": 5,
         "won": 4,
@@ -17191,6 +17213,18 @@ window.PROTOTYPE_DATA = {
         "cleanSheets": 0
       },
       {
+        "team": "USA",
+        "played": 5,
+        "won": 3,
+        "drawn": 0,
+        "lost": 2,
+        "goalsFor": 11,
+        "goalsAgainst": 8,
+        "goalDifference": 3,
+        "points": 9,
+        "cleanSheets": 0
+      },
+      {
         "team": "Mexico",
         "played": 5,
         "won": 4,
@@ -17227,18 +17261,6 @@ window.PROTOTYPE_DATA = {
         "cleanSheets": 0
       },
       {
-        "team": "USA",
-        "played": 4,
-        "won": 3,
-        "drawn": 0,
-        "lost": 1,
-        "goalsFor": 10,
-        "goalsAgainst": 4,
-        "goalDifference": 6,
-        "points": 9,
-        "cleanSheets": 0
-      },
-      {
         "team": "Senegal",
         "played": 4,
         "won": 1,
@@ -17248,6 +17270,18 @@ window.PROTOTYPE_DATA = {
         "goalsAgainst": 9,
         "goalDifference": 1,
         "points": 3,
+        "cleanSheets": 0
+      },
+      {
+        "team": "Spain",
+        "played": 5,
+        "won": 4,
+        "drawn": 1,
+        "lost": 0,
+        "goalsFor": 9,
+        "goalsAgainst": 0,
+        "goalDifference": 9,
+        "points": 13,
         "cleanSheets": 0
       },
       {
@@ -17263,18 +17297,6 @@ window.PROTOTYPE_DATA = {
         "cleanSheets": 0
       },
       {
-        "team": "Belgium",
-        "played": 4,
-        "won": 2,
-        "drawn": 2,
-        "lost": 0,
-        "goalsFor": 9,
-        "goalsAgainst": 4,
-        "goalDifference": 5,
-        "points": 8,
-        "cleanSheets": 0
-      },
-      {
         "team": "Canada",
         "played": 5,
         "won": 2,
@@ -17287,26 +17309,14 @@ window.PROTOTYPE_DATA = {
         "cleanSheets": 0
       },
       {
-        "team": "Spain",
-        "played": 4,
-        "won": 3,
-        "drawn": 1,
-        "lost": 0,
-        "goalsFor": 8,
-        "goalsAgainst": 0,
-        "goalDifference": 8,
-        "points": 10,
-        "cleanSheets": 0
-      },
-      {
         "team": "Portugal",
-        "played": 4,
+        "played": 5,
         "won": 2,
         "drawn": 2,
-        "lost": 0,
+        "lost": 1,
         "goalsFor": 8,
-        "goalsAgainst": 2,
-        "goalDifference": 6,
+        "goalsAgainst": 3,
+        "goalDifference": 5,
         "points": 8,
         "cleanSheets": 0
       },
@@ -17811,11 +17821,11 @@ window.PROTOTYPE_DATA = {
     ]
   },
   "tournamentStats": {
-    "completedMatches": 92,
-    "totalGoals": 267,
+    "completedMatches": 94,
+    "totalGoals": 273,
     "goalsPerMatch": 2.9,
     "draws": 23,
-    "cleanSheets": 42,
+    "cleanSheets": 43,
     "topScoringTeam": {
       "team": "France",
       "goals": 14
@@ -17831,8 +17841,8 @@ window.PROTOTYPE_DATA = {
   "playerStats": {
     "source": "ESPN FIFA World Cup statistics",
     "sourceUrl": "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/statistics",
-    "importedAt": "2026-07-06T10:22:06.913Z",
-    "sourceTimestamp": "2026-07-06T10:21:09Z",
+    "importedAt": "2026-07-07T04:20:08.863Z",
+    "sourceTimestamp": "2026-07-07T04:18:56Z",
     "season": {
       "year": 2026,
       "displayName": "2026 FIFA World Cup",
@@ -18038,6 +18048,12 @@ window.PROTOTYPE_DATA = {
           "goals": 6
         },
         {
+          "name": "Julián Quiñones",
+          "team": "Mexico",
+          "gp": 4,
+          "goals": 4
+        },
+        {
           "name": "Vinícius Júnior",
           "team": "Brazil",
           "gp": 3,
@@ -18066,12 +18082,6 @@ window.PROTOTYPE_DATA = {
           "team": "Senegal",
           "gp": 3,
           "goals": 4
-        },
-        {
-          "name": "Julián Quiñones",
-          "team": "Mexico",
-          "gp": 3,
-          "goals": 3
         },
         {
           "name": "Raúl Jiménez",
@@ -18136,11 +18146,18 @@ window.PROTOTYPE_DATA = {
       ],
       "scorerCorrections": [
         {
-          "name": "Giovanni Reyna",
-          "team": "United States",
+          "name": "Romelu Lukaku",
+          "team": "Belgium",
+          "sourceGoals": 2,
+          "eventGoals": 3,
+          "finalGoals": 3
+        },
+        {
+          "name": "Charles De Ketelaere",
+          "team": "Belgium",
           "sourceGoals": 0,
-          "eventGoals": 1,
-          "finalGoals": 1
+          "eventGoals": 2,
+          "finalGoals": 2
         }
       ]
     },
@@ -18244,6 +18261,14 @@ window.PROTOTYPE_DATA = {
       {
         "name": "Cody Gakpo",
         "team": "Netherlands",
+        "gp": 4,
+        "goals": 3,
+        "assists": 1,
+        "shots": null
+      },
+      {
+        "name": "Romelu Lukaku",
+        "team": "Belgium",
         "gp": 4,
         "goals": 3,
         "assists": 1,
@@ -18410,14 +18435,6 @@ window.PROTOTYPE_DATA = {
         "shots": null
       },
       {
-        "name": "Romelu Lukaku",
-        "team": "Belgium",
-        "gp": 4,
-        "goals": 2,
-        "assists": 1,
-        "shots": null
-      },
-      {
         "name": "Rubén Vargas",
         "team": "Switzerland",
         "gp": 4,
@@ -18453,6 +18470,14 @@ window.PROTOTYPE_DATA = {
         "name": "Azzedine Ounahi",
         "team": "Morocco",
         "gp": 5,
+        "goals": 2,
+        "assists": 0,
+        "shots": null
+      },
+      {
+        "name": "Charles De Ketelaere",
+        "team": "Belgium",
+        "gp": 1,
         "goals": 2,
         "assists": 0,
         "shots": null
@@ -18536,14 +18561,6 @@ window.PROTOTYPE_DATA = {
         "goals": 1,
         "assists": 2,
         "shots": null
-      },
-      {
-        "name": "Giovanni Reyna",
-        "team": "United States",
-        "gp": 1,
-        "goals": 1,
-        "assists": 0,
-        "shots": null
       }
     ],
     "attacking": [
@@ -18562,6 +18579,14 @@ window.PROTOTYPE_DATA = {
         "shots": 17,
         "sog": 11,
         "goals": 7
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "team": "Portugal",
+        "gp": 4,
+        "shots": 16,
+        "sog": 8,
+        "goals": 2
       },
       {
         "name": "Erling Haaland",
@@ -18604,14 +18629,6 @@ window.PROTOTYPE_DATA = {
         "goals": 4
       },
       {
-        "name": "Cristiano Ronaldo",
-        "team": "Portugal",
-        "gp": 3,
-        "shots": 13,
-        "sog": 6,
-        "goals": 2
-      },
-      {
         "name": "Harry Kane",
         "team": "England",
         "gp": 2,
@@ -18626,6 +18643,14 @@ window.PROTOTYPE_DATA = {
         "shots": 11,
         "sog": 5,
         "goals": 4
+      },
+      {
+        "name": "Leandro Trossard",
+        "team": "Belgium",
+        "gp": 2,
+        "shots": 11,
+        "sog": 2,
+        "goals": 2
       },
       {
         "name": "Viktor Gyökeres",
@@ -18665,7 +18690,7 @@ window.PROTOTYPE_DATA = {
         "gp": 2,
         "shots": 9,
         "sog": 3,
-        "goals": 3
+        "goals": 4
       },
       {
         "name": "Gustavo Puerta",
@@ -18674,6 +18699,14 @@ window.PROTOTYPE_DATA = {
         "shots": 9,
         "sog": 3,
         "goals": 0
+      },
+      {
+        "name": "Lamine Yamal",
+        "team": "Spain",
+        "gp": 2,
+        "shots": 8,
+        "sog": 4,
+        "goals": 1
       },
       {
         "name": "Scott McTominay",
@@ -18690,22 +18723,6 @@ window.PROTOTYPE_DATA = {
         "shots": 8,
         "sog": 3,
         "goals": 1
-      },
-      {
-        "name": "Cody Gakpo",
-        "team": "Netherlands",
-        "gp": 2,
-        "shots": 7,
-        "sog": 5,
-        "goals": 3
-      },
-      {
-        "name": "Enner Valencia",
-        "team": "Ecuador",
-        "gp": 1,
-        "shots": 7,
-        "sog": 5,
-        "goals": 0
       }
     ],
     "distribution": [
@@ -19115,8 +19132,8 @@ window.PROTOTYPE_DATA = {
       {
         "name": "Rodri",
         "team": "Spain",
-        "gp": 4,
-        "passes": 413,
+        "gp": 5,
+        "passes": 499,
         "label": "传球"
       },
       {
@@ -19207,6 +19224,14 @@ window.PROTOTYPE_DATA = {
         "cs": 2
       },
       {
+        "name": "Diogo Costa",
+        "team": "Portugal",
+        "gp": 5,
+        "saves": 19,
+        "ga": 3,
+        "cs": 2
+      },
+      {
         "name": "Eloy Room",
         "team": "Curaçao",
         "gp": 2,
@@ -19252,14 +19277,6 @@ window.PROTOTYPE_DATA = {
         "gp": 4,
         "saves": 14,
         "ga": 3,
-        "cs": 2
-      },
-      {
-        "name": "Diogo Costa",
-        "team": "Portugal",
-        "gp": 4,
-        "saves": 14,
-        "ga": 2,
         "cs": 2
       },
       {
@@ -19416,6 +19433,13 @@ window.PROTOTYPE_DATA = {
         "rc": 0
       },
       {
+        "name": "Bernardo Silva",
+        "team": "Portugal",
+        "gp": 2,
+        "yc": 2,
+        "rc": 0
+      },
+      {
         "name": "Caleb Yirenkyi",
         "team": "Ghana",
         "gp": 2,
@@ -19425,13 +19449,6 @@ window.PROTOTYPE_DATA = {
       {
         "name": "Abdukodir Khusanov",
         "team": "Uzbekistan",
-        "gp": 2,
-        "yc": 2,
-        "rc": 0
-      },
-      {
-        "name": "Ahmed Fathy",
-        "team": "Qatar",
         "gp": 2,
         "yc": 2,
         "rc": 0

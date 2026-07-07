@@ -30,6 +30,7 @@ if (config.checks?.localBuild !== false) checks.push({ id: "build", label: "本�
 const results = [];
 if (config.safety?.autoUpdateData === true) {
   results.push(await runCheck({ id: "syncResults", label: "同步赛果", command: [nodeBin, "scripts/sync-espn-match-results.mjs"] }));
+  results.push(await runCheck({ id: "resolveBracket", label: "解析淘汰赛对阵", command: [nodeBin, "scripts/resolve-bracket.mjs"] }));
   results.push(await runCheck({ id: "syncPlayerStats", label: "同步球员榜单", command: [nodeBin, "scripts/sync-player-stats.mjs"] }));
   results.push(await runCheck({ id: "calcInsights", label: "重算球队统计", command: [nodeBin, "scripts/calc-insights.mjs"] }));
   if (process.env.ANTHROPIC_API_KEY) {
